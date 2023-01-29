@@ -1,0 +1,7 @@
+_____________________
+RESIDENT PROFILE DETAILS
+
+THIS FILE STORES THE PROFILE DETAILS OF RESIDENTS
+STORE FORMAT: <RESIDENT ID> | <RESIDENT NAME> | <CONTACT NUMBER> | <EMAIL> | <BUILDING> | <UNIT NAME> | <MOVE-IN DATE> | <PROFILE PICTURE> | <NATIONALITY> | <USERNAME> | <PASSWORD>
+____________________
+RN001 | John Doe | 013-6699334 | john.doe@email.com | Parkhill Residence | Unit A-103 | 01012023 | johnDoe_01012023.jpg | Malaysian | johnDoe | 12345678
