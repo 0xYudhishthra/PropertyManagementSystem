@@ -1,0 +1,7 @@
+_____________________
+VENDOR PROFILE DETAILS
+
+THIS FILE STORES THE PROFILE DETAILS OF VENDORS
+STORE FORMAT: <VENDOR ID> | <VENDOR NAME> | <CONTACT NUMBER> | <EMAIL> | <BUILDING> | <UNIT NAME> | <MOVE-IN DATE> | <PROFILE PICTURE> | <BUSINESS REG NUMBER> | <USERNAME> | <PASSWORD>
+____________________
+VN001 | ABC Supplies | 013-9966334 | abc.supplies@email.com | Parkhill Business | Unit A-102 | 12012022 | abcSupplies_12012022.jpg | 334554332 | abcSupplies | 12345678
