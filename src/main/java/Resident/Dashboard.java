@@ -15,7 +15,7 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dasboard
      */
     public Dashboard() {
-        initComponents();
+        initComponents("John");
     }
 
     /**
@@ -25,7 +25,7 @@ public class Dashboard extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String userName) {
 
         profilePicture = new javax.swing.JLabel();
         greetingPrompt = new javax.swing.JLabel();
@@ -46,7 +46,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         greetingLabel.setBackground(new java.awt.Color(102, 255, 0));
         greetingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        greetingLabel.setText("Welcome, <Resident Name>");
+        greetingLabel.setText("Welcome, " + userName + "!");
 
         logout.setBackground(new java.awt.Color(255, 0, 51));
         logout.setText("LOGOUT");
@@ -93,10 +93,8 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addComponent(greetingLabel)
-                                                                .addGap(28, 28, 28))
-                                                        .addComponent(greetingPrompt))
+                                                        .addComponent(greetingPrompt)
+                                                        .addComponent(greetingLabel))
                                                 .addGap(46, 46, 46)
                                                 .addComponent(profilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

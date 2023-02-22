@@ -64,6 +64,7 @@ public class manageComplaints extends javax.swing.JFrame {
 
         delete.setBackground(new java.awt.Color(255, 51, 51));
         delete.setText("DELETE");
+        delete.setEnabled(false);
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionPerformed(evt);
@@ -92,6 +93,38 @@ public class manageComplaints extends javax.swing.JFrame {
                 return types[columnIndex];
             }
         });
+
+        for (int i = 0; i < pendingComplaintsTable.getColumnCount(); i++) {
+            //assign values based on the column name, use switch case
+            switch (pendingComplaintsTable.getColumnName(i)) {
+                case "Date of Complaint":
+                    pendingComplaintsTable.setValueAt("2018-01-01", 0, i);
+                    pendingComplaintsTable.setValueAt("2018-01-02", 1, i);
+                    pendingComplaintsTable.setValueAt("2018-01-03", 2, i);
+                    pendingComplaintsTable.setValueAt("2018-01-04", 3, i);
+                    break;
+                case "Description":
+                    pendingComplaintsTable.setValueAt("Description 1", 0, i);
+                    pendingComplaintsTable.setValueAt("Description 2", 1, i);
+                    pendingComplaintsTable.setValueAt("Description 3", 2, i);
+                    pendingComplaintsTable.setValueAt("Description 4", 3, i);
+                    break;
+                case "Complaint Number":
+                    pendingComplaintsTable.setValueAt("1", 0, i);
+                    pendingComplaintsTable.setValueAt("2", 1, i);
+                    pendingComplaintsTable.setValueAt("3", 2, i);
+                    pendingComplaintsTable.setValueAt("4", 3, i);
+                    break;
+                case "Status":
+                    pendingComplaintsTable.setValueAt("Resolved", 0, i);
+                    pendingComplaintsTable.setValueAt("Resolved", 1, i);
+                    pendingComplaintsTable.setValueAt("Resolved", 2, i);
+                    pendingComplaintsTable.setValueAt("Resolved", 3, i);
+                    break;
+            }
+        }
+
+        pendingComplaintsTable.setEnabled(false);
         pendingComplaintsPane.setViewportView(pendingComplaintsTable);
 
         viewPastComplaintsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -99,6 +132,7 @@ public class manageComplaints extends javax.swing.JFrame {
 
         update.setBackground(new java.awt.Color(102, 255, 102));
         update.setText("UPDATE");
+        update.setEnabled(false);
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
@@ -139,6 +173,36 @@ public class manageComplaints extends javax.swing.JFrame {
                 return types[columnIndex];
             }
         });
+        for (int i = 0; i < viewPastComplaintsTable.getColumnCount(); i++) {
+            //assign values based on the column name, use switch case
+            switch (viewPastComplaintsTable.getColumnName(i)) {
+                case "Date of Complaint":
+                    viewPastComplaintsTable.setValueAt("2018-01-01", 0, i);
+                    viewPastComplaintsTable.setValueAt("2018-01-02", 1, i);
+                    viewPastComplaintsTable.setValueAt("2018-01-03", 2, i);
+                    viewPastComplaintsTable.setValueAt("2018-01-04", 3, i);
+                    break;
+                case "Description":
+                    viewPastComplaintsTable.setValueAt("Description 1", 0, i);
+                    viewPastComplaintsTable.setValueAt("Description 2", 1, i);
+                    viewPastComplaintsTable.setValueAt("Description 3", 2, i);
+                    viewPastComplaintsTable.setValueAt("Description 4", 3, i);
+                    break;
+                case "Complaint Number":
+                    viewPastComplaintsTable.setValueAt("1", 0, i);
+                    viewPastComplaintsTable.setValueAt("2", 1, i);
+                    viewPastComplaintsTable.setValueAt("3", 2, i);
+                    viewPastComplaintsTable.setValueAt("4", 3, i);
+                    break;
+                case "Status":
+                    viewPastComplaintsTable.setValueAt("Resolved", 0, i);
+                    viewPastComplaintsTable.setValueAt("Resolved", 1, i);
+                    viewPastComplaintsTable.setValueAt("Resolved", 2, i);
+                    viewPastComplaintsTable.setValueAt("Resolved", 3, i);
+                    break;
+            }
+        }
+        viewPastComplaintsTable.setEnabled(false);
         viewPastComplaintsPane.setViewportView(viewPastComplaintsTable);
 
         javax.swing.GroupLayout manageComplaintsPanelLayout = new javax.swing.GroupLayout(manageComplaintsPanel);
@@ -147,33 +211,35 @@ public class manageComplaints extends javax.swing.JFrame {
                 manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(manageComplaintsPanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(addComplaintTitle)
-                                        .addGroup(manageComplaintsPanelLayout.createSequentialGroup()
-                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(complaintDetailsTitle)
-                                                        .addComponent(complaintDetailsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(32, 32, 32)
-                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(complaintDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(complaintDateTitle))
-                                                .addGap(41, 41, 41)
-                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(complaintNumberTitle)
-                                                        .addComponent(complaintNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(log))
-                                        .addComponent(viewPastComplaintsTitle)
-                                        .addComponent(viewPastComplaintsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
-                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(pendingComplaintsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(pendingComplaintsTitle)
+                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(manageComplaintsPanelLayout.createSequentialGroup()
                                                 .addComponent(delete)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(update)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(update))
+                                        .addGroup(manageComplaintsPanelLayout.createSequentialGroup()
+                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(addComplaintTitle)
+                                                        .addGroup(manageComplaintsPanelLayout.createSequentialGroup()
+                                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(complaintDetailsTitle)
+                                                                        .addComponent(complaintDetailsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(32, 32, 32)
+                                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(complaintDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(complaintDateTitle))
+                                                                .addGap(41, 41, 41)
+                                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                        .addComponent(complaintNumberTitle)
+                                                                        .addComponent(complaintNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(log))
+                                                        .addComponent(viewPastComplaintsTitle)
+                                                        .addComponent(viewPastComplaintsPane))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(pendingComplaintsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(pendingComplaintsTitle))))
+                                .addContainerGap(34, Short.MAX_VALUE))
         );
         manageComplaintsPanelLayout.setVerticalGroup(
                 manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,9 +253,9 @@ public class manageComplaints extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(pendingComplaintsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(manageComplaintsPanelLayout.createSequentialGroup()
                                                 .addGap(29, 29, 29)
                                                 .addGroup(manageComplaintsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +276,7 @@ public class manageComplaints extends javax.swing.JFrame {
                                                 .addComponent(viewPastComplaintsTitle)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(viewPastComplaintsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         manageComplaintsScrollPane.setViewportView(manageComplaintsPanel);
@@ -233,14 +299,14 @@ public class manageComplaints extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(manageComplaintsTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 842, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 848, Short.MAX_VALUE)
                                 .addComponent(back)
                                 .addContainerGap())
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                         .addContainerGap()
-                                        .addComponent(manageComplaintsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(manageComplaintsScrollPane)
+                                        .addContainerGap()))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
