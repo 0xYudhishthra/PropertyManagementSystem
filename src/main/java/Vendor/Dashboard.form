@@ -104,16 +104,25 @@
         </Property>
         <Property name="text" type="java.lang.String" value="LOGOUT"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="managePayments">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Payments"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managePaymentsActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="manageComplaints">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Complaints"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageComplaintsActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
