@@ -1,0 +1,24 @@
+package Helpers;
+
+public enum ResidentFiles {
+    residentComplaint(new String[]{"RESIDENT COMPLAINT DETAILS", "THIS FILE STORES RESIDENT COMPLAINT DETAILS",
+            "RESIDENT ID", "DATE OF COMPLAINT", "DESCRIPTION", "COMPLAINT NUMBER", "STATUS"}),
+    residentDetail(new String[]{"RESIDENT PAYMENT DETAILS", "THIS FILE STORES PAYMENT DETAILS FOR RESIDENTS",
+            "RESIDENT ID", "RESIDENT NAME", "CONTACT NUMBER", "EMAIL", "BUILDING", "UNIT NAME", "MOVE-IN DATE", "PROFILE PICTURE", "NATIONALITY", "USERNAME", "PASSWORD"}),
+    residentFacilityBooking(new String[]{"RESIDENT FACILITY BOOKING DETAILS", "THIS FILE STORES BOOKING DETAILS MADE BY RESIDENTS",
+            "RESIDENT ID", "FACILITY NAME", "BOOKING DATE", "START TIME", "END TIME", "BOOKING NUMBER", "STATUS"}),
+    residentPay(new String[]{"RESIDENT PAYMENT DETAILS", "THIS FILE STORES DETAILS OF RESIDENTS WHO EITHER MAKE FULL PAYMENTS OR DEPOSITS",
+            "RESIDENT ID", "PAYMENT DATE", "AMOUNT", "RECEIPT ID"}),
+    residentVisitorPass(new String[]{"RESIDENT VISITOR PASS DETAILS", "THIS FILE STORES DETAILS OF VISITOR PASSES CREATED BY RESIDENTS",
+            "RESIDENT ID", "VISITOR NAME", "VEHICLE NUMBER", "PURPOSE", "DATE OF VISIT", "VISITOR PASS NUMBER"});
+    private final String[] headers;
+
+    private ResidentFiles(String[] headers) {
+        this.headers = headers;
+    }
+
+    public String[] getHeaders() {
+        return headers;
+    }
+}
+
