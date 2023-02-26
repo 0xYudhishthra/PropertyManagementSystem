@@ -4,10 +4,15 @@
  */
 package Resident;
 
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class manageVisitorPass extends javax.swing.JFrame {
+
+    //instantiate file handler
+    Resident.residentFileHandler residentFileHandler = new residentFileHandler();
 
     /**
      * Creates new form manageVisitorPass
@@ -89,13 +94,13 @@ public class manageVisitorPass extends javax.swing.JFrame {
 
         currentVisitorPassTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Facility Name", "Booking Date", "Start Time", "End Time", "Booking Number", "Status"
+                "Visitor Name", "Vehicle Number", "Purpose", "Date of Visit", "Visitor Pass Number"
             }
         ) {
             Class[] types = new Class [] {
@@ -106,7 +111,30 @@ public class manageVisitorPass extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        currentVisitorPassTable.setEnabled(false);
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = residentFileHandler.getVisitorPasses("RN001");
+            if (data.size() != 0) {
+                cancel.setEnabled(true);
+                update.setEnabled(true);
+                currentVisitorPassTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < currentVisitorPassTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(currentVisitorPassTable.getColumnName(j).toUpperCase())) {
+                                currentVisitorPassTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                currentVisitorPassTable.setEnabled(false);
+            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
         currentVisitorPassPane.setViewportView(currentVisitorPassTable);
 
         visitorNameInput.setText("jTextField4");

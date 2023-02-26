@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * FileReader class declaration starts here.
  */
-abstract class FileHandler implements IFileHandler {
+public class FileHandler implements IFileHandler {
     //declare a static variable to hold the file path
     private static String filePath = "src/main/resources/";
 
@@ -23,57 +23,10 @@ abstract class FileHandler implements IFileHandler {
     private static String fileExtension = ".txt";
 
     //declare a static variable to hold the file separator, syste.getProperty is used here to
-    private static String dataSeparator = " | ";
+    protected static String dataSeparator = " | ";
 
     //declare a static variable to hold the file header separator
     private static String headerSeparator = "_____________________";
-
-
-//    /**
-//     * This method is used to check that all the files listed in the user files enum passed exist and has headers
-//     *
-//     * @param userFiles
-//     * @param userRole
-//     * @return boolean - true if all the files exist and has headers, false otherwise
-//     * @throws Exception
-//     */
-//    //the workflow is such that, the user will pass the name of the enum, and the function will go inside that enum and check if each of the files exists by first comparing
-//    // the value obtained by .values() to the output by the fileExists() method,
-//    //if the file exists, then the function will check if the file has headers by comparing the output of getHeaders() to the headers in the file
-//    //if the file does not exist, then the function will create the file and add the headers to it
-//    //if the file exists and has headers, then the function will return true and add the file to the fileExistsStatus hashmap
-//    public boolean checkFiles(Class<? extends Enum<?>> enumType, String userRole) throws Exception {
-//        try {
-//            //loop through the files in the enum
-//            Enum<?>[] files = enumType.getEnumConstants();
-//            for (Enum<?> file: files) {
-//                //check if the file exists
-//                if (fileExists(file.toString(), userRole)) {
-//                    String[] headers = getHeaders(file.toString(), userRole);
-//                    //check if the file has headers
-//                    if (headers.equals(getFileHeader(file.toString(), userRole))) {
-//                        //add the file to the fileExistsStatus hashmap
-//                        fileExistsStatus.put(file.toString(), true);
-//                    } else {
-//                            String storeFormat = "";
-//                            for (int i = 2; i < headers.length; i++) {
-//                                storeFormat += headers[i] + ",";
-//                            }
-//                        //if the file does not have headers, then add the headers to the file
-//                            createFileHeader(file.toString(), headers[0], headers[1], new String[]{headers[2:3]}, userRole);
-//                    }
-//                } else {
-//                    //if the file does not exist, then create the file and add the headers to it
-//                    createFile(file, userRole);
-//                    addHeaders(file, userFiles.getHeaders(file), userRole);
-//                }
-//            }
-//            //return true if all the files exist and has headers
-//            return true;
-//        } catch (Exception e) {
-//            throw new Exception("Error occured at checkFiles function with parameters: userFiles = " + userFiles + " : " + e.getMessage());
-//        }
-//    }
 
 
     /**
@@ -92,115 +45,120 @@ abstract class FileHandler implements IFileHandler {
             java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
             //read the contents of the file and store it in the data variable
             String line;
+            int count = 0;
+
+            //traverse the lines first to ensure headers are not read, and to know which line index to start reading data frm
             while ((line = reader.readLine()) != null) {
-                data.add(line);
+                if (line.contains(headerSeparator)) {
+                    count++;
+                }
+
+                if (count == 2) {
+                    break;
+                }
+            }
+
+            //traverse to the data line index, and print the data, dont print empty lines
+            while ((line = reader.readLine()) != null) {
+                if (line.equals("")) {
+                    continue;
+                }
+                data.add(line.strip());
             }
             //close the reader
             reader.close();
             //return the data
             return data;
         } catch (Exception e) {
-            throw new Exception("Error occured at readData function with parameters: filename = " + filename + ", userRole = " + userRole + " : " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
+        return null;
+    }
+
+    public ArrayList<String> readData(String filename, String id, String userRole) throws Exception {
+        //follows same implementation as above with the exception of the id parameter, we are looking for a specific record in the file
+        try {
+            ArrayList<String> data = new ArrayList<>();
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
+            String line;
+            int count = 0;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains(headerSeparator)) {
+                    count++;
+                }
+                if (count == 2) {
+                    break;
+                }
+            }
+            while ((line = reader.readLine()) != null) {
+                if (line.equals("")) {
+                    continue;
+                }
+                if (line.contains(id)) {
+                    data.add(line);
+                }
+            }
+            reader.close();
+            return data;
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
     }
 
 
     /**
-     * This method is used to get the headers of a given file by passing the enum and checking the value of that enum
+     * This method is used to get the headers of a given file
      *
      * @param filename
      * @return String[] - the headers of the file
      * @throws Exception
      */
-//    public String[] getHeaders(String filename, String userRole) throws Exception {
-//        try {
-//            //The user role is first used to identify which enum file to get, then the filename is used to get the enum value to call and get the
-//            //headers from the enum
-//            //get the right enum to call by first identifying the user role, all enums usually end with Files, so we add that to the user role
-//            //then we use the Class.forName() method to get the class of the enum, then we use the .getEnumConstants() method to get the enum values
-//            //then we use the .valueOf() method to get the enum value
-//            //then we use the .getHeaders() method to get the headers
-////            return userFiles.valueOf(userRole + "Files").getHeaders(filename);
-//
-//        } catch (Exception e) {
-//            throw new Exception("Error occured at getHeaders function with parameters: filename = " + filename + ", userRole = " + userRole + " : " + e.getMessage());
-//        }
-//    }
+    protected ArrayList<String> getFileHeader(String filename, String userRole) {
+        ArrayList<String> headers = null;
+        try {
+            headers = new ArrayList<>();
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
+            //read the contents of the file and store it in the data variable
+            String line;
+            //traverse lines until you find "STORE FORMAT: " then read the data along this line, strip the '<' and '>' characters and store it in the headers variable
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("STORE FORMAT: ")) {
+                    //split the elements after store format using the data separator
+                    //strip the "STORE FORMAT: " part of the string
+                    line = line.replace("STORE FORMAT: ", "");
+                    //replace the data separator with a space, and then split the string using the space
+                    line = line.replace(dataSeparator, " ");
+                    String currentHeader = "";
+                    for (int i = 0; i < line.length(); i++) {
+                        if (line.charAt(i) == '<') {
+                            currentHeader += line.charAt(i);
+                        } else if (line.charAt(i) == '>') {
+                            currentHeader += line.charAt(i);
+                            headers.add(currentHeader.strip());
+                            currentHeader = "";
+                        } else {
+                            currentHeader += line.charAt(i);
+                        }
+                    }
+                    //strip the '<' and '>' characters from each element in the headers variable
+                    for (int i = 0; i < headers.size(); i++) {
+                        headers.set(i, headers.get(i).replace("<", "").replace(">", ""));
+                    }
+                    //break out of the loop
+                    break;
+                }
+            }
+            //close the reader
+//            reader.close();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
 
+        //return headers
+        return headers;
+    }
 
-    /**
-     * This method is used to check if a given file exists
-     *
-     * @param filename
-     * @param userRole
-     * @return boolean - true if the file exists, false otherwise
-     * @throws Exception
-     */
-//    public boolean fileExists(String filename, String userRole) throws Exception {
-//        try {
-//            //check if the file exists by passing the full path to the java.io.File.exists() method, an example is src/main/resources/userRole/filename.txt
-//            return new java.io.File(filePath + userRole + "/" + filename + fileExtension).exists();
-//        } catch (Exception e) {
-//            throw new Exception("Error occured at fileExists function with parameters: filename = " + filename + ", userRole = " + userRole + " : " + e.getMessage());
-//        }
-//    }
-
-    /**
-     * This method is used to create a new file
-     *
-     * @param filename
-     * @param title
-     * @param description
-     * @param format
-     * @param userRole
-     * @return boolean - true if the file was created successfully, false otherwise
-     * @throws Exception
-     */
-//    public boolean createFileHeader(String filename, String title, String description, String @NotNull [] format, String userRole) throws Exception {
-//        try {
-//
-//            //create a string builder to hold the header
-//            StringBuilder header = new StringBuilder();
-//
-//            //append the header separator
-//            header.append(headerSeparator).append(System.getProperty("line.separator"));
-//
-//            //append the title
-//            header.append(title).append(System.getProperty("line.separator"));
-//
-//            //append a new line
-//            header.append(System.getProperty("line.separator"));
-//
-//            //append the description
-//            header.append(description).append(System.getProperty("line.separator"));
-//
-//            //append the store format
-//            header.append("STORE FORMAT: ");
-//
-//            //loop through the format array
-//            for (int i = 0; i < format.length; i++) {
-//                //append the format in the form of <key> | <key> | <key> | ...
-//                header.append('<' + format[i] + '>');
-//
-//                //check if we are at the last element
-//                if (i != format.length - 1) {
-//                    //if we are not at the last element, append the data separator
-//                    header.append(dataSeparator);
-//                }
-//            }
-//
-//            //append a new line
-//            header.append(System.getProperty("line.separator"));
-//
-//            //append the header separator
-//            header.append(headerSeparator).append(System.getProperty("line.separator"));
-//
-//            //return the result of the createFile method
-//            return createData(filename, header.toString(), userRole);
-//        } catch (Exception e) {
-//            throw new Exception("Error occurred at createFileHeader function with parameters: filename = " + filename + ", title = " + title + ", description = " + description + ", format = " + format + ", userRole = " + userRole + " : " + e.getMessage());
-//        }
-//    }
 
     /**
      * This method is used to create a new data record in a file
