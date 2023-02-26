@@ -90,10 +90,13 @@
   <component name="RunManager" selected="Application.Vendor.Dashboard">
     <configuration name="Resident.Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Resident.Dashboard" />
+  <component name="RunManager" selected="Application.Visitor">
+    <configuration name="Visitor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AccountExecutive.Visitor" />
       <module name="PropertyManagementSystem" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Resident.*" />
+          <option name="PATTERN" value="AccountExecutive.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -101,12 +104,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Vendor.Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Vendor.Dashboard" />
+    <configuration name="loginsystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AccountExecutive.loginsystem" />
       <module name="PropertyManagementSystem" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Vendor.*" />
+          <option name="PATTERN" value="AccountExecutive.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="manageVisitorEntry" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SecurityGuard.manageVisitorEntry" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SecurityGuard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -120,6 +136,12 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Vendor.*" />
+    <configuration name="manageVisitorPass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SecurityGuard.manageVisitorPass" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SecurityGuard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,6 +168,12 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Vendor.*" />
+    <configuration name="recordPayment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AccountExecutive.recordPayment" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AccountExecutive.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -160,6 +188,11 @@
         <item itemvalue="Application.managePayment" />
         <item itemvalue="Application.manageProfile" />
         <item itemvalue="Application.Resident.Dashboard" />
+        <item itemvalue="Application.Visitor" />
+        <item itemvalue="Application.recordPayment" />
+        <item itemvalue="Application.loginsystem" />
+        <item itemvalue="Application.manageVisitorPass" />
+        <item itemvalue="Application.manageVisitorEntry" />
       </list>
     </recent_temporary>
   </component>
