@@ -9,5 +9,8 @@
         <module name="PropertyManagementSystem" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PropertyManagementSystem" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
