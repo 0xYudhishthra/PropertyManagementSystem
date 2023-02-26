@@ -5,7 +5,6 @@
 package Resident;
 
 /**
- *
  * @author yudhx
  */
 public class manageFacilityBooking extends javax.swing.JFrame {
@@ -57,6 +56,11 @@ public class manageFacilityBooking extends javax.swing.JFrame {
 
         back.setBackground(new java.awt.Color(255, 0, 51));
         back.setText("BACK");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         manageBookingsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         manageBookingsTitle.setText("Manage Bookings");
@@ -77,6 +81,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
 
         cancel.setBackground(new java.awt.Color(255, 51, 51));
         cancel.setText("CANCEL");
+        cancel.setEnabled(false);
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelActionPerformed(evt);
@@ -105,6 +110,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        viewPastBookingsTable.setEnabled(false);
         viewPastBookingsPane.setViewportView(viewPastBookingsTable);
 
         viewPastBookingsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -112,6 +118,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
 
         update.setBackground(new java.awt.Color(102, 255, 102));
         update.setText("UPDATE");
+        update.setEnabled(false);
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
@@ -150,6 +157,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        pendingBookingsTable.setEnabled(false);
         pendingBookingsPane.setViewportView(pendingBookingsTable);
 
         bookingDateInput.setText("jTextField4");
@@ -322,6 +330,12 @@ public class manageFacilityBooking extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelActionPerformed
 
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // close this window and open the previous window
+        this.dispose();
+        new Dashboard().setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -329,7 +343,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

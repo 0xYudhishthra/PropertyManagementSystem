@@ -4,8 +4,9 @@
  */
 package AccountExecutive;
 
+import javax.swing.*;
+
 /**
- *
  * @author yudhx
  */
 public class Dashboard extends javax.swing.JFrame {
@@ -52,6 +53,7 @@ public class Dashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         greetingPanel.setBackground(new java.awt.Color(51, 255, 51));
+        greetingPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         greetingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         greetingLabel.setText("Welcome, NAME!");
@@ -62,22 +64,22 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
         greetingPanelLayout.setHorizontalGroup(
-            greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(greetingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(subgreetingLabel)
-                    .addComponent(greetingLabel))
-                .addContainerGap(24, Short.MAX_VALUE))
+                greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(greetingPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(subgreetingLabel)
+                                        .addComponent(greetingLabel))
+                                .addContainerGap(24, Short.MAX_VALUE))
         );
         greetingPanelLayout.setVerticalGroup(
-            greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(greetingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(greetingLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(subgreetingLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(greetingPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(greetingLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(subgreetingLabel)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         residentPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -144,44 +146,44 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout residentPanelLayout = new javax.swing.GroupLayout(residentPanel);
         residentPanel.setLayout(residentPanelLayout);
         residentPanelLayout.setHorizontalGroup(
-            residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(residentPanelLayout.createSequentialGroup()
-                .addGroup(residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(residentIssueInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(residentIssueStatement, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(residentIssueReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(residentRecordPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(residentViewPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(residentUpdatePayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(residentPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(residentViewOutstandingFee)))
-                    .addGroup(residentPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(residentTitle)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(residentPanelLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGroup(residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(residentIssueInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(residentIssueStatement, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(residentIssueReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(residentRecordPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(residentViewPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(residentUpdatePayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(residentViewOutstandingFee)))
+                                        .addGroup(residentPanelLayout.createSequentialGroup()
+                                                .addGap(50, 50, 50)
+                                                .addComponent(residentTitle)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         residentPanelLayout.setVerticalGroup(
-            residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(residentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(residentTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(residentIssueInvoice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(residentIssueReceipt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(residentIssueStatement)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(residentRecordPayment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(residentViewPayment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(residentUpdatePayment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(residentViewOutstandingFee)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                residentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(residentPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(residentTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(residentIssueInvoice)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(residentIssueReceipt)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(residentIssueStatement)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(residentRecordPayment)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(residentViewPayment)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(residentUpdatePayment)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(residentViewOutstandingFee)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         vendorPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -248,138 +250,201 @@ public class Dashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout vendorPanelLayout = new javax.swing.GroupLayout(vendorPanel);
         vendorPanel.setLayout(vendorPanelLayout);
         vendorPanelLayout.setHorizontalGroup(
-            vendorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vendorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(vendorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(vendorIssueInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vendorIssueStatement, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vendorIssueReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vendorRecordPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vendorViewPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vendorUpdatePayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vendorViewOutstandingFee))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendorPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vendorTitle)
-                .addGap(58, 58, 58))
+                vendorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(vendorPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(vendorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(vendorIssueInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(vendorIssueStatement, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(vendorIssueReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(vendorRecordPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(vendorViewPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(vendorUpdatePayment, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(vendorViewOutstandingFee))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vendorPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(vendorTitle)
+                                .addGap(58, 58, 58))
         );
         vendorPanelLayout.setVerticalGroup(
-            vendorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vendorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(vendorTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vendorIssueInvoice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vendorIssueReceipt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vendorIssueStatement)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vendorRecordPayment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vendorViewPayment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vendorUpdatePayment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vendorViewOutstandingFee)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                vendorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(vendorPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(vendorTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vendorIssueInvoice)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vendorIssueReceipt)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vendorIssueStatement)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vendorRecordPayment)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vendorViewPayment)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vendorUpdatePayment)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vendorViewOutstandingFee)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         logout.setBackground(new java.awt.Color(255, 51, 51));
         logout.setText("LOGOUT");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(greetingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(residentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(vendorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(greetingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(residentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(vendorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(greetingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(residentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(vendorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(greetingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(residentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(vendorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void residentIssueStatementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentIssueStatementActionPerformed
-        // TODO add your handling code here:
+        // close this current window and bring up the issue statement window
+        issueStatement issueStatement = new issueStatement();
+        issueStatement.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_residentIssueStatementActionPerformed
 
     private void residentIssueReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentIssueReceiptActionPerformed
-        // TODO add your handling code here:
+        // close this current window and bring up the issue receipt window
+        issueReceipt issueReceipt = new issueReceipt();
+        issueReceipt.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_residentIssueReceiptActionPerformed
 
     private void residentIssueInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentIssueInvoiceActionPerformed
-        // TODO add your handling code here:
+        //close this current window and bring up the issue invoice window
+        issueInvoice issueInvoice = new issueInvoice();
+        issueInvoice.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_residentIssueInvoiceActionPerformed
 
     private void residentRecordPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentRecordPaymentActionPerformed
-        // TODO add your handling code here:
+        //close this current window and bring up the record payment window
+        recordPayment recordPayment = new recordPayment();
+        recordPayment.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_residentRecordPaymentActionPerformed
 
     private void residentViewPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentViewPaymentActionPerformed
-        // TODO add your handling code here:
+        //close this current window and bring up the view payment window
+        viewPayment viewPayment = new viewPayment();
+        viewPayment.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_residentViewPaymentActionPerformed
 
     private void residentUpdatePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentUpdatePaymentActionPerformed
-        // TODO add your handling code here:
+        //close this current window and bring up the update payment window
+        updatePayment updatePayment = new updatePayment();
+        updatePayment.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_residentUpdatePaymentActionPerformed
 
     private void residentViewOutstandingFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentViewOutstandingFeeActionPerformed
-        // TODO add your handling code here:
+        // close this current window and bring up the view outstanding fee window
+        viewOutstandingFee viewOutstandingFee = new viewOutstandingFee();
+        viewOutstandingFee.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_residentViewOutstandingFeeActionPerformed
 
     private void vendorIssueInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorIssueInvoiceActionPerformed
-        // TODO add your handling code here:
+        //close this current window and bring up the issue invoice window
+        issueInvoice issueInvoice = new issueInvoice();
+        issueInvoice.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vendorIssueInvoiceActionPerformed
 
     private void vendorIssueReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorIssueReceiptActionPerformed
-        // TODO add your handling code here:
+        //close this current window and bring up the issue receipt window
+        issueReceipt issueReceipt = new issueReceipt();
+        issueReceipt.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vendorIssueReceiptActionPerformed
 
     private void vendorIssueStatementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorIssueStatementActionPerformed
-        // TODO add your handling code here:
+        //close this current window and bring up the issue statement window
+        issueStatement issueStatement = new issueStatement();
+        issueStatement.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vendorIssueStatementActionPerformed
 
     private void vendorRecordPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorRecordPaymentActionPerformed
-        // TODO add your handling code here:
+        // //close this window and bring up the record payment window
+        recordPayment recordPayment = new recordPayment();
+        recordPayment.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vendorRecordPaymentActionPerformed
 
     private void vendorViewPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorViewPaymentActionPerformed
-        // TODO add your handling code here:
+        // close this window and bring up the view payment window
+        viewPayment viewPayment = new viewPayment();
+        viewPayment.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vendorViewPaymentActionPerformed
 
     private void vendorUpdatePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorUpdatePaymentActionPerformed
-        // TODO add your handling code here:
+        // close this window and bring up the update payment window
+        updatePayment updatePayment = new updatePayment();
+        updatePayment.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vendorUpdatePaymentActionPerformed
 
     private void vendorViewOutstandingFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorViewOutstandingFeeActionPerformed
-        // TODO add your handling code here:
+        // close this window and bring up the view outstanding fee window
+        viewOutstandingFee viewOutstandingFee = new viewOutstandingFee();
+        viewOutstandingFee.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_vendorViewOutstandingFeeActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // first prompt the user if they are sure they want to logout, if yes, then close the current window and bring up the login window
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", dialogButton);
+        if (dialogResult == 0) {
+            // close this window and bring up the login window
+//            login login = new login();
+//            login.setVisible(true);
+            this.dispose();
+            //exit the program
+            System.exit(0);
+        }
+
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,7 +453,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -5,7 +5,6 @@
 package Resident;
 
 /**
- *
  * @author yudhx
  */
 public class managePayment extends javax.swing.JFrame {
@@ -59,6 +58,11 @@ public class managePayment extends javax.swing.JFrame {
 
         back.setBackground(new java.awt.Color(255, 0, 51));
         back.setText("BACK");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         managePaymentPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 51, 0), null));
 
@@ -78,6 +82,11 @@ public class managePayment extends javax.swing.JFrame {
 
         pay.setBackground(new java.awt.Color(51, 255, 102));
         pay.setText("PAY");
+        pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payActionPerformed(evt);
+            }
+        });
 
         outstandingFeeTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         outstandingFeeTitle.setText("Outstanding Fee");
@@ -107,6 +116,7 @@ public class managePayment extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        viewPaymentHistoryTable.setEnabled(false);
         viewPaymentHistoryPane.setViewportView(viewPaymentHistoryTable);
         if (viewPaymentHistoryTable.getColumnModel().getColumnCount() > 0) {
             viewPaymentHistoryTable.getColumnModel().getColumn(0).setHeaderValue("Date");
@@ -131,6 +141,7 @@ public class managePayment extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        viewInvoiceTable.setEnabled(false);
         viewInvoiceTablePane.setViewportView(viewInvoiceTable);
 
         viewInvoiceTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
@@ -158,6 +169,7 @@ public class managePayment extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        viewReceiptTable.setEnabled(false);
         viewReceiptPane.setViewportView(viewReceiptTable);
 
         viewStatementTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -179,6 +191,7 @@ public class managePayment extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        viewStatementTable.setEnabled(false);
         viewStatementPane.setViewportView(viewStatementTable);
 
         viewStatementTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
@@ -186,6 +199,7 @@ public class managePayment extends javax.swing.JFrame {
 
         print.setBackground(new java.awt.Color(102, 255, 102));
         print.setText("PRINT");
+        print.setEnabled(false);
 
         javax.swing.GroupLayout managePaymentPanelLayout = new javax.swing.GroupLayout(managePaymentPanel);
         managePaymentPanel.setLayout(managePaymentPanelLayout);
@@ -316,6 +330,16 @@ public class managePayment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_payActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // close this window and bring the previous one
+        this.dispose();
+        new Dashboard().setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -323,7 +347,7 @@ public class managePayment extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

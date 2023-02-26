@@ -11,4 +11,17 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>propertymanagementsystem.propertymanagementsystem.PropertyManagementSystem</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+    </dependencies>
 </project>

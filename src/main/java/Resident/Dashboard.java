@@ -4,8 +4,9 @@
  */
 package Resident;
 
+import javax.swing.*;
+
 /**
- *
  * @author yudhx
  */
 public class Dashboard extends javax.swing.JFrame {
@@ -14,7 +15,7 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dasboard
      */
     public Dashboard() {
-        initComponents();
+        initComponents("John");
     }
 
     /**
@@ -24,7 +25,7 @@ public class Dashboard extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String userName) {
 
         profilePicture = new javax.swing.JLabel();
         greetingPrompt = new javax.swing.JLabel();
@@ -45,12 +46,22 @@ public class Dashboard extends javax.swing.JFrame {
 
         greetingLabel.setBackground(new java.awt.Color(102, 255, 0));
         greetingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        greetingLabel.setText("Welcome, <Resident Name>");
+        greetingLabel.setText("Welcome, " + userName + "!");
 
         logout.setBackground(new java.awt.Color(255, 0, 51));
         logout.setText("LOGOUT");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         managePayments.setText("Manage Payments");
+        managePayments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                managePaymentsActionPerformed(evt);
+            }
+        });
 
         manageFacilityBookings.setText("Manage Facility Bookings");
         manageFacilityBookings.addActionListener(new java.awt.event.ActionListener() {
@@ -60,64 +71,110 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         manageVisitorPass.setText("Manage Visitor Pass");
+        manageVisitorPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageVisitorPassActionPerformed(evt);
+            }
+        });
 
         manageComplaints.setText("Manage Complaints");
+        manageComplaints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageComplaintsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(greetingLabel)
-                                .addGap(28, 28, 28))
-                            .addComponent(greetingPrompt))
-                        .addGap(46, 46, 46)
-                        .addComponent(profilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(logout))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(manageVisitorPass, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(managePayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(manageFacilityBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(manageComplaints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(greetingPrompt)
+                                                        .addComponent(greetingLabel))
+                                                .addGap(46, 46, 46)
+                                                .addComponent(profilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(logout))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(manageVisitorPass, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                                        .addComponent(managePayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(manageFacilityBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(manageComplaints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(greetingLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(greetingPrompt))
-                    .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(profilePicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(manageFacilityBookings, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(managePayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(manageVisitorPass, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                    .addComponent(manageComplaints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(greetingLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(greetingPrompt))
+                                        .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(profilePicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(manageFacilityBookings, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                        .addComponent(managePayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(manageVisitorPass, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                        .addComponent(manageComplaints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageFacilityBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageFacilityBookingsActionPerformed
-        // TODO add your handling code here:
+        // close this window and open the facility booking window
+        this.dispose();
+        manageFacilityBooking fbw = new manageFacilityBooking();
+        fbw.setVisible(true);
     }//GEN-LAST:event_manageFacilityBookingsActionPerformed
+
+    private void managePaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePaymentsActionPerformed
+        // close this window and open the payment window
+        this.dispose();
+        managePayment mp = new managePayment();
+        mp.setVisible(true);
+    }//GEN-LAST:event_managePaymentsActionPerformed
+
+    private void manageVisitorPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVisitorPassActionPerformed
+        // close this window and bring up the visitor pass window
+        this.dispose();
+        manageVisitorPass mvp = new manageVisitorPass();
+        mvp.setVisible(true);
+    }//GEN-LAST:event_manageVisitorPassActionPerformed
+
+    private void manageComplaintsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageComplaintsActionPerformed
+        // close this window and bring up the complaints window
+        this.dispose();
+        manageComplaints mc = new manageComplaints();
+        mc.setVisible(true);
+    }//GEN-LAST:event_manageComplaintsActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // first prompt the user if they are sure they want to logout, if yes, then close the current window and bring up the login window
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", dialogButton);
+        if (dialogResult == 0) {
+            // close this window and bring up the login window
+//            login login = new login();
+//            login.setVisible(true);
+            this.dispose();
+            //exit the program
+            System.exit(0);
+        }
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,7 +183,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -164,11 +221,5 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton managePayments;
     private javax.swing.JButton manageVisitorPass;
     private javax.swing.JLabel profilePicture;
-    private javax.swing.JButton residentIssueInvoice;
-    private javax.swing.JButton residentIssueInvoice1;
-    private javax.swing.JPanel residentPanel;
-    private javax.swing.JPanel residentPanel1;
-    private javax.swing.JLabel residentTitle;
-    private javax.swing.JLabel residentTitle1;
     // End of variables declaration//GEN-END:variables
 }
