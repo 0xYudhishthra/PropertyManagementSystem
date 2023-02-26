@@ -14,38 +14,12 @@ import java.util.ArrayList;
 public interface IFileHandler {
 
     /**
-     * This method is used to check that all the files listed in the user files enum exist and has headers
-     *
-     * @return boolean - true if all the files exist and has headers, false otherwise
-     * @throws Exception
-     */
-    boolean checkFiles() throws Exception;
-
-    /**
-     * This method is used to check if a given file exists
-     *
-     * @param filename
-     * @return boolean
-     * @throws Exception
-     */
-    boolean fileExists(String filename, String userRole) throws Exception;
-
-    /**
-     * This method is used to create a new file
-     *
-     * @param filename
-     * @return boolean
-     * @throws Exception
-     */
-    boolean createFile(String filename, String userRole) throws Exception;
-
-    /**
      * This method is used to create a new data record in a given file
      *
-     * @param filename
-     * @param data
+     * @param filename - the file to create the new data record in
+     * @param data - the data to insert
      * @return boolean
-     * @throws Exception
+     * @throws Exception - if data cannot be inserted
      */
     boolean createData(String filename, Object data, String userRole) throws Exception;
 
@@ -70,9 +44,6 @@ public interface IFileHandler {
      * @throws Exception
      */
     boolean createFileHeader(String filename, String title, String description, String[] format, String userRole) throws Exception;
-
-    //read
-    //method to read a data record or data records from a given file
 
     /**
      * This method is used to read data records from a given filename
@@ -101,7 +72,7 @@ public interface IFileHandler {
      * @return String[]
      * @throws Exception
      */
-    ArrayList<String> getFileHeader(String filename, String userRole) throws Exception;
+//    ArrayList<String> getFileHeader(String filename, String userRole) throws Exception;
 
     //update
 
