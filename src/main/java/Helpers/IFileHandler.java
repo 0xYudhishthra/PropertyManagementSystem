@@ -21,7 +21,7 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception - if data cannot be inserted
      */
-    boolean createData(String filename, Object data, String userRole) throws Exception;
+//    boolean createData(String filename, Object data, String userRole) throws Exception;
 
     /**
      * This method is used to create new data records in a given file
@@ -31,19 +31,7 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception
      */
-    boolean createData(String filename, Object[] data, String userRole) throws Exception;
-
-    /**
-     * This method is used to create a default header in a newly created text file. parameters are the main title, description, store format (in the form of: {key1, key2, key3, ...})
-     *
-     * @param filename
-     * @param title
-     * @param description
-     * @param format
-     * @return boolean
-     * @throws Exception
-     */
-    boolean createFileHeader(String filename, String title, String description, String[] format, String userRole) throws Exception;
+//    boolean createData(String filename, Object[] data, String userRole) throws Exception;
 
     /**
      * This method is used to read data records from a given filename
@@ -85,7 +73,7 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception
      */
-    boolean updateData(String filename, String id, Object data) throws Exception;
+//    boolean updateData(String filename, String id, Object data) throws Exception;
 
     /**
      * This method is used to update data records from a given filename, with given IDs and datas to update for each ID
@@ -96,7 +84,7 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception
      */
-    boolean updateData(String filename, String[] ids, Object[] data) throws Exception;
+//    boolean updateData(String filename, String[] ids, Object[] data) throws Exception;
 
     //delete
 
@@ -107,7 +95,7 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception
      */
-    boolean deleteData(String filename) throws Exception;
+//    boolean deleteData(String filename) throws Exception;
 
     /**
      * This method is used to delete a data record from a given filename, with a given id
@@ -117,7 +105,7 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception
      */
-    boolean deleteData(String filename, String id) throws Exception;
+//    boolean deleteData(String filename, String id) throws Exception;
 
     /**
      * This method is used to delete data records from a given filename, with given IDs
@@ -127,6 +115,6 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception
      */
-    boolean deleteData(String filename, String[] ids) throws Exception;
+//    boolean deleteData(String filename, String[] ids) throws Exception;
 }
 
