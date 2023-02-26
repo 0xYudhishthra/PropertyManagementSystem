@@ -4,10 +4,20 @@
  */
 package Resident;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * @author yudhx
  */
+
 public class manageComplaints extends javax.swing.JFrame {
+
+    //instantiate file handler
+    Resident.residentFileHandler residentFileHandler = new residentFileHandler();
 
     /**
      * Creates new form manageComplaints
@@ -23,28 +33,29 @@ public class manageComplaints extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()  {
 
-        manageComplaintsScrollPane = new javax.swing.JScrollPane();
-        manageComplaintsPanel = new javax.swing.JPanel();
-        complaintDetailsTitle = new javax.swing.JLabel();
-        addComplaintTitle = new javax.swing.JLabel();
-        complaintNumberTitle = new javax.swing.JLabel();
-        complaintNumberInput = new javax.swing.JTextField();
-        delete = new javax.swing.JButton();
-        pendingComplaintsTitle = new javax.swing.JLabel();
-        pendingComplaintsPane = new javax.swing.JScrollPane();
-        pendingComplaintsTable = new javax.swing.JTable();
-        viewPastComplaintsTitle = new javax.swing.JLabel();
-        update = new javax.swing.JButton();
-        complaintDateTitle = new javax.swing.JLabel();
-        complaintDetailsInput = new javax.swing.JTextField();
-        log = new javax.swing.JButton();
-        complaintDateInput = new javax.swing.JTextField();
-        viewPastComplaintsPane = new javax.swing.JScrollPane();
-        viewPastComplaintsTable = new javax.swing.JTable();
-        manageComplaintsTitle = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
+        javax.swing.JScrollPane manageComplaintsScrollPane = new javax.swing.JScrollPane();
+        JPanel manageComplaintsPanel = new JPanel();
+        JLabel complaintDetailsTitle = new JLabel();
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        JLabel addComplaintTitle = new JLabel();
+        JLabel complaintNumberTitle = new JLabel();
+        JTextField complaintNumberInput = new JTextField();
+        JButton delete = new JButton();
+        javax.swing.JLabel pendingComplaintsTitle = new javax.swing.JLabel();
+        javax.swing.JScrollPane pendingComplaintsPane = new javax.swing.JScrollPane();
+        javax.swing.JTable pendingComplaintsTable = new javax.swing.JTable();
+        javax.swing.JLabel viewPastComplaintsTitle = new javax.swing.JLabel();
+        javax.swing.JButton update = new javax.swing.JButton();
+        JLabel complaintDateTitle = new JLabel();
+        JTextField complaintDetailsInput = new JTextField();
+        JButton log = new JButton();
+        JTextField complaintDateInput = new JTextField();
+        javax.swing.JScrollPane viewPastComplaintsPane = new javax.swing.JScrollPane();
+        javax.swing.JTable viewPastComplaintsTable = new javax.swing.JTable();
+        javax.swing.JLabel manageComplaintsTitle = new javax.swing.JLabel();
+        JButton back = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,13 +77,20 @@ public class manageComplaints extends javax.swing.JFrame {
         delete.setText("DELETE");
         delete.setEnabled(false);
         delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionPerformed(evt);
+            public void actionPerformed(ActionEvent evt) {
+                deleteActionPerformed();
             }
         });
 
         pendingComplaintsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         pendingComplaintsTitle.setText("Pending Complaints");
+
+        ArrayList<String> fileHeader = residentFileHandler.getFileHeader("residentComplaint", "resident");
+        //convert all elements in fileHeader to capitalizes
+
+        for (int i = 0; i < fileHeader.size(); i++) {
+            fileHeader.set(i, fileHeader.get(i).substring(0,1).toUpperCase() + fileHeader.get(i).substring(1).toLowerCase());
+        }
 
         pendingComplaintsTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -81,11 +99,12 @@ public class manageComplaints extends javax.swing.JFrame {
                         {null, null, null, null},
                         {null, null, null, null}
                 },
+                //generate the string below bsed on the output of getFileHeader
                 new String[]{
-                        "Date of Complaint", "Description", "Complaint Number", "Status"
+                        fileHeader.get(1), fileHeader.get(2), fileHeader.get(3), fileHeader.get(4)
                 }
         ) {
-            Class[] types = new Class[]{
+            final Class[] types = new Class[]{
                     java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
@@ -94,37 +113,34 @@ public class manageComplaints extends javax.swing.JFrame {
             }
         });
 
-        for (int i = 0; i < pendingComplaintsTable.getColumnCount(); i++) {
-            //assign values based on the column name, use switch case
-            switch (pendingComplaintsTable.getColumnName(i)) {
-                case "Date of Complaint":
-                    pendingComplaintsTable.setValueAt("2018-01-01", 0, i);
-                    pendingComplaintsTable.setValueAt("2018-01-02", 1, i);
-                    pendingComplaintsTable.setValueAt("2018-01-03", 2, i);
-                    pendingComplaintsTable.setValueAt("2018-01-04", 3, i);
-                    break;
-                case "Description":
-                    pendingComplaintsTable.setValueAt("Description 1", 0, i);
-                    pendingComplaintsTable.setValueAt("Description 2", 1, i);
-                    pendingComplaintsTable.setValueAt("Description 3", 2, i);
-                    pendingComplaintsTable.setValueAt("Description 4", 3, i);
-                    break;
-                case "Complaint Number":
-                    pendingComplaintsTable.setValueAt("1", 0, i);
-                    pendingComplaintsTable.setValueAt("2", 1, i);
-                    pendingComplaintsTable.setValueAt("3", 2, i);
-                    pendingComplaintsTable.setValueAt("4", 3, i);
-                    break;
-                case "Status":
-                    pendingComplaintsTable.setValueAt("Resolved", 0, i);
-                    pendingComplaintsTable.setValueAt("Resolved", 1, i);
-                    pendingComplaintsTable.setValueAt("Resolved", 2, i);
-                    pendingComplaintsTable.setValueAt("Resolved", 3, i);
-                    break;
+        //call the readData function from another
+        try{
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPendingComplaints("RN001");
+            if (data.size() != 0) {
+                update.setEnabled(true);
+                delete.setEnabled(true);
+                pendingComplaintsTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < pendingComplaintsTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(pendingComplaintsTable.getColumnName(j).toUpperCase())) {
+                                pendingComplaintsTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                update.setEnabled(false);
+                delete.setEnabled(false);
+                pendingComplaintsTable.setEnabled(false);
             }
+
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
-        pendingComplaintsTable.setEnabled(false);
+
         pendingComplaintsPane.setViewportView(pendingComplaintsTable);
 
         viewPastComplaintsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -132,10 +148,9 @@ public class manageComplaints extends javax.swing.JFrame {
 
         update.setBackground(new java.awt.Color(102, 255, 102));
         update.setText("UPDATE");
-        update.setEnabled(false);
         update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateActionPerformed(evt);
+            public void actionPerformed(ActionEvent evt) {
+                updateActionPerformed();
             }
         });
 
@@ -147,8 +162,8 @@ public class manageComplaints extends javax.swing.JFrame {
         log.setBackground(new java.awt.Color(51, 255, 102));
         log.setText("LOG");
         log.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logActionPerformed(evt);
+            public void actionPerformed(ActionEvent evt) {
+                logActionPerformed();
             }
         });
 
@@ -165,7 +180,7 @@ public class manageComplaints extends javax.swing.JFrame {
                         "Date of Complaint", "Description", "Complaint Number", "Status"
                 }
         ) {
-            Class[] types = new Class[]{
+            final Class[] types = new Class[]{
                     java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
@@ -173,36 +188,29 @@ public class manageComplaints extends javax.swing.JFrame {
                 return types[columnIndex];
             }
         });
-        for (int i = 0; i < viewPastComplaintsTable.getColumnCount(); i++) {
-            //assign values based on the column name, use switch case
-            switch (viewPastComplaintsTable.getColumnName(i)) {
-                case "Date of Complaint":
-                    viewPastComplaintsTable.setValueAt("2018-01-01", 0, i);
-                    viewPastComplaintsTable.setValueAt("2018-01-02", 1, i);
-                    viewPastComplaintsTable.setValueAt("2018-01-03", 2, i);
-                    viewPastComplaintsTable.setValueAt("2018-01-04", 3, i);
-                    break;
-                case "Description":
-                    viewPastComplaintsTable.setValueAt("Description 1", 0, i);
-                    viewPastComplaintsTable.setValueAt("Description 2", 1, i);
-                    viewPastComplaintsTable.setValueAt("Description 3", 2, i);
-                    viewPastComplaintsTable.setValueAt("Description 4", 3, i);
-                    break;
-                case "Complaint Number":
-                    viewPastComplaintsTable.setValueAt("1", 0, i);
-                    viewPastComplaintsTable.setValueAt("2", 1, i);
-                    viewPastComplaintsTable.setValueAt("3", 2, i);
-                    viewPastComplaintsTable.setValueAt("4", 3, i);
-                    break;
-                case "Status":
-                    viewPastComplaintsTable.setValueAt("Resolved", 0, i);
-                    viewPastComplaintsTable.setValueAt("Resolved", 1, i);
-                    viewPastComplaintsTable.setValueAt("Resolved", 2, i);
-                    viewPastComplaintsTable.setValueAt("Resolved", 3, i);
-                    break;
+        //call the readData function from another
+        try {
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPastComplaints("RN001");
+            if (data.size() != 0) {
+                viewPastComplaintsTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewPastComplaintsTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewPastComplaintsTable.getColumnName(j).toUpperCase())) {
+                                viewPastComplaintsTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewPastComplaintsTable.setEnabled(false);
             }
-        }
-        viewPastComplaintsTable.setEnabled(false);
+
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+
         viewPastComplaintsPane.setViewportView(viewPastComplaintsTable);
 
         javax.swing.GroupLayout manageComplaintsPanelLayout = new javax.swing.GroupLayout(manageComplaintsPanel);
@@ -281,15 +289,13 @@ public class manageComplaints extends javax.swing.JFrame {
 
         manageComplaintsScrollPane.setViewportView(manageComplaintsPanel);
 
-        manageComplaintsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        manageComplaintsTitle.setFont(new java.awt.Font("Helvetica Neue", Font.PLAIN, 18)); // NOI18N
         manageComplaintsTitle.setText("Manage Complaints");
 
         back.setBackground(new java.awt.Color(255, 0, 51));
         back.setText("BACK");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
+        back.addActionListener(evt -> {
+            backActionPerformed(evt);
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -326,19 +332,19 @@ public class manageComplaints extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+    private void deleteActionPerformed() {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteActionPerformed
 
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+    private void updateActionPerformed() {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateActionPerformed
 
-    private void logActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logActionPerformed
+    private void logActionPerformed() {//GEN-FIRST:event_logActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_logActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+    private void backActionPerformed(ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // close this window and bring up the previous one
         this.dispose();
         new Dashboard().setVisible(true);
@@ -347,7 +353,7 @@ public class manageComplaints extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -360,13 +366,8 @@ public class manageComplaints extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(manageComplaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(manageComplaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(manageComplaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException |
+                 InstantiationException ex) {
             java.util.logging.Logger.getLogger(manageComplaints.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -379,26 +380,5 @@ public class manageComplaints extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addComplaintTitle;
-    private javax.swing.JButton back;
-    private javax.swing.JTextField complaintDateInput;
-    private javax.swing.JLabel complaintDateTitle;
-    private javax.swing.JTextField complaintDetailsInput;
-    private javax.swing.JLabel complaintDetailsTitle;
-    private javax.swing.JTextField complaintNumberInput;
-    private javax.swing.JLabel complaintNumberTitle;
-    private javax.swing.JButton delete;
-    private javax.swing.JButton log;
-    private javax.swing.JPanel manageComplaintsPanel;
-    private javax.swing.JScrollPane manageComplaintsScrollPane;
-    private javax.swing.JLabel manageComplaintsTitle;
-    private javax.swing.JScrollPane pendingComplaintsPane;
-    private javax.swing.JTable pendingComplaintsTable;
-    private javax.swing.JLabel pendingComplaintsTitle;
-    private javax.swing.JButton update;
-    private javax.swing.JScrollPane viewPastComplaintsPane;
-    private javax.swing.JTable viewPastComplaintsTable;
-    private javax.swing.JLabel viewPastComplaintsTitle;
     // End of variables declaration//GEN-END:variables
 }

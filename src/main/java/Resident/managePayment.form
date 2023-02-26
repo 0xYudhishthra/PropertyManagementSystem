@@ -115,14 +115,14 @@
                                   </Group>
                               </Group>
                               <EmptySpace pref="385" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="outstandingFeeTitle" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="380" max="32767" attributes="0"/>
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Component id="outstandingFeeOutput" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="outstandingFeeOutput" max="32767" attributes="0"/>
+                                  <Component id="outstandingFeeTitle" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace pref="435" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -171,26 +171,31 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="makePaymentTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="receiptNumberTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="receiptNumberOutput" pref="54" max="32767" attributes="0"/>
-                                  <Component id="makePaymentInput" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="makePaymentTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="receiptNumberTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="receiptNumberOutput" pref="60" max="32767" attributes="0"/>
+                                          <Component id="makePaymentInput" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="pay" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="outstandingFeeOutput" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="pay" max="32767" attributes="0"/>
+                              <Component id="outstandingFeeOutput" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="viewPaymentHistoryTitle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="viewPaymentHistoryPane" min="-2" pref="179" max="-2" attributes="0"/>
