@@ -4,10 +4,15 @@
  */
 package Resident;
 
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class manageFacilityBooking extends javax.swing.JFrame {
+
+    //instantiate file handler
+    Resident.residentFileHandler residentFileHandler = new residentFileHandler();
 
     /**
      * Creates new form manageFacilityBooking
@@ -110,7 +115,31 @@ public class manageFacilityBooking extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        viewPastBookingsTable.setEnabled(false);
+
+        //call the readData function from another
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPastBookings("RN001");
+            if (data.size() != 0) {
+                viewPastBookingsTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewPastBookingsTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewPastBookingsTable.getColumnName(j).toUpperCase())) {
+                                viewPastBookingsTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewPastBookingsTable.setEnabled(false);
+            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
         viewPastBookingsPane.setViewportView(viewPastBookingsTable);
 
         viewPastBookingsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -157,7 +186,31 @@ public class manageFacilityBooking extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        pendingBookingsTable.setEnabled(false);
+        //call the readData function from another
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPendingBookings("RN001");
+            if (data.size() != 0) {
+                update.setEnabled(true);
+                cancel.setEnabled(true);
+                pendingBookingsTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < pendingBookingsTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(pendingBookingsTable.getColumnName(j).toUpperCase())) {
+                                pendingBookingsTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                pendingBookingsTable.setEnabled(false);
+            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
         pendingBookingsPane.setViewportView(pendingBookingsTable);
 
         bookingDateInput.setText("jTextField4");

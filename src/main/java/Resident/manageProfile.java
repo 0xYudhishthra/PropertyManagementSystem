@@ -4,10 +4,17 @@
  */
 package Resident;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class manageProfile extends javax.swing.JFrame {
+
+    //instantiate file handler
+    Resident.residentFileHandler residentFileHandler = new residentFileHandler();
 
     /**
      * Creates new form Profile
@@ -62,6 +69,57 @@ public class manageProfile extends javax.swing.JFrame {
 
         manageProfilePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 51, 0), null));
 
+
+        //a sample return data from the statement above is {NATIONALITY=Malaysian, RESIDENT ID=N001, PROFILE PICTURE=johnDoe_01012023.jpg, CONTACT NUMBER=013-6699334, BUILDING=Parkhill Residence, PASSWORD=12345678, MOVE-IN DATE=01012023, RESIDENT NAME=John Doe, USERNAME=johnDoe, EMAIL=john.doe@email.com, UNIT NAME=Unit A-103}
+        //automatically set the text of the text fields to the data from the database
+        try{
+            Map<String, String> profileData = residentFileHandler.getProfileDetails("RN001");
+            for (Map.Entry<String, String> entry : profileData.entrySet()) {
+                switch (entry.getKey()){
+                    case "NATIONALITY":
+                        nationalityInput.setText(entry.getValue());
+                        break;
+                    case "PROFILE PICTURE":
+                        profilePicture.setIcon(new ImageIcon("src/main/resources/Resident/ProfilePictures/" + entry.getValue()));
+                        Dimension size = profilePicture.getPreferredSize();
+                        profilePicture.setBounds(10, 10, size.width, size.height);
+                        Image img = ((ImageIcon) profilePicture.getIcon()).getImage();
+                        Image newImg = img.getScaledInstance(125, 200, Image.SCALE_SMOOTH);
+                        ImageIcon newImc = new ImageIcon(newImg);
+                        profilePicture.setIcon(newImc);
+                        break;
+                    case "CONTACT NUMBER":
+                        contactNumberInput.setText(entry.getValue());
+                        break;
+                    case "BUILDING":
+                        buildingInput.setText(entry.getValue());
+                        break;
+                    case "MOVE-IN DATE":
+                        moveInDateInput.setText(entry.getValue());
+                        break;
+                    case "RESIDENT NAME":
+                        nameInput.setText(entry.getValue());
+                        break;
+                    case "USERNAME":
+                        usernameInput.setText(entry.getValue());
+                        break;
+                    case "EMAIL":
+                        emailInput.setText(entry.getValue());
+                        break;
+                    case "UNIT NAME":
+                        unitNameInput.setText(entry.getValue());
+                        break;
+                    case "PASSWORD":
+                        passwordInput.setText(entry.getValue());
+                        break;
+
+                }
+            }
+            }
+        catch(Exception e){
+            System.out.println(e);
+        }
+
         profilePicture.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         profilePicture.setText("profilePicture");
 
@@ -81,19 +139,11 @@ public class manageProfile extends javax.swing.JFrame {
         nameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         nameTitle.setText("Name");
 
-        nameInput.setText("jTextField1");
-
-        contactNumberInput.setText("jTextField1");
-
         contactNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         contactNumberTitle.setText("Contact Number");
 
         emailTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         emailTitle.setText("Email");
-
-        emailInput.setText("jTextField1");
-
-        nationalityInput.setText("jTextField1");
 
         nationalityTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         nationalityTitle.setText("Nationality");
@@ -149,10 +199,6 @@ public class manageProfile extends javax.swing.JFrame {
         buildingTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         buildingTitle.setText("Building");
 
-        buildingInput.setText("jTextField1");
-
-        unitNameInput.setText("jTextField1");
-
         unitNameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         unitNameTitle.setText("Unit Name");
 
@@ -194,7 +240,6 @@ public class manageProfile extends javax.swing.JFrame {
         moveInDateTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         moveInDateTitle.setText("Move-In Date");
 
-        moveInDateInput.setText("jTextField1");
         moveInDateInput.setEnabled(false);
 
         javax.swing.GroupLayout occupancyDetailsPanelLayout = new javax.swing.GroupLayout(occupancyDetailsPanel);
@@ -229,12 +274,10 @@ public class manageProfile extends javax.swing.JFrame {
         usernameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         usernameTitle.setText("Username");
 
-        usernameInput.setText("jTextField1");
 
         passwordTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         passwordTitle.setText("Password");
 
-        passwordInput.setText("jTextField1");
 
         javax.swing.GroupLayout accountDetailsPanelLayout = new javax.swing.GroupLayout(accountDetailsPanel);
         accountDetailsPanel.setLayout(accountDetailsPanelLayout);
