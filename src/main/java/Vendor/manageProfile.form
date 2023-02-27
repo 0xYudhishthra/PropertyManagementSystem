@@ -27,13 +27,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="manageProfileScrollPane" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="manageProfileTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="533" max="32767" attributes="0"/>
                       <Component id="back" min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,8 +46,8 @@
                   <Component id="back" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="manageProfileScrollPane" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="manageProfileScrollPane" min="-2" pref="447" max="-2" attributes="0"/>
+              <EmptySpace pref="68" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -115,7 +115,7 @@
                           </Group>
                           <Component id="personalDetailsPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="81" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -166,8 +166,6 @@
                                   <Component id="contactNumberInput" alignment="0" max="32767" attributes="0"/>
                                   <Component id="emailInput" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="nationalityTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="nationalityInput" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="nationalityTitle1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="nationalityInput1" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -193,12 +191,8 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="emailInput" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="nationalityTitle" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="nationalityInput" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="nationalityTitle1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="nationalityInput1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -251,19 +245,6 @@
                 <Component class="javax.swing.JTextField" name="emailInput">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="nationalityInput">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="nationalityTitle">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Helvetica Neue" size="14" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Nationality"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="nationalityTitle1">

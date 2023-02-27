@@ -4,10 +4,14 @@
  */
 package Vendor;
 
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class manageComplaints extends javax.swing.JFrame {
+
+    Vendor.vendorFileHandler vendorFileHandler = new Vendor.vendorFileHandler();
 
     /**
      * Creates new form manageComplaints
@@ -92,6 +96,27 @@ public class manageComplaints extends javax.swing.JFrame {
                 return types[columnIndex];
             }
         });
+        try {
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getPendingComplaints("VN001");
+            if (data.size() != 0) {
+                pendingComplaintsTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < pendingComplaintsTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(pendingComplaintsTable.getColumnName(j).toUpperCase())) {
+                                pendingComplaintsTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                pendingComplaintsTable.setEnabled(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         pendingComplaintsPane.setViewportView(pendingComplaintsTable);
 
         viewPastComplaintsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -139,6 +164,28 @@ public class manageComplaints extends javax.swing.JFrame {
                 return types[columnIndex];
             }
         });
+        //call the readData function from another
+        try {
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getPastComplaints("VN001");
+            if (data.size() != 0) {
+                viewPastComplaintsTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewPastComplaintsTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewPastComplaintsTable.getColumnName(j).toUpperCase())) {
+                                viewPastComplaintsTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewPastComplaintsTable.setEnabled(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         viewPastComplaintsPane.setViewportView(viewPastComplaintsTable);
 
         javax.swing.GroupLayout manageComplaintsPanelLayout = new javax.swing.GroupLayout(manageComplaintsPanel);
