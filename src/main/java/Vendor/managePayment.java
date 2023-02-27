@@ -4,10 +4,14 @@
  */
 package Vendor;
 
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class managePayment extends javax.swing.JFrame {
+
+    Vendor.vendorFileHandler vendorFileHandler = new Vendor.vendorFileHandler();
 
     /**
      * Creates new form makePayment
@@ -91,7 +95,7 @@ public class managePayment extends javax.swing.JFrame {
         outstandingFeeTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         outstandingFeeTitle.setText("Outstanding Fee");
 
-        outstandingFeeOutput.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        outstandingFeeOutput.setFont(new java.awt.Font("Helvetica Neue", 0, 50)); // NOI18N
         outstandingFeeOutput.setText("jLabel23");
 
         viewPaymentHistoryTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
@@ -109,13 +113,38 @@ public class managePayment extends javax.swing.JFrame {
                 }
         ) {
             Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
         });
+
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getPaymentHistory("VN001");
+            if (data.size() != 0) {
+                outstandingFeeOutput.setText(data.get(data.size()).get("TOTAL AMOUNT DUE"));
+                viewPaymentHistoryTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewPaymentHistoryTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewPaymentHistoryTable.getColumnName(j).toUpperCase())) {
+                                viewPaymentHistoryTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewPaymentHistoryTable.setEnabled(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         viewPaymentHistoryPane.setViewportView(viewPaymentHistoryTable);
         if (viewPaymentHistoryTable.getColumnModel().getColumnCount() > 0) {
             viewPaymentHistoryTable.getColumnModel().getColumn(0).setHeaderValue("Date");
@@ -133,13 +162,36 @@ public class managePayment extends javax.swing.JFrame {
                 }
         ) {
             Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
         });
+
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getInvoice("VN001");
+            if (data.size() != 0) {
+                viewInvoiceTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewInvoiceTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewInvoiceTable.getColumnName(j).toUpperCase())) {
+                                viewInvoiceTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewInvoiceTable.setEnabled(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         viewInvoiceTablePane.setViewportView(viewInvoiceTable);
 
         viewInvoiceTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
@@ -160,13 +212,36 @@ public class managePayment extends javax.swing.JFrame {
                 }
         ) {
             Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
         });
+
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getReceipt("VN001");
+            if (data.size() != 0) {
+                viewReceiptTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewReceiptTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewReceiptTable.getColumnName(j).toUpperCase())) {
+                                viewReceiptTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewReceiptTable.setEnabled(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         viewReceiptPane.setViewportView(viewReceiptTable);
 
         viewStatementTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -181,13 +256,36 @@ public class managePayment extends javax.swing.JFrame {
                 }
         ) {
             Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
         });
+
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getStatement("VN001");
+            if (data.size() != 0) {
+                viewStatementTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewStatementTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewStatementTable.getColumnName(j).toUpperCase())) {
+                                viewStatementTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewStatementTable.setEnabled(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         viewStatementPane.setViewportView(viewStatementTable);
 
         viewStatementTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N

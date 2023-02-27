@@ -72,10 +72,10 @@ public class manageProfile extends javax.swing.JFrame {
 
         //a sample return data from the statement above is {NATIONALITY=Malaysian, RESIDENT ID=N001, PROFILE PICTURE=johnDoe_01012023.jpg, CONTACT NUMBER=013-6699334, BUILDING=Parkhill Residence, PASSWORD=12345678, MOVE-IN DATE=01012023, RESIDENT NAME=John Doe, USERNAME=johnDoe, EMAIL=john.doe@email.com, UNIT NAME=Unit A-103}
         //automatically set the text of the text fields to the data from the database
-        try{
+        try {
             Map<String, String> profileData = residentFileHandler.getProfileDetails("RN001");
             for (Map.Entry<String, String> entry : profileData.entrySet()) {
-                switch (entry.getKey()){
+                switch (entry.getKey()) {
                     case "NATIONALITY":
                         nationalityInput.setText(entry.getValue());
                         break;
@@ -115,8 +115,7 @@ public class manageProfile extends javax.swing.JFrame {
 
                 }
             }
-            }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
 

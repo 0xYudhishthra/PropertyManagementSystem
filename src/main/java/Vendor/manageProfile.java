@@ -4,10 +4,16 @@
  */
 package Vendor;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class manageProfile extends javax.swing.JFrame {
+
+    Vendor.vendorFileHandler vendorFileHandler = new vendorFileHandler();
 
     /**
      * Creates new form Profile
@@ -37,8 +43,6 @@ public class manageProfile extends javax.swing.JFrame {
         contactNumberTitle = new javax.swing.JLabel();
         emailTitle = new javax.swing.JLabel();
         emailInput = new javax.swing.JTextField();
-        nationalityInput = new javax.swing.JTextField();
-        nationalityTitle = new javax.swing.JLabel();
         nationalityTitle1 = new javax.swing.JLabel();
         nationalityInput1 = new javax.swing.JTextField();
         buildingDetailsPanel = new javax.swing.JPanel();
@@ -75,6 +79,55 @@ public class manageProfile extends javax.swing.JFrame {
             }
         });
 
+        //a sample return data from the statement above is {NATIONALITY=Malaysian, RESIDENT ID=N001, PROFILE PICTURE=johnDoe_01012023.jpg, CONTACT NUMBER=013-6699334, BUILDING=Parkhill Residence, PASSWORD=12345678, MOVE-IN DATE=01012023, RESIDENT NAME=John Doe, USERNAME=johnDoe, EMAIL=john.doe@email.com, UNIT NAME=Unit A-103}
+        //automatically set the text of the text fields to the data from the database
+        try {
+            Map<String, String> profileData = vendorFileHandler.getProfileDetails("VN001");
+            for (Map.Entry<String, String> entry : profileData.entrySet()) {
+                switch (entry.getKey()) {
+                    case "PROFILE PICTURE":
+                        profilePicture.setIcon(new ImageIcon("src/main/resources/Vendor/ProfilePictures/" + entry.getValue()));
+                        Dimension size = profilePicture.getPreferredSize();
+                        profilePicture.setBounds(10, 10, size.width, size.height);
+                        Image img = ((ImageIcon) profilePicture.getIcon()).getImage();
+                        Image newImg = img.getScaledInstance(120, 100, Image.SCALE_SMOOTH);
+                        ImageIcon newImc = new ImageIcon(newImg);
+                        profilePicture.setIcon(newImc);
+                        break;
+                    case "CONTACT NUMBER":
+                        contactNumberInput.setText(entry.getValue());
+                        break;
+                    case "BUILDING":
+                        buildingInput.setText(entry.getValue());
+                        break;
+                    case "MOVE-IN DATE":
+                        moveInDateInput.setText(entry.getValue());
+                        break;
+                    case "VENDOR NAME":
+                        nameInput.setText(entry.getValue());
+                        break;
+                    case "USERNAME":
+                        usernameInput.setText(entry.getValue());
+                        break;
+                    case "EMAIL":
+                        emailInput.setText(entry.getValue());
+                        break;
+                    case "UNIT NAME":
+                        unitNameInput.setText(entry.getValue());
+                        break;
+                    case "PASSWORD":
+                        passwordInput.setText(entry.getValue());
+                        break;
+                    case "BUSINESS REG NUMBER":
+                        nationalityInput1.setText(entry.getValue());
+                        break;
+
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         personalDetailsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 0), null));
 
         personalDetailsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -83,27 +136,14 @@ public class manageProfile extends javax.swing.JFrame {
         nameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         nameTitle.setText("Name");
 
-        nameInput.setText("jTextField1");
-
-        contactNumberInput.setText("jTextField1");
-
         contactNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         contactNumberTitle.setText("Contact Number");
 
         emailTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         emailTitle.setText("Email");
 
-        emailInput.setText("jTextField1");
-
-        nationalityInput.setText("jTextField1");
-
-        nationalityTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        nationalityTitle.setText("Nationality");
-
         nationalityTitle1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         nationalityTitle1.setText("Business Reg Number");
-
-        nationalityInput1.setText("jTextField1");
 
         javax.swing.GroupLayout personalDetailsPanelLayout = new javax.swing.GroupLayout(personalDetailsPanel);
         personalDetailsPanel.setLayout(personalDetailsPanelLayout);
@@ -120,8 +160,6 @@ public class manageProfile extends javax.swing.JFrame {
                                                 .addComponent(nameInput)
                                                 .addComponent(contactNumberInput)
                                                 .addComponent(emailInput))
-                                        .addComponent(nationalityTitle)
-                                        .addComponent(nationalityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(nationalityTitle1)
                                         .addComponent(nationalityInput1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(22, Short.MAX_VALUE))
@@ -144,12 +182,8 @@ public class manageProfile extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(nationalityTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nationalityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
                                 .addComponent(nationalityTitle1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(nationalityInput1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -161,10 +195,6 @@ public class manageProfile extends javax.swing.JFrame {
 
         buildingTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         buildingTitle.setText("Building");
-
-        buildingInput.setText("jTextField1");
-
-        unitNameInput.setText("jTextField1");
 
         unitNameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         unitNameTitle.setText("Unit Name");
@@ -207,7 +237,6 @@ public class manageProfile extends javax.swing.JFrame {
         moveInDateTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         moveInDateTitle.setText("Move-In Date");
 
-        moveInDateInput.setText("jTextField1");
         moveInDateInput.setEnabled(false);
 
         javax.swing.GroupLayout occupancyDetailsPanelLayout = new javax.swing.GroupLayout(occupancyDetailsPanel);
@@ -242,12 +271,8 @@ public class manageProfile extends javax.swing.JFrame {
         usernameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         usernameTitle.setText("Username");
 
-        usernameInput.setText("jTextField1");
-
         passwordTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         passwordTitle.setText("Password");
-
-        passwordInput.setText("jTextField1");
 
         javax.swing.GroupLayout accountDetailsPanelLayout = new javax.swing.GroupLayout(accountDetailsPanel);
         accountDetailsPanel.setLayout(accountDetailsPanelLayout);
@@ -320,7 +345,7 @@ public class manageProfile extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addComponent(personalDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(16, Short.MAX_VALUE))
+                                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         manageProfileScrollPane.setViewportView(manageProfilePanel);
@@ -346,9 +371,9 @@ public class manageProfile extends javax.swing.JFrame {
                                         .addComponent(manageProfileScrollPane)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(manageProfileTitle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
+                                                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addContainerGap())))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,8 +383,8 @@ public class manageProfile extends javax.swing.JFrame {
                                         .addComponent(manageProfileTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                                         .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(manageProfileScrollPane)
-                                .addContainerGap())
+                                .addComponent(manageProfileScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -432,9 +457,7 @@ public class manageProfile extends javax.swing.JFrame {
     private javax.swing.JLabel moveInDateTitle;
     private javax.swing.JTextField nameInput;
     private javax.swing.JLabel nameTitle;
-    private javax.swing.JTextField nationalityInput;
     private javax.swing.JTextField nationalityInput1;
-    private javax.swing.JLabel nationalityTitle;
     private javax.swing.JLabel nationalityTitle1;
     private javax.swing.JPanel occupancyDetailsPanel;
     private javax.swing.JLabel occupancyDetailsTitle;
