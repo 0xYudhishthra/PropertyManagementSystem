@@ -4,16 +4,21 @@
  */
 package AccountExecutive;
 
+import javax.swing.*;
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class issueReceipt extends javax.swing.JFrame {
 
+    AccountExecutive.accountExecutiveFileHandler accountExecutiveFileHandler = new AccountExecutive.accountExecutiveFileHandler();
+
     /**
      * Creates new form issueInvoice
      */
-    public issueReceipt() {
-        initComponents();
+    public issueReceipt(String role) {
+        initComponents(role);
     }
 
     /**
@@ -23,7 +28,7 @@ public class issueReceipt extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String role) {
 
         back = new javax.swing.JButton();
         greetingPanel = new javax.swing.JPanel();
@@ -54,7 +59,7 @@ public class issueReceipt extends javax.swing.JFrame {
         actionTitle.setText("You have chosen to:");
 
         actionName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        actionName.setText("Issue Receipt for <IUser>");
+        actionName.setText("Issue Receipt for " + role);
 
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
@@ -78,9 +83,7 @@ public class issueReceipt extends javax.swing.JFrame {
         );
 
         userNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        userNumberTitle.setText("<IUser> Number");
-
-        userNumberInput.setText("jTextField1");
+        userNumberTitle.setText(role + " Number");
 
         print.setBackground(new java.awt.Color(255, 0, 255));
         print.setText("PRINT");
@@ -106,11 +109,11 @@ public class issueReceipt extends javax.swing.JFrame {
                         {null, null, null, null, null, null, null}
                 },
                 new String[]{
-                        "Date", "Receipt ID", "<IUser> ID", "Invoice ID", "Statement ID", "Amount", "Total Amount Paid"
+                        "Date", "Receipt ID", role + " ID", "Invoice ID", "Statement ID", "Amount", "Total Amount Paid"
                 }
         ) {
             Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -180,7 +183,36 @@ public class issueReceipt extends javax.swing.JFrame {
     }//GEN-LAST:event_printActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getReceipt(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+            if (data.size() != 0) {
+                receiptOutputTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < receiptOutputTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(receiptOutputTable.getColumnName(j).toUpperCase())) {
+                                receiptOutputTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                //clear the table
+                for (int i = 0; i < receiptOutputTable.getRowCount(); i++) {
+                    for (int j = 0; j < receiptOutputTable.getColumnCount(); j++) {
+                        receiptOutputTable.setValueAt("", i, j);
+                    }
+                }
+                receiptOutputTable.setEnabled(false);
+                //display error message
+                JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_searchActionPerformed
 
     /**
@@ -214,7 +246,7 @@ public class issueReceipt extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new issueReceipt().setVisible(true);
+                new issueReceipt(null).setVisible(true);
             }
         });
     }

@@ -56,7 +56,7 @@ public class Dashboard extends javax.swing.JFrame {
         greetingPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         greetingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        greetingLabel.setText("Welcome, NAME!");
+        greetingLabel.setText("Welcome!");
 
         subgreetingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         subgreetingLabel.setText("What would you like to do today?");
@@ -334,21 +334,21 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void residentIssueStatementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentIssueStatementActionPerformed
         // close this current window and bring up the issue statement window
-        issueStatement issueStatement = new issueStatement();
+        issueStatement issueStatement = new issueStatement("Resident");
         issueStatement.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_residentIssueStatementActionPerformed
 
     private void residentIssueReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentIssueReceiptActionPerformed
         // close this current window and bring up the issue receipt window
-        issueReceipt issueReceipt = new issueReceipt();
+        issueReceipt issueReceipt = new issueReceipt("Resident");
         issueReceipt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_residentIssueReceiptActionPerformed
 
     private void residentIssueInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentIssueInvoiceActionPerformed
         //close this current window and bring up the issue invoice window
-        issueInvoice issueInvoice = new issueInvoice();
+        issueInvoice issueInvoice = new issueInvoice("Resident");
         issueInvoice.setVisible(true);
         this.dispose();
 
@@ -356,77 +356,77 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void residentRecordPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentRecordPaymentActionPerformed
         //close this current window and bring up the record payment window
-        recordPayment recordPayment = new recordPayment();
+        recordPayment recordPayment = new recordPayment("Resident");
         recordPayment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_residentRecordPaymentActionPerformed
 
     private void residentViewPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentViewPaymentActionPerformed
         //close this current window and bring up the view payment window
-        viewPayment viewPayment = new viewPayment();
+        viewPayment viewPayment = new viewPayment("Resident");
         viewPayment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_residentViewPaymentActionPerformed
 
     private void residentUpdatePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentUpdatePaymentActionPerformed
         //close this current window and bring up the update payment window
-        updatePayment updatePayment = new updatePayment();
+        updatePayment updatePayment = new updatePayment("Resident");
         updatePayment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_residentUpdatePaymentActionPerformed
 
     private void residentViewOutstandingFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentViewOutstandingFeeActionPerformed
         // close this current window and bring up the view outstanding fee window
-        viewOutstandingFee viewOutstandingFee = new viewOutstandingFee();
+        viewOutstandingFee viewOutstandingFee = new viewOutstandingFee("Resident");
         viewOutstandingFee.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_residentViewOutstandingFeeActionPerformed
 
     private void vendorIssueInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorIssueInvoiceActionPerformed
         //close this current window and bring up the issue invoice window
-        issueInvoice issueInvoice = new issueInvoice();
+        issueInvoice issueInvoice = new issueInvoice("Vendor");
         issueInvoice.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vendorIssueInvoiceActionPerformed
 
     private void vendorIssueReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorIssueReceiptActionPerformed
         //close this current window and bring up the issue receipt window
-        issueReceipt issueReceipt = new issueReceipt();
+        issueReceipt issueReceipt = new issueReceipt("Vendor");
         issueReceipt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vendorIssueReceiptActionPerformed
 
     private void vendorIssueStatementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorIssueStatementActionPerformed
         //close this current window and bring up the issue statement window
-        issueStatement issueStatement = new issueStatement();
+        issueStatement issueStatement = new issueStatement("Vendor");
         issueStatement.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vendorIssueStatementActionPerformed
 
     private void vendorRecordPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorRecordPaymentActionPerformed
         // //close this window and bring up the record payment window
-        recordPayment recordPayment = new recordPayment();
+        recordPayment recordPayment = new recordPayment("Vendor");
         recordPayment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vendorRecordPaymentActionPerformed
 
     private void vendorViewPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorViewPaymentActionPerformed
         // close this window and bring up the view payment window
-        viewPayment viewPayment = new viewPayment();
+        viewPayment viewPayment = new viewPayment("Vendor");
         viewPayment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vendorViewPaymentActionPerformed
 
     private void vendorUpdatePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorUpdatePaymentActionPerformed
         // close this window and bring up the update payment window
-        updatePayment updatePayment = new updatePayment();
+        updatePayment updatePayment = new updatePayment("Vendor");
         updatePayment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vendorUpdatePaymentActionPerformed
 
     private void vendorViewOutstandingFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorViewOutstandingFeeActionPerformed
         // close this window and bring up the view outstanding fee window
-        viewOutstandingFee viewOutstandingFee = new viewOutstandingFee();
+        viewOutstandingFee viewOutstandingFee = new viewOutstandingFee("Vendor");
         viewOutstandingFee.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_vendorViewOutstandingFeeActionPerformed
