@@ -4,16 +4,21 @@
  */
 package AccountExecutive;
 
+import javax.swing.*;
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class issueInvoice extends javax.swing.JFrame {
 
+    AccountExecutive.accountExecutiveFileHandler accountExecutiveFileHandler = new AccountExecutive.accountExecutiveFileHandler();
+
     /**
      * Creates new form issueInvoice
      */
-    public issueInvoice() {
-        initComponents();
+    public issueInvoice(String role) {
+        initComponents(role);
     }
 
     /**
@@ -23,7 +28,7 @@ public class issueInvoice extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String role) {
 
         back = new javax.swing.JButton();
         greetingPanel = new javax.swing.JPanel();
@@ -54,38 +59,32 @@ public class issueInvoice extends javax.swing.JFrame {
         actionTitle.setText("You have chosen to:");
 
         actionName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        actionName.setText("Issue Invoice for <IUser>");
+        actionName.setText("Issue Invoice for " + role);
 
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
         greetingPanelLayout.setHorizontalGroup(
-                greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(greetingPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(actionName)
-                                        .addComponent(actionTitle))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(greetingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(actionName)
+                    .addComponent(actionTitle))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         greetingPanelLayout.setVerticalGroup(
-                greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(greetingPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(actionTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(actionName)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(greetingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(actionTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(actionName)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         userNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        userNumberTitle.setText("<IUser> Number");
+        userNumberTitle.setText(role + " Number");
 
-        userNumberInput.setText("jTextField1");
-        userNumberInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNumberInputActionPerformed(evt);
-            }
-        });
 
         print.setBackground(new java.awt.Color(255, 0, 255));
         print.setText("PRINT");
@@ -104,71 +103,72 @@ public class issueInvoice extends javax.swing.JFrame {
         });
 
         invoiceOutputTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null}
-                },
-                new String[]{
-                        "<IUser> Name", "<IUser> ID", "Invoice Date", "Amount", "Invoice Number"
-                }
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                role + " Name", role + " ID", "Invoice Date", "Amount", "Invoice Number"
+            }
         ) {
-            Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
         });
+
         invoiceOutputPane.setViewportView(invoiceOutputTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(invoiceGenerateProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(print))
-                                        .addComponent(invoiceOutputPane, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(userNumberInput)
-                                                        .addComponent(userNumberTitle))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(search))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(greetingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(246, 246, 246)
-                                                .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
-                                .addGap(16, 16, 16))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(invoiceGenerateProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(print))
+                    .addComponent(invoiceOutputPane, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(userNumberInput)
+                            .addComponent(userNumberTitle))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(search))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(greetingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(246, 246, 246)
+                        .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(greetingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(userNumberTitle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(userNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(invoiceOutputPane, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(invoiceGenerateProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(greetingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(userNumberTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(invoiceOutputPane, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(invoiceGenerateProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -185,12 +185,37 @@ public class issueInvoice extends javax.swing.JFrame {
     }//GEN-LAST:event_printActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchActionPerformed
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getInvoice(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+            if (data.size() != 0) {
+                invoiceOutputTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < invoiceOutputTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(invoiceOutputTable.getColumnName(j).toUpperCase())) {
+                                invoiceOutputTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                //clear the table
+                for (int i = 0; i < invoiceOutputTable.getRowCount(); i++) {
+                    for (int j = 0; j < invoiceOutputTable.getColumnCount(); j++) {
+                        invoiceOutputTable.setValueAt("", i, j);
+                    }
+                }
+                invoiceOutputTable.setEnabled(false);
+                //display error message
+                JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
-    private void userNumberInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNumberInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userNumberInputActionPerformed
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,7 +247,7 @@ public class issueInvoice extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new issueInvoice().setVisible(true);
+                new issueInvoice(null).setVisible(true);
             }
         });
     }

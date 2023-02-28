@@ -4,16 +4,21 @@
  */
 package AccountExecutive;
 
+import javax.swing.*;
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class issueStatement extends javax.swing.JFrame {
 
+    AccountExecutive.accountExecutiveFileHandler accountExecutiveFileHandler = new AccountExecutive.accountExecutiveFileHandler();
+
     /**
      * Creates new form issueInvoice
      */
-    public issueStatement() {
-        initComponents();
+    public issueStatement(String role) {
+        initComponents(role);
     }
 
     /**
@@ -23,7 +28,7 @@ public class issueStatement extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String role) {
 
         back = new javax.swing.JButton();
         greetingPanel = new javax.swing.JPanel();
@@ -54,7 +59,7 @@ public class issueStatement extends javax.swing.JFrame {
         actionTitle.setText("You have chosen to:");
 
         actionName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        actionName.setText("Issue Statement for <IUser>");
+        actionName.setText("Issue Statement for " + role);
 
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
@@ -78,9 +83,7 @@ public class issueStatement extends javax.swing.JFrame {
         );
 
         userNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        userNumberTitle.setText("<IUser> Number");
-
-        userNumberInput.setText("jTextField1");
+        userNumberTitle.setText(role + " Number");
 
         print.setBackground(new java.awt.Color(255, 0, 255));
         print.setText("PRINT");
@@ -106,11 +109,11 @@ public class issueStatement extends javax.swing.JFrame {
                         {null, null, null, null, null, null, null, null, null}
                 },
                 new String[]{
-                        "Date", "<IUser> Name", "<IUser> ID", "Building", "Unit Number", "Description", "Amount", "Total Amount Due", "Statement ID"
+                        "Date", role + " Name", role + " ID", "Building", "Unit Number", "Description", "Amount", "Total Amount Due", "Statement ID"
                 }
         ) {
             Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -180,7 +183,36 @@ public class issueStatement extends javax.swing.JFrame {
     }//GEN-LAST:event_printActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getStatement(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+            if (data.size() != 0) {
+                statementOutputTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < statementOutputTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(statementOutputTable.getColumnName(j).toUpperCase())) {
+                                statementOutputTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                //clear the table
+                for (int i = 0; i < statementOutputTable.getRowCount(); i++) {
+                    for (int j = 0; j < statementOutputTable.getColumnCount(); j++) {
+                        statementOutputTable.setValueAt("", i, j);
+                    }
+                }
+                statementOutputTable.setEnabled(false);
+                //display error message
+                JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_searchActionPerformed
 
     /**
@@ -214,7 +246,7 @@ public class issueStatement extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new issueStatement().setVisible(true);
+                new issueStatement(null).setVisible(true);
             }
         });
     }

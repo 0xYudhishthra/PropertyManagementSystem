@@ -4,21 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6becf549-07e1-4dce-9c19-9005896eaff8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_toedter_jcalendar_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_24_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Vendor/vendorFileHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Vendor/ProfilePictures/abcSupplies_12012022.jpg" afterDir="false" />
+    <list default="true" id="21d7b740-7e5c-493d-bfeb-86e307663444" name="Changes" comment="feat: init vendor read functions">
+      <change afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/accountExecutiveFileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_toedter_jcalendar_1_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_24_0_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PropertyManagementSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PropertyManagementSystem.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/manageProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/manageProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/Dashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/manageComplaints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/manageComplaints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/managePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/managePayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/manageProfile.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/manageProfile.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/manageProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/manageProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vendor/vendorComplaint.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vendor/vendorComplaint.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Vendor/vendorDetail.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Vendor/vendorDetail.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/Dashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueReceipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueReceipt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/recordPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/recordPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/updatePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/updatePayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageIncident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageIncident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageVisitorEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageVisitorEntry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,71 +31,65 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Record" />
-        <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="FormatOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="vendor" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="OptimizeOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
-  </component>
-  <component name="ProjectId" id="2LylBW3WtjLXtDpx0jEyTHxQQWN" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/Users/yudhx/Library/CloudStorage/OneDrive-AsiaPacificUniversity/Degree/Y2S1/OODJ/Assignment/PropertyManagementSystem/src/main/resources/Vendor/ProfilePictures",
-    "settings.editor.selected.configurable": "editor.preferences.folding"
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true"
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/Vendor/ProfilePictures" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Vendor" />
-      <recent name="Helpers" />
+      <recent name="AccountExecutive" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Vendor.Dashboard">
+  <component name="RunManager" selected="Application.Dashboard">
+    <configuration name="Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AccountExecutive.Dashboard" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AccountExecutive.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Resident.Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Resident.Dashboard" />
-  <component name="RunManager" selected="Application.Visitor">
-    <configuration name="Visitor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AccountExecutive.Visitor" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Resident.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Vendor.Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Vendor.Dashboard" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Vendor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="issueInvoice (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AccountExecutive.issueInvoice" />
       <module name="PropertyManagementSystem" />
       <extension name="coverage">
         <pattern>
@@ -104,72 +101,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="loginsystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AccountExecutive.loginsystem" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AccountExecutive.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="manageVisitorEntry" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SecurityGuard.manageVisitorEntry" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="SecurityGuard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="manageComplaints" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Vendor.manageComplaints" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Vendor.*" />
-    <configuration name="manageVisitorPass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SecurityGuard.manageVisitorPass" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="SecurityGuard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="managePayment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Vendor.managePayment" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Vendor.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="manageProfile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Vendor.manageProfile" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Vendor.*" />
-    <configuration name="recordPayment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AccountExecutive.recordPayment" />
+    <configuration name="viewOutstandingFee" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AccountExecutive.viewOutstandingFee" />
       <module name="PropertyManagementSystem" />
       <extension name="coverage">
         <pattern>
@@ -183,28 +116,15 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Vendor.Dashboard" />
-        <item itemvalue="Application.manageComplaints" />
-        <item itemvalue="Application.managePayment" />
-        <item itemvalue="Application.manageProfile" />
+        <item itemvalue="Application.Dashboard" />
         <item itemvalue="Application.Resident.Dashboard" />
-        <item itemvalue="Application.Visitor" />
-        <item itemvalue="Application.recordPayment" />
-        <item itemvalue="Application.loginsystem" />
-        <item itemvalue="Application.manageVisitorPass" />
-        <item itemvalue="Application.manageVisitorEntry" />
+        <item itemvalue="Application.viewOutstandingFee" />
+        <item itemvalue="Application.issueInvoice (1)" />
+        <item itemvalue="Application.Vendor.Dashboard" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="6becf549-07e1-4dce-9c19-9005896eaff8" name="Changes" comment="" />
-      <created>1676851068294</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1676851068294</updated>
-    </task>
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,56 +132,10 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="database-text-files" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="helper/textFilesGetSet" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="building-executive" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

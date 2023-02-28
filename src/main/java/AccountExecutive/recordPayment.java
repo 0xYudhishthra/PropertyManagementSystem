@@ -12,8 +12,8 @@ public class recordPayment extends javax.swing.JFrame {
     /**
      * Creates new form recordPayment
      */
-    public recordPayment() {
-        initComponents();
+    public recordPayment(String role) {
+        initComponents(role);
     }
 
     /**
@@ -23,7 +23,7 @@ public class recordPayment extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String role) {
 
         totalAmountDueTitle = new javax.swing.JLabel();
         userNumberInput = new javax.swing.JTextField();
@@ -85,7 +85,7 @@ public class recordPayment extends javax.swing.JFrame {
         actionTitle.setText("You have chosen to:");
 
         actionName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        actionName.setText("Record Payment for <IUser>");
+        actionName.setText("Record Payment for " + role);
 
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
@@ -111,7 +111,7 @@ public class recordPayment extends javax.swing.JFrame {
         receiptNumberPane.setViewportView(receiptNumberInput);
 
         userNumber.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        userNumber.setText("<IUser> Number");
+        userNumber.setText(role + " Number");
 
         print.setBackground(new java.awt.Color(255, 0, 255));
         print.setText("PRINT");
@@ -272,7 +272,7 @@ public class recordPayment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new recordPayment().setVisible(true);
+                new recordPayment(null).setVisible(true);
             }
         });
     }

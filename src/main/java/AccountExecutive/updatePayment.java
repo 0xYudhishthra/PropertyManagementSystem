@@ -12,8 +12,8 @@ public class updatePayment extends javax.swing.JFrame {
     /**
      * Creates new form updatePayment
      */
-    public updatePayment() {
-        initComponents();
+    public updatePayment(String role) {
+        initComponents(role);
     }
 
     /**
@@ -23,7 +23,7 @@ public class updatePayment extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String role) {
 
         totalAmountDueTitle = new javax.swing.JLabel();
         userNumberInput = new javax.swing.JTextField();
@@ -48,7 +48,7 @@ public class updatePayment extends javax.swing.JFrame {
         userNumberInput.setText("jTextField1");
 
         userNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        userNumberTitle.setText("<IUser> Number");
+        userNumberTitle.setText(role + " Number");
 
         update.setBackground(new java.awt.Color(255, 0, 255));
         update.setText("UPDATE");
@@ -87,7 +87,7 @@ public class updatePayment extends javax.swing.JFrame {
         actionTitle.setText("You have chosen to:");
 
         actionName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        actionName.setText("Update Payment for <IUser>");
+        actionName.setText("Update Payment for " + role);
 
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
@@ -219,7 +219,7 @@ public class updatePayment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new updatePayment().setVisible(true);
+                new updatePayment(null).setVisible(true);
             }
         });
     }
