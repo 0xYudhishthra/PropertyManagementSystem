@@ -4,17 +4,22 @@
  */
 package AccountExecutive;
 
+import javax.swing.*;
+import java.util.Map;
+
 /**
  *
  * @author yudhx
  */
 public class viewPayment extends javax.swing.JFrame {
 
+    AccountExecutive.accountExecutiveFileHandler accountExecutiveFileHandler = new AccountExecutive.accountExecutiveFileHandler();
+
     /**
      * Creates new form viewPayment
      */
-    public viewPayment() {
-        initComponents();
+    public viewPayment(String role) {
+        initComponents(role);
     }
 
     /**
@@ -24,7 +29,7 @@ public class viewPayment extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String role) {
 
         search = new javax.swing.JButton();
         back = new javax.swing.JButton();
@@ -61,7 +66,7 @@ public class viewPayment extends javax.swing.JFrame {
         actionTitle.setText("You have chosen to:");
 
         actionName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        actionName.setText("View Payment for <User>");
+        actionName.setText("View Payment for " + role);
 
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
@@ -85,9 +90,7 @@ public class viewPayment extends javax.swing.JFrame {
         );
 
         userNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        userNumberTitle.setText("<User> Number");
-
-        userNumberInput.setText("jTextField1");
+        userNumberTitle.setText(role + " Number");
 
         viewPaymentHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,7 +104,7 @@ public class viewPayment extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -153,7 +156,36 @@ public class viewPayment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getPaymentHistory(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+            if (data.size() != 0) {
+                viewPaymentHistoryTable.setEnabled(true);
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < viewPaymentHistoryTable.getColumnCount(); j++) {
+                            if (entry.getKey().equals(viewPaymentHistoryTable.getColumnName(j).toUpperCase())) {
+                                viewPaymentHistoryTable.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                //clear the table
+                for (int i = 0; i < viewPaymentHistoryTable.getRowCount(); i++) {
+                    for (int j = 0; j < viewPaymentHistoryTable.getColumnCount(); j++) {
+                        viewPaymentHistoryTable.setValueAt("", i, j);
+                    }
+                }
+                viewPaymentHistoryTable.setEnabled(false);
+                //display error message
+                JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_searchActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -192,7 +224,7 @@ public class viewPayment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewPayment().setVisible(true);
+                new viewPayment(null).setVisible(true);
             }
         });
     }
