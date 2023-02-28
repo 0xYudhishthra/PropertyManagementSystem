@@ -30,10 +30,10 @@ public class dashboard extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        managevisitorpass = new javax.swing.JButton();
+        managecheckpoint = new javax.swing.JButton();
+        managevisitorentry = new javax.swing.JButton();
+        manageincident = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -55,18 +55,33 @@ public class dashboard extends javax.swing.JFrame {
 
         jLabel2.setText("what do you want to access today?");
 
-        jButton2.setText("Manage Visitor Pass");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        managevisitorpass.setText("Manage Visitor Pass");
+        managevisitorpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                managevisitorpassActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Manage Checkpoint");
+        managecheckpoint.setText("Manage Checkpoint");
+        managecheckpoint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                managecheckpointActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Manage Visitor Entry");
+        managevisitorentry.setText("Manage Visitor Entry");
+        managevisitorentry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                managevisitorentryActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText(" Record Incident");
+        manageincident.setText(" Manage Incident");
+        manageincident.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageincidentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,14 +90,14 @@ public class dashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(managevisitorpass, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(managecheckpoint, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(managevisitorentry, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(manageincident, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
@@ -96,23 +111,47 @@ public class dashboard extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(manageincident, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(managecheckpoint, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(managevisitorpass, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(managevisitorentry, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(205, 205, 205))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void managevisitorpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managevisitorpassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        manageVisitorPass vp = new manageVisitorPass();
+        vp.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_managevisitorpassActionPerformed
+
+    private void managevisitorentryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managevisitorentryActionPerformed
+        // TODO add your handling code here:
+        manageVisitorEntry vp = new manageVisitorEntry () ;
+        vp.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_managevisitorentryActionPerformed
+
+    private void managecheckpointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managecheckpointActionPerformed
+        // TODO add your handling code here:
+        CheckpointCheckIn vp = new CheckpointCheckIn () ;
+        vp.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_managecheckpointActionPerformed
+
+    private void manageincidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageincidentActionPerformed
+        // TODO add your handling code here:
+        manageIncident vp = new manageIncident () ;
+        vp.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_manageincidentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,13 +189,13 @@ public class dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton managecheckpoint;
+    private javax.swing.JButton manageincident;
+    private javax.swing.JButton managevisitorentry;
+    private javax.swing.JButton managevisitorpass;
     // End of variables declaration//GEN-END:variables
 }
