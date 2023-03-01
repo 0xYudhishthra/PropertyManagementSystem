@@ -4,10 +4,15 @@
  */
 package AccountExecutive;
 
+import javax.swing.*;
+import java.util.Map;
+
 /**
  * @author yudhx
  */
 public class updatePayment extends javax.swing.JFrame {
+
+    AccountExecutive.accountExecutiveFileHandler accountExecutiveFileHandler = new AccountExecutive.accountExecutiveFileHandler();
 
     /**
      * Creates new form updatePayment
@@ -39,13 +44,12 @@ public class updatePayment extends javax.swing.JFrame {
         actionName = new javax.swing.JLabel();
         totalAmountDuePane = new javax.swing.JScrollPane();
         totalAmountDueInput = new javax.swing.JTextPane();
+        totalAmountDueInput.setEnabled(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         totalAmountDueTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         totalAmountDueTitle.setText("Total Amount Due");
-
-        userNumberInput.setText("jTextField1");
 
         userNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         userNumberTitle.setText(role + " Number");
@@ -77,8 +81,6 @@ public class updatePayment extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-
-        newAmountDueInput.setText("jTextField1");
 
         greetingPanel.setBackground(new java.awt.Color(51, 255, 51));
         greetingPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -176,11 +178,89 @@ public class updatePayment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        // TODO add your handling code here:
+        update.setEnabled(false);
+
+        //check if all fields are filled, and is not empty
+        if (newAmountDueInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount is numeric
+        try {
+            Double.parseDouble(newAmountDueInput.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount non-negative
+        if (Double.parseDouble(newAmountDueInput.getText()) < 0) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Helpers.ProgressBarLoader progressBar = new Helpers.ProgressBarLoader(paymentUpdateProgress);
+        progressBar.startLoading(0, 100, new Runnable() {
+            @Override
+            public void run() {
+                // Perform the desired logic here
+                accountExecutiveFileHandler.updatePayment(
+                        userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")),
+                        userNumberInput.getText().strip(),
+                        String.valueOf(Double.parseDouble(newAmountDueInput.getText().strip()))
+                );
+                //show a success message
+                JOptionPane.showMessageDialog(null, "New amount due updated successfully! ", "Success", JOptionPane.INFORMATION_MESSAGE);
+                update.setEnabled(true);
+                totalAmountDueInput.setText("MYR " + Double.parseDouble(newAmountDueInput.getText().strip()));
+                //clear the amount paid input
+                newAmountDueInput.setText("");
+                //reset loading bar
+                paymentUpdateProgress.setValue(0);
+
+            }
+        });
+
+
+
     }//GEN-LAST:event_updateActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+        search.setEnabled(false);
+        Helpers.ProgressBarLoader progressBar = new Helpers.ProgressBarLoader(paymentUpdateProgress);
+        progressBar.startLoading(0, 100, new Runnable() {
+            @Override
+            public void run() {
+                // Perform the desired logic here
+                try {
+                    //read the data from the database
+                    Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getPaymentHistory(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+                    if (data.size() != 0) {
+                        search.setEnabled(true);
+                        totalAmountDueInput.setText(data.get(data.size()).get("TOTAL AMOUNT DUE"));
+                        totalAmountDueInput.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+                        //enable the record button
+                        update.setEnabled(true);
+                        //clear the loading bar
+                        paymentUpdateProgress.setValue(0);
+                    } else {
+                        search.setEnabled(true);
+                        update.setEnabled(false);
+                        //display error message
+                        JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+                        //clear the total amoount due input
+                        totalAmountDueInput.setText("");
+                        //clear the loading bar
+                        paymentUpdateProgress.setValue(0);
+                    }
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }//GEN-LAST:event_searchActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed

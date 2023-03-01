@@ -4,10 +4,21 @@
  */
 package AccountExecutive;
 
+import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.logging.Logger;
+
 /**
  * @author yudhx
  */
 public class recordPayment extends javax.swing.JFrame {
+
+    AccountExecutive.accountExecutiveFileHandler accountExecutiveFileHandler = new accountExecutiveFileHandler();
 
     /**
      * Creates new form recordPayment
@@ -36,6 +47,7 @@ public class recordPayment extends javax.swing.JFrame {
         actionName = new javax.swing.JLabel();
         receiptNumberPane = new javax.swing.JScrollPane();
         receiptNumberInput = new javax.swing.JTextPane();
+        receiptNumberInput.setEnabled(false);
         userNumber = new javax.swing.JLabel();
         print = new javax.swing.JButton();
         amountPaidTitle = new javax.swing.JLabel();
@@ -43,15 +55,16 @@ public class recordPayment extends javax.swing.JFrame {
         receiptNumberTitle = new javax.swing.JLabel();
         totalAmountDuePane = new javax.swing.JScrollPane();
         totalAmountDueLabel = new javax.swing.JTextPane();
+        totalAmountDueLabel.setEnabled(false);
         amountTitle = new javax.swing.JLabel();
         amountInput = new javax.swing.JTextField();
+        amountPaidTitle1 = new javax.swing.JLabel();
+        amountPaidInput1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         totalAmountDueTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         totalAmountDueTitle.setText("Total Amount Due");
-
-        userNumberInput.setText("jTextField1");
 
         record.setBackground(new java.awt.Color(255, 0, 255));
         record.setText("RECORD");
@@ -90,22 +103,22 @@ public class recordPayment extends javax.swing.JFrame {
         javax.swing.GroupLayout greetingPanelLayout = new javax.swing.GroupLayout(greetingPanel);
         greetingPanel.setLayout(greetingPanelLayout);
         greetingPanelLayout.setHorizontalGroup(
-                greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(greetingPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(actionName)
-                                        .addComponent(actionTitle))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(greetingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(actionName)
+                    .addComponent(actionTitle))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         greetingPanelLayout.setVerticalGroup(
-                greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(greetingPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(actionTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(actionName)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            greetingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(greetingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(actionTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(actionName)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         receiptNumberPane.setViewportView(receiptNumberInput);
@@ -125,8 +138,6 @@ public class recordPayment extends javax.swing.JFrame {
         amountPaidTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         amountPaidTitle.setText("Amount Paid");
 
-        amountPaidInput.setText("jTextField1");
-
         receiptNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         receiptNumberTitle.setText("Receipt Number");
 
@@ -135,98 +146,214 @@ public class recordPayment extends javax.swing.JFrame {
         amountTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         amountTitle.setText("Amount ");
 
-        amountInput.setText("jTextField1");
+        amountPaidTitle1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        amountPaidTitle1.setText("Description");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(greetingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(greetingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(userNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(userNumber))
-                                                                .addGap(51, 51, 51))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                        .addComponent(amountTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addComponent(amountInput, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                                                .addGap(113, 113, 113)))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(amountPaidInput, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(amountPaidTitle)
-                                                        .addComponent(totalAmountDueTitle)
-                                                        .addComponent(totalAmountDuePane, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(search, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(receiptNumberTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(receiptNumberPane, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(paymentRecordProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(record)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(print)))
-                                .addGap(6, 6, 6))
+                                    .addComponent(userNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(userNumber))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(totalAmountDueTitle)
+                                    .addComponent(totalAmountDuePane, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(amountTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(amountInput, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(amountPaidInput, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(amountPaidTitle))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(amountPaidTitle1)
+                                    .addComponent(amountPaidInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(search, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(receiptNumberTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(receiptNumberPane, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(paymentRecordProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(record)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(print)))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(greetingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(12, 12, 12)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(userNumber)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(userNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(totalAmountDueTitle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(totalAmountDuePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(amountPaidTitle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(amountPaidInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(receiptNumberTitle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(receiptNumberPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(amountTitle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(amountInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(paymentRecordProgress, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                                        .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(record, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(greetingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(userNumber)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(userNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(totalAmountDueTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalAmountDuePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(amountPaidTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(amountPaidInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(receiptNumberTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(receiptNumberPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(amountTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(amountInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(amountPaidTitle1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(amountPaidInput1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(paymentRecordProgress, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(record, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void recordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recordActionPerformed
+        //check if all fields are filled, and is not empty
+        if (amountPaidInput.getText().isEmpty() || amountInput.getText().isEmpty() || amountPaidInput1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount and amount paid is numeric
+        try {
+            Double.parseDouble(amountPaidInput.getText());
+            Double.parseDouble(amountInput.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure description is non-numeric
+        if (amountPaidInput1.getText().matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid description", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount and amount paid is non-negative
+        if (Double.parseDouble(amountPaidInput.getText()) < 0 || Double.parseDouble(amountInput.getText()) < 0) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure total amount due is not 0
+        if (Double.parseDouble(totalAmountDueLabel.getText().replace("MYR", "")) == 0) {
+            JOptionPane.showMessageDialog(null, "Total amount due is 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //amount should be equal or more than the amount paid
+        if (Double.parseDouble(amountPaidInput.getText()) > Double.parseDouble(amountInput.getText())) {
+            JOptionPane.showMessageDialog(null, "Amount paid should be equal or less than the amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //after user clicks this button, a series of steps will occur
+        //we will first create a new statement record, then create a new invoice record, then create a new receipt record, get the receipt id, and then add a new payment record with the receipt id
+        //get the new total amount due by subtracting the amount paid from the total amount due
+        double newTotalAmountDue = Double.parseDouble(totalAmountDueLabel.getText().replace("MYR", "")) - Double.parseDouble(amountPaidInput.getText());
+        //cast the above double to a string with "MYR" in front
+        String newTotalAmountDueString = "MYR " + String.valueOf(newTotalAmountDue);
+
+        String newStatementID = accountExecutiveFileHandler.addStatement(
+                userNumber.getText().substring(0, userNumber.getText().indexOf(" ")),
+                userNumberInput.getText().strip(),
+                amountPaidInput1.getText().strip(),
+                amountPaidInput.getText().strip(),
+                newTotalAmountDueString);
+
+        String newInvoiceID = accountExecutiveFileHandler.addInvoice(
+                userNumber.getText().substring(0, userNumber.getText().indexOf(" ")),
+                userNumberInput.getText().strip(),
+                amountPaidInput.getText().strip()
+        );
+
+
+        String newReceiptID = accountExecutiveFileHandler.addReceipt(
+                userNumber.getText().substring(0, userNumber.getText().indexOf(" ")),
+                userNumberInput.getText().strip(),
+                newInvoiceID,
+                newStatementID,
+                amountInput.getText().strip(),
+                amountPaidInput.getText().strip()
+        );
+
+        Helpers.ProgressBarLoader progressBar = new Helpers.ProgressBarLoader(paymentRecordProgress);
+        record.setEnabled(false);
+
+        progressBar.startLoading(0, 100, new Runnable() {
+
+            @Override
+            public void run() {
+                // Perform the desired logic here
+                record.setEnabled(true);
+                totalAmountDueLabel.setText(newTotalAmountDueString);
+                accountExecutiveFileHandler.addPayment(
+                        userNumber.getText().substring(0, userNumber.getText().indexOf(" ")),
+                        userNumberInput.getText().strip(),
+                        amountInput.getText().strip(),
+                        amountPaidInput.getText().strip(),
+                        totalAmountDueLabel.getText().strip(),
+                        newReceiptID
+                        );
+                //fill up the receipt number label
+                receiptNumberInput.setText(newReceiptID);
+                //enable the print button
+                print.setEnabled(true);
+                //show a success message
+                JOptionPane.showMessageDialog(null, "Payment recorded successfully, your receipt number is " + newReceiptID, "Success", JOptionPane.INFORMATION_MESSAGE);
+                //clear the amount paid input
+                amountPaidInput.setText("");
+                //clear the amount input
+                amountInput.setText("");
+                //clear the description input
+                amountPaidInput1.setText("");
+                //reset loading bar
+                paymentRecordProgress.setValue(0);
+
+            }
+        });
+    }
+
+
+    //GEN-LAST:event_recordActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // close this window and open the dashboard
@@ -235,7 +362,44 @@ public class recordPayment extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+        search.setEnabled(false);
+        Helpers.ProgressBarLoader progressBar = new Helpers.ProgressBarLoader(paymentRecordProgress);
+        progressBar.startLoading(0, 100, new Runnable() {
+            @Override
+            public void run() {
+                // Perform the desired logic here
+                try {
+                    //read the data from the database
+                    Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getPaymentHistory(userNumber.getText().substring(0, userNumber.getText().indexOf(" ")), userNumberInput.getText().strip());
+                    if (data.size() != 0) {
+                        //disable the search button
+                        search.setEnabled(true);
+                        totalAmountDueLabel.setText(data.get(data.size()).get("TOTAL AMOUNT DUE"));
+                        totalAmountDueLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+                        amountInput.setText(data.get(data.size()).get("TOTAL AMOUNT DUE"));
+                        amountInput.setText(amountInput.getText().replace("MYR", "").strip());
+                        //enable the record button
+                        record.setEnabled(true);
+                        //clear the loading bar
+                        paymentRecordProgress.setValue(0);
+                    } else {
+                        search.setEnabled(true);
+                        record.setEnabled(false);
+                        amountInput.setText("");
+                        //clear the output
+                        totalAmountDueLabel.setText("");
+                        //display error message
+                        JOptionPane.showMessageDialog(null, "No data found for the given " + userNumber.getText().substring(0, userNumber.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+                        //clear the loading bar
+                        paymentRecordProgress.setValue(0);
+                    }
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }//GEN-LAST:event_searchActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
@@ -282,7 +446,9 @@ public class recordPayment extends javax.swing.JFrame {
     private javax.swing.JLabel actionTitle;
     private javax.swing.JTextField amountInput;
     private javax.swing.JTextField amountPaidInput;
+    private javax.swing.JTextField amountPaidInput1;
     private javax.swing.JLabel amountPaidTitle;
+    private javax.swing.JLabel amountPaidTitle1;
     private javax.swing.JLabel amountTitle;
     private javax.swing.JButton back;
     private javax.swing.JPanel greetingPanel;
