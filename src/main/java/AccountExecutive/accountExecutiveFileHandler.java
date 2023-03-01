@@ -28,420 +28,6 @@ public class accountExecutiveFileHandler extends FileHandler {
         return super.createData(filename, data, userRole);
     }
 
-    public Map<Integer, Map<String, String>> getPendingComplaints(String residentID) {
-        {
-            try {
-                ComplaintStatus pendingStatus = ComplaintStatus.PENDING;
-                ComplaintStatus inProgressStatus = ComplaintStatus.IN_PROGRESS;
-                //create a list of complaints
-                //from the call of the second readData function above, get the list of complaints
-                Map<Integer, Map<String, String>> complaintMap = new HashMap<>();
-
-                ArrayList<String> complaints = readData("residentComplaint", "resident");
-                //also get file header
-                ArrayList<String> fileHeader = getFileHeader("residentComplaint", "resident");
-                int dataCount = 0;
-                for (String complaint : complaints) {
-                    Map<String, String> complaintDetails = new HashMap<>();
-                    //get the last index of the complaint, which is the status of the complaint
-                    String[] complaintDetailsArray = complaint.split(dataSeparator);
-                    String residentIDFromComplaint = complaintDetailsArray[0];
-                    String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                    //for each char in residentID, check if it is equal to the char in residentIDFromComplaint
-                    //if it is, then print true
-                    //if it is not, then print false
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(inProgressStatus.toString()))) {
-                        int count = 0;
-                        int columnCount = 0;
-
-                        for (int i = 0; i < complaint.length(); i++) {
-                            if (dataSeparator.charAt(1) == complaint.charAt(i)) {
-                                //this means that there is data before the data separator
-                                //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
-                                //get the value to start iterating from backwards, which is the index of the data separator - 1
-                                int start = i - 2;
-                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-                                int end = start - count + 2;
-
-                                //create temp string to store the data
-                                StringBuilder temp = new StringBuilder();
-                                //iterate through the string backwards
-                                //add the char to the temp string
-                                for (int j = start; j >= end; j--) temp.append(complaint.charAt(j));
-                                //reverse the string
-                                var sb = new StringBuilder(temp.toString());
-                                sb.reverse();
-                                //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
-                                for (int k = 0; k < sb.length(); k++) {
-                                    if (sb.charAt(k) == dataSeparator.charAt(1)) {
-                                        sb.deleteCharAt(k);
-                                    }
-                                }
-                                //remove any space from the first index of the string
-                                if (sb.charAt(0) == ' ') {
-                                    sb.deleteCharAt(0);
-                                }
-
-                                complaintDetails.put(fileHeader.get(columnCount), sb.toString());
-                                //reset the count
-                                count = 0;
-                                columnCount++;
-
-                            }
-
-                            //if we are reaching the last element in the line, then we need to add the last element to the map
-                            if (i == complaint.length() - 1) {
-                                //get the value to start iterating from backwards, which is the index of the data separator - 1
-                                int start = i - count + 2;
-                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-
-                                //create temp string to store the data
-                                StringBuilder temp = new StringBuilder();
-                                //iterate through the string backwards
-                                for (int j = i; j >= start; j--) {
-                                    //add the char to the temp string
-                                    temp.append(complaint.charAt(j));
-                                }
-                                //reverse the string
-                                var sb = new StringBuilder(temp.toString());
-                                sb.reverse();
-                                columnCount++;
-                                complaintDetails.put(fileHeader.get(columnCount - 1), sb.toString());
-                                columnCount++;
-                            }
-
-                            count++;
-                        }
-                        dataCount++;
-                        complaintMap.put(dataCount, complaintDetails);
-
-                    }
-                }
-                return complaintMap;
-
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        return null;
-    }
-
-    public Map<Integer, Map<String, String>> getPastComplaints(String residentID) {
-        try {
-            ComplaintStatus resolvedStatus = ComplaintStatus.RESOLVED;
-            ComplaintStatus closedStatus = ComplaintStatus.CLOSED;
-            //create a list of complaints
-            //from the call of the second readData function above, get the list of complaints
-            Map<Integer, Map<String, String>> complaintMap = new HashMap<>();
-
-            ArrayList<String> complaints = readData("residentComplaint", "resident");
-            //also get file header
-            ArrayList<String> fileHeader = getFileHeader("residentComplaint", "resident");
-
-            int dataCount = 0;
-            for (String complaint : complaints) {
-                Map<String, String> complaintDetails = new HashMap<>();
-                //get the last index of the complaint, which is the status of the complaint
-                String[] complaintDetailsArray = complaint.split(dataSeparator);
-                String residentIDFromComplaint = complaintDetailsArray[0];
-                String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                boolean isResidentID = true;
-                for (int i = 0; i < residentID.length(); i++) {
-                    if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                        isResidentID = false;
-                        break;
-                    }
-                }
-                if (isResidentID && (complaintStatus.toUpperCase().equals(resolvedStatus.toString()) || complaintStatus.toUpperCase().equals(closedStatus.toString()))) {
-                    int count = 0;
-                    int columnCount = 0;
-
-                    for (int i = 0; i < complaint.length(); i++) {
-                        if (complaint.charAt(i) == dataSeparator.charAt(1)) {
-                            //this means that there is data before the data separator
-                            //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
-                            //get the value to start iterating from backwards, which is the index of the data separator - 1
-                            int start = i - 2;
-                            //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-                            int end = start - count + 2;
-
-                            //create temp string to store the data
-                            StringBuilder temp = new StringBuilder();
-                            //iterate through the string backwards
-                            for (int j = start; j >= end; j--) {
-                                //add the char to the temp string
-                                temp.append(complaint.charAt(j));
-                            }
-                            //reverse the string
-                            StringBuilder sb = new StringBuilder(temp.toString());
-                            sb.reverse();
-                            //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
-                            for (int k = 0; k < sb.length(); k++) {
-                                if (sb.charAt(k) == dataSeparator.charAt(1)) {
-                                    sb.deleteCharAt(k);
-                                }
-                            }
-                            //remove any space from the first index of the string
-                            if (sb.charAt(0) == ' ') {
-                                sb.deleteCharAt(0);
-                            }
-
-                            complaintDetails.put(fileHeader.get(columnCount), sb.toString());
-                            //reset the count
-                            count = 0;
-                            columnCount++;
-
-                        }
-
-                        //if we are reaching the last element in the line, then we need to add the last element to the map
-                        if (i == complaint.length() - 1) {
-                            //get the value to start iterating from backwards, which is the index of the data separator - 1
-                            int start = i - count + 2;
-                            //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-
-                            //create temp string to store the data
-                            StringBuilder temp = new StringBuilder();
-                            //iterate through the string backwards
-                            for (int j = i; j >= start; j--) {
-                                //add the char to the temp string
-                                temp.append(complaint.charAt(j));
-                            }
-                            //reverse the string
-                            StringBuilder sb = new StringBuilder(temp.toString());
-                            sb.reverse();
-                            columnCount++;
-                            complaintDetails.put(fileHeader.get(columnCount - 1), sb.toString());
-                            columnCount++;
-                        }
-
-                        count++;
-                    }
-                    dataCount++;
-                    complaintMap.put(dataCount, complaintDetails);
-
-                }
-            }
-            return complaintMap;
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        return null;
-    }
-
-    public Map<Integer, Map<String, String>> getPendingBookings(String residentID) {
-        {
-            try {
-                BookingStatus pendingStatus = BookingStatus.PENDING;
-                BookingStatus confirmedStatus = BookingStatus.CONFIRMED;
-                //create a list of complaints
-                //from the call of the second readData function above, get the list of complaints
-                Map<Integer, Map<String, String>> bookingMap = new HashMap<>();
-
-                ArrayList<String> bookings = readData("residentFacilityBooking", "resident");
-                //also get file header
-                ArrayList<String> fileHeader = getFileHeader("residentFacilityBooking", "resident");
-                int dataCount = 0;
-                for (String booking : bookings) {
-                    Map<String, String> bookingDetails = new HashMap<>();
-                    //get the last index of the complaint, which is the status of the complaint
-                    String[] complaintDetailsArray = booking.split(dataSeparator);
-                    String residentIDFromComplaint = complaintDetailsArray[0];
-                    String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(confirmedStatus.toString()))) {
-                        int count = 0;
-                        int columnCount = 0;
-
-                        for (int i = 0; i < booking.length(); i++) {
-                            if (booking.charAt(i) == dataSeparator.charAt(1)) {
-                                //this means that there is data before the data separator
-                                //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
-                                //get the value to start iterating from backwards, which is the index of the data separator - 1
-                                int start = i - 2;
-                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-                                int end = start - count + 2;
-
-                                //create temp string to store the data
-                                StringBuilder temp = new StringBuilder();
-                                //iterate through the string backwards
-                                for (int j = start; j >= end; j--) {
-                                    //add the char to the temp string
-                                    temp.append(booking.charAt(j));
-                                }
-                                //reverse the string
-                                StringBuilder sb = new StringBuilder(temp.toString());
-                                sb.reverse();
-                                //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
-                                for (int k = 0; k < sb.length(); k++) {
-                                    if (sb.charAt(k) == dataSeparator.charAt(1)) {
-                                        sb.deleteCharAt(k);
-                                    }
-                                }
-                                //remove any space from the first index of the string
-                                if (sb.charAt(0) == ' ') {
-                                    sb.deleteCharAt(0);
-                                }
-
-                                bookingDetails.put(fileHeader.get(columnCount), sb.toString());
-                                //reset the count
-                                count = 0;
-                                columnCount++;
-
-                            }
-
-                            //if we are reaching the last element in the line, then we need to add the last element to the map
-                            if (i == booking.length() - 1) {
-                                //get the value to start iterating from backwards, which is the index of the data separator - 1
-                                int start = i - count + 2;
-                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-
-                                //create temp string to store the data
-                                StringBuilder temp = new StringBuilder();
-                                //iterate through the string backwards
-                                for (int j = i; j >= start; j--) {
-                                    //add the char to the temp string
-                                    temp.append(booking.charAt(j));
-                                }
-                                //reverse the string
-                                StringBuilder sb = new StringBuilder(temp.toString());
-                                sb.reverse();
-                                columnCount++;
-                                bookingDetails.put(fileHeader.get(columnCount - 1), sb.toString());
-                                columnCount++;
-                            }
-
-                            count++;
-                        }
-                        dataCount++;
-                        bookingMap.put(dataCount, bookingDetails);
-
-                    }
-                }
-                return bookingMap;
-
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        return null;
-    }
-
-    public Map<Integer, Map<String, String>> getPastBookings(String residentID) {
-        {
-            try {
-                BookingStatus pendingStatus = BookingStatus.CANCELLED;
-                BookingStatus confirmedStatus = BookingStatus.COMPLETED;
-                Map<Integer, Map<String, String>> bookingMap = new HashMap<>();
-
-                ArrayList<String> bookings = readData("residentFacilityBooking", "resident");
-                //also get file header
-                ArrayList<String> fileHeader = getFileHeader("residentFacilityBooking", "resident");
-                int dataCount = 0;
-                for (String booking : bookings) {
-                    Map<String, String> bookingDetails = new HashMap<>();
-                    //get the last index of the complaint, which is the status of the complaint
-                    String[] complaintDetailsArray = booking.split(dataSeparator);
-                    String residentIDFromComplaint = complaintDetailsArray[0];
-                    String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(confirmedStatus.toString()))) {
-                        int count = 0;
-                        int columnCount = 0;
-
-                        for (int i = 0; i < booking.length(); i++) {
-                            if (booking.charAt(i) == dataSeparator.charAt(1)) {
-                                //this means that there is data before the data separator
-                                //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
-                                //get the value to start iterating from backwards, which is the index of the data separator - 1
-                                int start = i - 2;
-                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-                                int end = start - count + 2;
-
-                                //create temp string to store the data
-                                StringBuilder temp = new StringBuilder();
-                                //iterate through the string backwards
-                                for (int j = start; j >= end; j--) {
-                                    //add the char to the temp string
-                                    temp.append(booking.charAt(j));
-                                }
-                                //reverse the string
-                                StringBuilder sb = new StringBuilder(temp.toString());
-                                sb.reverse();
-                                //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
-                                for (int k = 0; k < sb.length(); k++) {
-                                    if (sb.charAt(k) == dataSeparator.charAt(1)) {
-                                        sb.deleteCharAt(k);
-                                    }
-                                }
-                                //remove any space from the first index of the string
-                                if (sb.charAt(0) == ' ') {
-                                    sb.deleteCharAt(0);
-                                }
-
-                                bookingDetails.put(fileHeader.get(columnCount), sb.toString());
-                                //reset the count
-                                count = 0;
-                                columnCount++;
-
-                            }
-
-                            //if we are reaching the last element in the line, then we need to add the last element to the map
-                            if (i == booking.length() - 1) {
-                                //get the value to start iterating from backwards, which is the index of the data separator - 1
-                                int start = i - count + 2;
-                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-
-                                //create temp string to store the data
-                                StringBuilder temp = new StringBuilder();
-                                //iterate through the string backwards
-                                for (int j = i; j >= start; j--) {
-                                    //add the char to the temp string
-                                    temp.append(booking.charAt(j));
-                                }
-                                //reverse the string
-                                StringBuilder sb = new StringBuilder(temp.toString());
-                                sb.reverse();
-                                columnCount++;
-                                bookingDetails.put(fileHeader.get(columnCount - 1), sb.toString());
-                                columnCount++;
-                            }
-
-                            count++;
-                        }
-                        dataCount++;
-                        bookingMap.put(dataCount, bookingDetails);
-
-                    }
-                }
-                return bookingMap;
-
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        return null;
-    }
-
     public Map<Integer, Map<String, String>> getPaymentHistory(String role, String userID) {
         {
             try {
@@ -864,14 +450,18 @@ public class accountExecutiveFileHandler extends FileHandler {
         Map<Integer, Map<String, String>> statementMap = getStatement(role, userID);
         //get the last key in the map
         int lastKey = statementMap.size();
-        //get the statement ID from the map
-        String statementID = statementMap.get(lastKey).get("STATEMENT ID");
-        //Statement id is in format ST002, so we need to get the last 3 digits, and convert it to an int, and add 1 to it
-        int statementIDInt = Integer.parseInt(statementID.substring(2));
-        statementIDInt++;
-        //convert the int back to a string
-        statementID = "ST" + statementIDInt;
-        return statementID;
+        if (statementMap.isEmpty()) {
+            return "ST1";
+        } else {
+            //get the statement ID from the map
+            String statementID = statementMap.get(lastKey).get("STATEMENT ID");
+            //Statement id is in format ST002, so we need to get the last 3 digits, and convert it to an int, and add 1 to it
+            int statementIDInt = Integer.parseInt(statementID.substring(2));
+            statementIDInt++;
+            //convert the int back to a string
+            statementID = "ST" + statementIDInt;
+            return statementID;
+        }
     }
 
     //this function will get the latest invoice ID
@@ -880,14 +470,18 @@ public class accountExecutiveFileHandler extends FileHandler {
         Map<Integer, Map<String, String>> invoiceMap = getInvoice(role, userID);
         //get the last key in the map
         int lastKey = invoiceMap.size();
-        //get the statement ID from the map
-        String statementID = invoiceMap.get(lastKey).get("INVOICE NUMBER");
-        //Statement id is in format ST002, so we need to get the last 3 digits, and convert it to an int, and add 1 to it
-        int statementIDInt = Integer.parseInt(statementID.substring(3));
-        statementIDInt++;
-        //convert the int back to a string
-        statementID = "INV" + statementIDInt;
-        return statementID;
+        if (invoiceMap.isEmpty()) {
+            return "INV1";
+        } else {
+            //get the statement ID from the map
+            String statementID = invoiceMap.get(lastKey).get("INVOICE NUMBER");
+            //Statement id is in format ST002, so we need to get the last 3 digits, and convert it to an int, and add 1 to it
+            int statementIDInt = Integer.parseInt(statementID.substring(3));
+            statementIDInt++;
+            //convert the int back to a string
+            statementID = "INV" + statementIDInt;
+            return statementID;
+        }
     }
 
     public String getNewReceiptID(String role, String userID) {
@@ -895,14 +489,18 @@ public class accountExecutiveFileHandler extends FileHandler {
         Map<Integer, Map<String, String>> receiptMap = getReceipt(role, userID);
         //get the last key in the map
         int lastKey = receiptMap.size();
-        //get the statement ID from the map
-        String receiptID = receiptMap.get(lastKey).get("RECEIPT ID");
-        //Statement id is in format ST002, so we need to get the last 3 digits, and convert it to an int, and add 1 to it
-        int receiptIDInt = Integer.parseInt(receiptID.substring(1));
-        receiptIDInt++;
-        //convert the int back to a string
-        receiptID = "R" + receiptIDInt;
-        return receiptID;
+        if (receiptMap.isEmpty()) {
+            return "R1";
+        } else {
+            //get the statement ID from the map
+            String receiptID = receiptMap.get(lastKey).get("RECEIPT ID");
+            //Statement id is in format ST002, so we need to get the l  ast 3 digits, and convert it to an int, and add 1 to it
+            int receiptIDInt = Integer.parseInt(receiptID.substring(1));
+            receiptIDInt++;
+            //convert the int back to a string
+            receiptID = "R" + receiptIDInt;
+            return receiptID;
+        }
     }
 
     public String addStatement(String role, String userID, String description, String amount, String totalAmountDue) {

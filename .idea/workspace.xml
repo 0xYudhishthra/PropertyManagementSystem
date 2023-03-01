@@ -5,21 +5,150 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d9740a3-6b06-4dad-9e01-897d96db5605" name="Changes" comment="chore: include boilerplate data">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/accountExecutiveFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/accountExecutiveFileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Helpers/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Helpers/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/Dashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/manageComplaints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/manageComplaints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/manageFacilityBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/manageFacilityBooking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/managePayment.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/managePayment.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/managePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/managePayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/manageProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/manageProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/manageVisitorPass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/manageVisitorPass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/residentFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/residentFileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentInvoice.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentInvoice.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentPayment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentPayment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentReceipt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentReceipt.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentStatement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AccountExecutive/residentStatement.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Resident/residentComplaint.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Resident/residentComplaint.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Resident/residentDetail.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Resident/residentDetail.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Resident/residentFacilityBooking.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Resident/residentFacilityBooking.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Resident/residentVisitorPass.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Resident/residentVisitorPass.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/clearLocal.sh" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MP5ucNxI96evcmq0k96jzLgR1e" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.Dashboard">
+    <configuration name="Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Resident.Dashboard" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Resident.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="manageComplaints" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Resident.manageComplaints" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Resident.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="manageComplaints" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Resident.manageComplaints" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Resident.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="manageFacilityBooking" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Resident.manageFacilityBooking" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Resident.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="manageVisitorPass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Resident.manageVisitorPass" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Resident.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Dashboard" />
+        <item itemvalue="Application.manageComplaints" />
+        <item itemvalue="Application.manageFacilityBooking" />
+        <item itemvalue="Application.manageVisitorPass" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d9740a3-6b06-4dad-9e01-897d96db5605" name="Changes" comment="chore: include boilerplate data" />
+      <created>1677656601983</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677656601983</updated>
+    </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: include boilerplate data" />

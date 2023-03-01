@@ -288,7 +288,6 @@ public class FileHandler implements IFileHandler {
             File oldName = new File(filePath + userRole + "/" + filename + fileExtension + ".tmp");
             //add ".tmp" to the end of the filename
             new File(filePath + userRole + "/" + filename + ".temp").renameTo(realName); // rename the new file to the filename the original file had.
-            System.out.println(oldName);
             oldName.delete();
             //if data has been written to the file, return true
             return true;
