@@ -7,6 +7,7 @@
 package Helpers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * FileReader interface declaration starts here.
@@ -21,17 +22,7 @@ public interface IFileHandler {
      * @return boolean
      * @throws Exception - if data cannot be inserted
      */
-//    boolean createData(String filename, Object data, String userRole) throws Exception;
-
-    /**
-     * This method is used to create new data records in a given file
-     *
-     * @param filename
-     * @param data
-     * @return boolean
-     * @throws Exception
-     */
-//    boolean createData(String filename, Object[] data, String userRole) throws Exception;
+    boolean createData(String filename, HashMap<String, String> data, String userRole) throws Exception;
 
     /**
      * This method is used to read data records from a given filename
@@ -43,50 +34,24 @@ public interface IFileHandler {
     ArrayList<String> readData(String filename, String userRole) throws Exception;
 
     /**
-     * This method is used to read a data record from a given filename, with a given id
-     *
-     * @param filename
-     * @param id
-     * @return Object
-     * @throws Exception
-     */
-    ArrayList<String> readData(String filename, String id, String userRole) throws Exception;
-
-
-    /**
      * This method is used to get the file header from a given filename, and return it as a string array
      *
      * @param filename
      * @return String[]
      * @throws Exception
      */
-//    ArrayList<String> getFileHeader(String filename, String userRole) throws Exception;
-
-    //update
+    ArrayList<String> getFileHeader(String filename, String userRole) throws Exception;
 
     /**
      * This method is used to update a data record from a given filename, with a given id and data to update
      *
      * @param filename
-     * @param id
      * @param data
+     * @param userRole
      * @return boolean
      * @throws Exception
      */
-//    boolean updateData(String filename, String id, Object data) throws Exception;
-
-    /**
-     * This method is used to update data records from a given filename, with given IDs and datas to update for each ID
-     *
-     * @param filename
-     * @param ids
-     * @param data
-     * @return boolean
-     * @throws Exception
-     */
-//    boolean updateData(String filename, String[] ids, Object[] data) throws Exception;
-
-    //delete
+    boolean updateData(String filename, HashMap<Integer, HashMap<String, String>> data, String userRole) throws Exception;
 
     /**
      * This method is used to delete all data records from a given filename
@@ -107,14 +72,5 @@ public interface IFileHandler {
      */
 //    boolean deleteData(String filename, String id) throws Exception;
 
-    /**
-     * This method is used to delete data records from a given filename, with given IDs
-     *
-     * @param filename
-     * @param ids
-     * @return boolean
-     * @throws Exception
-     */
-//    boolean deleteData(String filename, String[] ids) throws Exception;
 }
 

@@ -6,7 +6,13 @@
 //import the required packages
 package Helpers;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * FileReader class declaration starts here.
@@ -106,7 +112,6 @@ public class FileHandler implements IFileHandler {
         return null;
     }
 
-
     /**
      * This method is used to get the headers of a given file
      *
@@ -114,7 +119,7 @@ public class FileHandler implements IFileHandler {
      * @return String[] - the headers of the file
      * @throws Exception
      */
-    protected ArrayList<String> getFileHeader(String filename, String userRole) {
+    public ArrayList<String> getFileHeader(String filename, String userRole) {
         ArrayList<String> headers = null;
         try {
             headers = new ArrayList<>();
@@ -159,7 +164,6 @@ public class FileHandler implements IFileHandler {
         return headers;
     }
 
-
     /**
      * This method is used to create a new data record in a file
      *
@@ -169,32 +173,132 @@ public class FileHandler implements IFileHandler {
      * @return boolean - true if the data was successfully appended to the file, false otherwise
      * @throws Exception
      */
-//    public boolean createData(String filename, Object data, String userRole) throws Exception {
-//        //depending on whether the data passed is Object or Object[], we call the appropriate method
-//
-//
-//        try {
-//            boolean writeData = false;
-//            if (fileExists(filename, userRole)) {
-//                //if the file exists, we append the data to the file
-//                writeData = true;
-//            } else {
-//                //if the file doesn't exist, we create the file and then if that is a success, assign true to writeData
-//                writeData = createFile(filename, userRole) && createFileHeader(filename,
-//
-//            }
-//
-//            if (writeData) {
-//                if (data instanceof Object[]) {
-//                    return createData(filename, (Object[]) data, userRole);
-//                } else {
-//                    return createData(filename, data, userRole);
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//            throw new Exception("Error occured at createData function with parameters: filename = " + filename + ", data = " + data + ", userRole = " + userRole + " : " + e.getMessage());
-//        }
-//
-//
+    public boolean createData(String filename, HashMap<String, String> data, String userRole) throws Exception {
+        try {
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
+            //read the contents of the file and store it in the data variable
+            String line;
+            int headerCount = 0;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains(headerSeparator)) {
+                    headerCount++;
+                }
+
+                if (headerCount == 2) {
+                    break;
+                }
+            }
+
+            //now, we have the line index to start writing data to, so we can close the reader
+            reader.close();
+
+            //create a new java.io.BufferedWriter to write the contents of the file
+            java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(filePath + userRole + "/" + filename + fileExtension, true));
+
+            ArrayList<String> headers = getFileHeader(filename, userRole);
+            //we use a temp variable to store the data to be written to the file
+            String temp = "";
+            //we compare the key value from object data to that of the headers, and write the data in the same order as the headers
+            for (int i = 0; i < headers.size(); i++) {
+                //get the key value pair from the data object
+                String key = headers.get(i);
+                String value = data.get(key);
+                //append the value to the temp variable
+                temp += value;
+                //if we are not at the last element, append the dataSeparator to the temp variable
+                if (i != headers.size() - 1) {
+                    temp += dataSeparator;
+                }
+                //if we are at the last element, append the new line character to the temp variable
+                else {
+                    temp += "\n";
+                }
+            }
+
+            //write the data to the file
+            writer.write(temp);
+            //close the writer
+            writer.close();
+            //if data has been written to the file, return true
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * This method is used to update a data record in a file
+     *
+     * @param filename
+     * @param data
+     * @param userRole
+     * @return boolean - true if the data was successfully updated in the file, false otherwise
+     * @throws Exception
+     */
+    public boolean updateData(String filename, HashMap<Integer, HashMap<String, String>> data, String userRole) throws Exception {
+        try {
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
+            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath + userRole + "/" + filename + ".temp", false)));
+            String line;
+            int lineNum = 0; // track line number
+            while ((line = reader.readLine()) != null) {
+                // check if current line is a header line
+                boolean isHeaderSeparator = line.contains(headerSeparator);
+                if (isHeaderSeparator) {
+                    // if header line, print an extra blank line before it
+                    writer.println(line);
+                }
+                if (!isHeaderSeparator && lineNum != 5) {
+                    // if not header line and not first line, print a blank line after it
+                    writer.println(line);
+                }
+                lineNum++;
+
+                if (lineNum == 6) {
+                    // if first line, print a blank line after it
+                    break;
+                }
+            }
+
+            // print data
+            String temp = "";
+            ArrayList<String> headers = getFileHeader(filename, userRole);
+            for (int i = 1; i < data.size() + 1; i++) {
+                HashMap<String, String> currentData = data.get(i);
+                for (int j = 0; j < headers.size(); j++) {
+                    String key = headers.get(j);
+                    String value = currentData.get(key);
+                    temp += value;
+                    if (j != headers.size() - 1) {
+                        temp += dataSeparator;
+                    } else {
+                        temp += "\n";
+                    }
+                }
+            }
+            writer.println(temp);
+
+            //close the reader
+            reader.close();
+            //close the writer
+            writer.close();
+            File realName = new File(filePath + userRole + "/" + filename + fileExtension);
+            File oldName = new File(filePath + userRole + "/" + filename + fileExtension + ".tmp");
+            //add ".tmp" to the end of the filename
+            new File(filePath + userRole + "/" + filename + ".temp").renameTo(realName); // rename the new file to the filename the original file had.
+            System.out.println(oldName);
+            oldName.delete();
+            //if data has been written to the file, return true
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return false;
+    }
 }
+
+
+

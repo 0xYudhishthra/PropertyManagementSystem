@@ -4,5 +4,11 @@ RESIDENT STATEMENT DETAILS
 THIS FILE STORES DETAILS TO CREATE A STATEMENT FOR RESIDENTS
 STORE FORMAT: <DATE> | <RESIDENT NAME> | <RESIDENT ID> | <BUILDING> | <UNIT NUMBER> | <DESCRIPTION> | <AMOUNT> | <TOTAL AMOUNT DUE> | <STATEMENT ID>
 _____________________
-01012023 | John Doe | RN001 | Parkhill Residence | Unit A-103 | Supply of Cleaning Prod. | MYR 500 | MYR 500 | ST001
+01012023 | John Doe | RN001 | Parkhill Residence | Unit A-103 | Supply of Cleaning Prod. | MYR 500 | MYR 500 | ST1
+01032023 | John Doe | RN002 | Parkhill Residence | Unit A-103 | test | MYR 100 | MYR 11213.0 | ST1
+01032023 | John Doe | RN003 | Parkhill Residence | Unit A-103 | test | MYR 350 | MYR 100.0 | ST1
+01032023 | John Doe | RN003 | Parkhill Residence | Unit A-103 | pls work | MYR 100 | MYR 0.0 | ST2
+01032023 | John Doe | RN002 | Parkhill Residence | Unit A-103 | Facilities | MYR 12 | MYR 88.0 | ST2
+01032023 | John Doe | RN002 | Parkhill Residence | Unit A-103 | It works! | MYR 80 | MYR 80.0 | ST3
 
+01032023 | John Doe | RN002 | Parkhill Residence | Unit A-103 | Test | MYR 70 | MYR 10.0 | ST4
