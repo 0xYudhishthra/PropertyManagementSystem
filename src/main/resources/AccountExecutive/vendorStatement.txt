@@ -4,4 +4,6 @@ VENDOR STATEMENT DETAILS
 THIS FILE STORES DETAILS TO CREATE A STATEMENT FOR VENDORS
 STORE FORMAT: <DATE> | <VENDOR NAME> | <VENDOR ID> | <BUILDING> | <UNIT NUMBER> | <DESCRIPTION> | <AMOUNT> | <TOTAL AMOUNT DUE> | <STATEMENT ID>
 _____________________
-12012022 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | Supply of Cleaning Prod. | MYR 500 | MYR 500 | ST001
+12012022 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | Supply of Cleaning Prod. | MYR 500 | MYR 500 | ST1
+01032023 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | test | MYR 400 | MYR 100.0 | ST2
+01032023 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | test | MYR 1 | MYR 1269.0 | ST3

@@ -151,23 +151,35 @@ public class viewOutstandingFee extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        try {
-            //read the data from the database
-            Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getPaymentHistory(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
-            if (data.size() != 0) {
-                outstandingFeeOutput.setText(data.get(data.size()).get("TOTAL AMOUNT DUE"));
-                outstandingFeeOutput.setFont(new java.awt.Font("Helvetica Neue", 0, 30)); // NOI18N
+        Helpers.ProgressBarLoader progressBar = new Helpers.ProgressBarLoader(outstandingFeeShowProgress);
 
-            } else {
-                //clear the output
-                outstandingFeeOutput.setText("");
-                //display error message
-                JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+        progressBar.startLoading(0, 100, new Runnable() {
+
+            @Override
+            public void run() {
+                // Perform the desired logic here
+                try {
+                    //read the data from the database
+                    Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getPaymentHistory(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+                    if (data.size() != 0) {
+                        outstandingFeeOutput.setText(data.get(data.size()).get("TOTAL AMOUNT DUE"));
+                        outstandingFeeOutput.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+                    } else {
+                        //clear the output
+                        outstandingFeeOutput.setText("");
+                        //display error message
+                        JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    outstandingFeeShowProgress.setValue(0);
+
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
             }
+        });
 
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+
     }//GEN-LAST:event_searchActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed

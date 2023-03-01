@@ -38,6 +38,7 @@ public class issueReceipt extends javax.swing.JFrame {
         userNumberInput = new javax.swing.JTextField();
         receiptGenerateProgress = new javax.swing.JProgressBar();
         print = new javax.swing.JButton();
+        print.setEnabled(false);
         search = new javax.swing.JButton();
         receiptOutputPane = new javax.swing.JScrollPane();
         receiptOutputTable = new javax.swing.JTable();
@@ -183,36 +184,54 @@ public class issueReceipt extends javax.swing.JFrame {
     }//GEN-LAST:event_printActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        try {
-            //read the data from the database
-            Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getReceipt(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
-            if (data.size() != 0) {
-                receiptOutputTable.setEnabled(true);
-                for (int i = 1; i < data.size() + 1; i++) {
-                    //iterate through the data
-                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
-                        for (int j = 0; j < receiptOutputTable.getColumnCount(); j++) {
-                            if (entry.getKey().equals(receiptOutputTable.getColumnName(j).toUpperCase())) {
-                                receiptOutputTable.setValueAt(entry.getValue(), i - 1, j);
+        Helpers.ProgressBarLoader progressBar = new Helpers.ProgressBarLoader(receiptGenerateProgress);
+
+        progressBar.startLoading(0, 100, new Runnable() {
+
+            @Override
+            public void run() {
+                // Perform the desired logic here
+                print.setEnabled(false);
+                search.setEnabled(false);
+                try {
+                    //read the data from the database
+                    Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getReceipt(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+                    if (data.size() != 0) {
+                        print.setEnabled(true);
+                        search.setEnabled(true);
+                        receiptOutputTable.setEnabled(true);
+                        for (int i = 1; i < data.size() + 1; i++) {
+                            //iterate through the data
+                            for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                                for (int j = 0; j < receiptOutputTable.getColumnCount(); j++) {
+                                    if (entry.getKey().equals(receiptOutputTable.getColumnName(j).toUpperCase())) {
+                                        receiptOutputTable.setValueAt(entry.getValue(), i - 1, j);
+                                    }
+                                }
                             }
                         }
+                    } else {
+                        //clear the table
+                        search.setEnabled(true);
+                        for (int i = 0; i < receiptOutputTable.getRowCount(); i++) {
+                            for (int j = 0; j < receiptOutputTable.getColumnCount(); j++) {
+                                receiptOutputTable.setValueAt("", i, j);
+                            }
+                        }
+                        receiptOutputTable.setEnabled(false);
+                        //display error message
+                        JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                }
-            } else {
-                //clear the table
-                for (int i = 0; i < receiptOutputTable.getRowCount(); i++) {
-                    for (int j = 0; j < receiptOutputTable.getColumnCount(); j++) {
-                        receiptOutputTable.setValueAt("", i, j);
-                    }
-                }
-                receiptOutputTable.setEnabled(false);
-                //display error message
-                JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+                    //clear loading bar
+                    receiptGenerateProgress.setValue(0);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
     }//GEN-LAST:event_searchActionPerformed
 
     /**
