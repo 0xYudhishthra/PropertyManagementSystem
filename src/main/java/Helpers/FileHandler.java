@@ -49,6 +49,7 @@ public class FileHandler implements IFileHandler {
             ArrayList<String> data = new ArrayList<>();
             //create a new java.io.BufferedReader to read the contents of the file
             java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
+            System.out.println("read: " + reader);
             //read the contents of the file and store it in the data variable
             String line;
             int count = 0;

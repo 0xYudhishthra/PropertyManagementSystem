@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package SecurityGuard;
-
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,6 +17,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
      */
     public manageVisitorEntry() {
         initComponents();
+        readVistorEntryTable("");
     }
 
     /**
@@ -30,7 +32,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        visitorEntry = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -67,18 +69,15 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Manage Visitor Entry");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        visitorEntry.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(visitorEntry);
 
         jLabel2.setText("Date : ");
 
@@ -90,18 +89,11 @@ public class manageVisitorEntry extends javax.swing.JFrame {
 
         jLabel6.setText("Number Plate : ");
 
-        jTextField2.setText("jTextField1");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-
-        jTextField3.setText("jTextField1");
-
-        jTextField4.setText("jTextField1");
-
-        jTextField5.setText("jTextField1");
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -180,14 +172,6 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         jLabel10.setText("Unit Number : ");
 
         jLabel11.setText("Number Plate : ");
-
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField8");
-
-        jTextField9.setText("jTextField9");
 
         jButton2.setText("Update");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -313,6 +297,38 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void readVistorEntryTable(String query){
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> visitorEntries = new securityGuardFileHandler().getData("visitorEntry", "SecurityGuard");
+            //create a table model
+            DefaultTableModel model = (DefaultTableModel)visitorEntry.getModel();
+            //clear the table
+            model.setRowCount(0);
+            //set header
+            String[] header = {"DATE" , "NAME" , "PHONE NUMBER" , "PLATE NUMBER" , "UNIT NUMBER" };
+            model.setColumnIdentifiers(header);
+            if(query.equals("")){
+                for (Map.Entry<Integer, Map<String, String>> entry : visitorEntries.entrySet()) {
+                    Map<String, String> visitorEntry = entry.getValue();
+                    String[] row = {visitorEntry.get("DATE"), visitorEntry.get("NAME"), visitorEntry.get("PHONE NUMBER"), visitorEntry.get("PLATE NUMBER"), visitorEntry.get("UNIT NUMBER")};
+                    model.addRow(row);
+                }
+            }
+            else{
+                for (Map.Entry<Integer, Map<String, String>> entry : visitorEntries.entrySet()) {
+                    Map<String, String> visitorEntry = entry.getValue();
+                    if(visitorEntry.get("NAME").equals(query)){
+                        String[] row = {visitorEntry.get("DATE"), visitorEntry.get("NAME"), visitorEntry.get("PHONE NUMBER"), visitorEntry.get("PLATE NUMBER"), visitorEntry.get("UNIT NUMBER")};
+                        model.addRow(row);
+                    }
+                }
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -394,7 +410,6 @@ public class manageVisitorEntry extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -404,5 +419,6 @@ public class manageVisitorEntry extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable visitorEntry;
     // End of variables declaration//GEN-END:variables
 }
