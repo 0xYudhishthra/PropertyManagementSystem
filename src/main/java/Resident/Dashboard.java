@@ -14,11 +14,12 @@ import java.util.Map;
 public class Dashboard extends javax.swing.JFrame {
 
     Resident.residentFileHandler residentFileHandler = new residentFileHandler();
+    String residentID;
     /**
      * Creates new form Dashboard
      */
-    public Dashboard() {
-        initComponents();
+    public Dashboard(String residentID) {
+        initComponents(residentID);
     }
 
     /**
@@ -28,7 +29,9 @@ public class Dashboard extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String residentID) {
+
+        this.residentID = residentID;
 
         profilePicture = new javax.swing.JLabel();
         greetingPrompt = new javax.swing.JLabel();
@@ -42,7 +45,7 @@ public class Dashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         try{
-            Map<String, String> profileData = residentFileHandler.getProfileDetails("RN001");
+            Map<String, String> profileData = residentFileHandler.getProfileDetails(residentID);
             for (Map.Entry<String, String> entry : profileData.entrySet()) {
                 switch (entry.getKey()){
                     case "PROFILE PICTURE":
@@ -68,7 +71,7 @@ public class Dashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 //close this frame and bring up the profile page
                 dispose();
-                new manageProfile().setVisible(true);
+                new manageProfile(residentID).setVisible(true);
             }
         });
 
@@ -168,28 +171,28 @@ public class Dashboard extends javax.swing.JFrame {
     private void manageFacilityBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageFacilityBookingsActionPerformed
         // close this window and open the facility booking window
         this.dispose();
-        manageFacilityBooking fbw = new manageFacilityBooking();
+        manageFacilityBooking fbw = new manageFacilityBooking(residentID);
         fbw.setVisible(true);
     }//GEN-LAST:event_manageFacilityBookingsActionPerformed
 
     private void managePaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePaymentsActionPerformed
         // close this window and open the payment window
         this.dispose();
-        managePayment mp = new managePayment();
+        managePayment mp = new managePayment(residentID);
         mp.setVisible(true);
     }//GEN-LAST:event_managePaymentsActionPerformed
 
     private void manageVisitorPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVisitorPassActionPerformed
         // close this window and bring up the visitor pass window
         this.dispose();
-        manageVisitorPass mvp = new manageVisitorPass();
+        manageVisitorPass mvp = new manageVisitorPass(residentID);
         mvp.setVisible(true);
     }//GEN-LAST:event_manageVisitorPassActionPerformed
 
     private void manageComplaintsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageComplaintsActionPerformed
         // close this window and bring up the complaints window
         this.dispose();
-        manageComplaints mc = new manageComplaints();
+        manageComplaints mc = new manageComplaints(residentID);
         mc.setVisible(true);
     }//GEN-LAST:event_manageComplaintsActionPerformed
 
@@ -238,7 +241,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                new Dashboard(null).setVisible(true);
             }
         });
     }
