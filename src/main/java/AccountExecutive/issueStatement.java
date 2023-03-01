@@ -38,6 +38,7 @@ public class issueStatement extends javax.swing.JFrame {
         userNumberInput = new javax.swing.JTextField();
         statementGenerateProgress = new javax.swing.JProgressBar();
         print = new javax.swing.JButton();
+        print.setEnabled(false);
         search = new javax.swing.JButton();
         statementOutputPane = new javax.swing.JScrollPane();
         statementOutputTable = new javax.swing.JTable();
@@ -183,36 +184,54 @@ public class issueStatement extends javax.swing.JFrame {
     }//GEN-LAST:event_printActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        try {
-            //read the data from the database
-            Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getStatement(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
-            if (data.size() != 0) {
-                statementOutputTable.setEnabled(true);
-                for (int i = 1; i < data.size() + 1; i++) {
-                    //iterate through the data
-                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
-                        for (int j = 0; j < statementOutputTable.getColumnCount(); j++) {
-                            if (entry.getKey().equals(statementOutputTable.getColumnName(j).toUpperCase())) {
-                                statementOutputTable.setValueAt(entry.getValue(), i - 1, j);
+        Helpers.ProgressBarLoader progressBar = new Helpers.ProgressBarLoader(statementGenerateProgress);
+
+        progressBar.startLoading(0, 100, new Runnable() {
+
+            @Override
+            public void run() {
+                // Perform the desired logic here
+                print.setEnabled(false);
+                search.setEnabled(false);
+                try {
+                    //read the data from the database
+                    Map<Integer, Map<String, String>> data = accountExecutiveFileHandler.getStatement(userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")), userNumberInput.getText().strip());
+                    if (data.size() != 0) {
+                        print.setEnabled(true);
+                        search.setEnabled(true);
+                        statementOutputTable.setEnabled(true);
+                        for (int i = 1; i < data.size() + 1; i++) {
+                            //iterate through the data
+                            for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                                for (int j = 0; j < statementOutputTable.getColumnCount(); j++) {
+                                    if (entry.getKey().equals(statementOutputTable.getColumnName(j).toUpperCase())) {
+                                        statementOutputTable.setValueAt(entry.getValue(), i - 1, j);
+                                    }
+                                }
                             }
                         }
+                    } else {
+                        //clear the table
+                        search.setEnabled(true);
+                        for (int i = 0; i < statementOutputTable.getRowCount(); i++) {
+                            for (int j = 0; j < statementOutputTable.getColumnCount(); j++) {
+                                statementOutputTable.setValueAt("", i, j);
+                            }
+                        }
+                        statementOutputTable.setEnabled(false);
+                        //display error message
+                        JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                }
-            } else {
-                //clear the table
-                for (int i = 0; i < statementOutputTable.getRowCount(); i++) {
-                    for (int j = 0; j < statementOutputTable.getColumnCount(); j++) {
-                        statementOutputTable.setValueAt("", i, j);
-                    }
-                }
-                statementOutputTable.setEnabled(false);
-                //display error message
-                JOptionPane.showMessageDialog(null, "No data found for the given " + userNumberTitle.getText().substring(0, userNumberTitle.getText().indexOf(" ")) + " number", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+                    //clear loading bar
+                    statementGenerateProgress.setValue(0);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
     }//GEN-LAST:event_searchActionPerformed
 
     /**

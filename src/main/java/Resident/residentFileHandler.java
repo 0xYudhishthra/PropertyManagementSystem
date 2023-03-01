@@ -20,7 +20,7 @@ public class residentFileHandler extends FileHandler {
     }
 
     @Override
-    protected ArrayList<String> getFileHeader(String filename, String userRole) {
+    public ArrayList<String> getFileHeader(String filename, String userRole) {
         return super.getFileHeader(filename, userRole);
     }
 

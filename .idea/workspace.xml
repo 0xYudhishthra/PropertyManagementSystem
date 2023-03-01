@@ -4,138 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21d7b740-7e5c-493d-bfeb-86e307663444" name="Changes" comment="feat: init vendor read functions">
-      <change afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/accountExecutiveFileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_toedter_jcalendar_1_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_24_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/Dashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueInvoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueReceipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueReceipt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/issueStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/recordPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/recordPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/updatePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/updatePayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewOutstandingFee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AccountExecutive/viewPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageIncident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageIncident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageVisitorEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SecurityGuard/manageVisitorEntry.java" afterDir="false" />
+    <list default="true" id="4d9740a3-6b06-4dad-9e01-897d96db5605" name="Changes" comment="chore: include boilerplate data">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/clearLocal.sh" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true"
-  }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="AccountExecutive" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.Dashboard">
-    <configuration name="Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AccountExecutive.Dashboard" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AccountExecutive.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Resident.Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Resident.Dashboard" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Resident.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Vendor.Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Vendor.Dashboard" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Vendor.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="issueInvoice (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AccountExecutive.issueInvoice" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AccountExecutive.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="viewOutstandingFee" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AccountExecutive.viewOutstandingFee" />
-      <module name="PropertyManagementSystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AccountExecutive.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Dashboard" />
-        <item itemvalue="Application.Resident.Dashboard" />
-        <item itemvalue="Application.viewOutstandingFee" />
-        <item itemvalue="Application.issueInvoice (1)" />
-        <item itemvalue="Application.Vendor.Dashboard" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="TaskManager">
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: include boilerplate data" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: include boilerplate data" />
   </component>
 </project>
