@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package SecurityGuard;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,26 +46,28 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jButton4 = new javax.swing.JButton();
+        EntryName = new javax.swing.JTextField();
+        EntryPhoneNumber = new javax.swing.JTextField();
+        EntryUnitNumber = new javax.swing.JTextField();
+        EntryNumberPlate = new javax.swing.JTextField();
+        add = new javax.swing.JButton();
+        EntryDate = new com.toedter.calendar.JDateChooser();
+        reset = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        UpdateEntryDate = new com.toedter.calendar.JDateChooser();
+        UpdateEntryName = new javax.swing.JTextField();
+        UpdateEntryPhoneNumber = new javax.swing.JTextField();
+        UpdateEntryUnitNumber = new javax.swing.JTextField();
+        UpdateEntryPlateNumber = new javax.swing.JTextField();
+        update = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        UpdateVisitorEntryID = new javax.swing.JTextField();
         back = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
@@ -76,7 +84,18 @@ public class manageVisitorEntry extends javax.swing.JFrame {
             new String [] {
 
             }
-        ));
+
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        });
+        visitorEntry.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                visitorEntryMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(visitorEntry);
 
         jLabel2.setText("Date : ");
@@ -89,20 +108,25 @@ public class manageVisitorEntry extends javax.swing.JFrame {
 
         jLabel6.setText("Number Plate : ");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        EntryPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                EntryPhoneNumberActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        add.setText("Add");
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Reset");
+        reset.setText("Reset");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,19 +140,19 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(add))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(reset)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField5)
+                        .addComponent(EntryNumberPlate)
                         .addGap(2, 2, 2))
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(EntryUnitNumber)
+                    .addComponent(EntryName)
+                    .addComponent(EntryPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(EntryDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,27 +161,27 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EntryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EntryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EntryPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EntryUnitNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EntryNumberPlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
+                    .addComponent(add)
+                    .addComponent(reset))
                 .addContainerGap(202, Short.MAX_VALUE))
         );
 
@@ -173,19 +197,21 @@ public class manageVisitorEntry extends javax.swing.JFrame {
 
         jLabel11.setText("Number Plate : ");
 
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                deleteActionPerformed(evt);
             }
         });
+
+        jLabel12.setText("Visitor Entry ID :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -199,58 +225,64 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(67, 67, 67)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField6)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel11)
                                     .addComponent(jLabel10))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jButton3)
+                                        .addComponent(delete)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jTextField7)
-                                    .addComponent(jTextField8)
-                                    .addComponent(jTextField9)))))
+                                    .addComponent(UpdateEntryPhoneNumber)
+                                    .addComponent(UpdateEntryUnitNumber)
+                                    .addComponent(UpdateEntryPlateNumber)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel12))
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(UpdateEntryName)
+                                    .addComponent(UpdateEntryDate, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                                    .addComponent(UpdateVisitorEntryID)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(update)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(UpdateVisitorEntryID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpdateEntryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpdateEntryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpdateEntryPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpdateEntryUnitNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpdateEntryPlateNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(198, Short.MAX_VALUE))
+                    .addComponent(update)
+                    .addComponent(delete))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Update", jPanel2);
@@ -307,12 +339,12 @@ public class manageVisitorEntry extends javax.swing.JFrame {
             //clear the table
             model.setRowCount(0);
             //set header
-            String[] header = {"DATE" , "NAME" , "PHONE NUMBER" , "PLATE NUMBER" , "UNIT NUMBER" };
+            String[] header = {"VISITOR ENTRY ID", "DATE" , "NAME" , "PHONE NUMBER" , "PLATE NUMBER" , "UNIT NUMBER" };
             model.setColumnIdentifiers(header);
             if(query.equals("")){
                 for (Map.Entry<Integer, Map<String, String>> entry : visitorEntries.entrySet()) {
                     Map<String, String> visitorEntry = entry.getValue();
-                    String[] row = {visitorEntry.get("DATE"), visitorEntry.get("NAME"), visitorEntry.get("PHONE NUMBER"), visitorEntry.get("PLATE NUMBER"), visitorEntry.get("UNIT NUMBER")};
+                    String[] row = {visitorEntry.get("VISITOR ENTRY ID"), visitorEntry.get("DATE"), visitorEntry.get("NAME"), visitorEntry.get("PHONE NUMBER"), visitorEntry.get("PLATE NUMBER"), visitorEntry.get("UNIT NUMBER")};
                     model.addRow(row);
                 }
             }
@@ -320,7 +352,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                 for (Map.Entry<Integer, Map<String, String>> entry : visitorEntries.entrySet()) {
                     Map<String, String> visitorEntry = entry.getValue();
                     if(visitorEntry.get("NAME").equals(query)){
-                        String[] row = {visitorEntry.get("DATE"), visitorEntry.get("NAME"), visitorEntry.get("PHONE NUMBER"), visitorEntry.get("PLATE NUMBER"), visitorEntry.get("UNIT NUMBER")};
+                        String[] row = {visitorEntry.get("VISITOR ENTRY ID"), visitorEntry.get("DATE"), visitorEntry.get("NAME"), visitorEntry.get("PHONE NUMBER"), visitorEntry.get("PLATE NUMBER"), visitorEntry.get("UNIT NUMBER")};
                         model.addRow(row);
                     }
                 }
@@ -329,21 +361,80 @@ public class manageVisitorEntry extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Date date = EntryDate.getDate();
+        String name = EntryName.getText();
+        String phoneNumber = EntryPhoneNumber.getText();
+        String plateNumber = EntryNumberPlate.getText();
+        String unitNumber = EntryUnitNumber.getText();
+        if(date == null || name.equals("") || phoneNumber.equals("") || plateNumber.equals("") || unitNumber.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill all the fields");
+        }
+        else{
+            String dateStr = new SimpleDateFormat("dd-MM-yyyy").format(date);
+            try {
+                new securityGuardFileHandler().addNewEntry(dateStr, name, phoneNumber, plateNumber, unitNumber);
+                readVistorEntryTable("");
+                //clear the fields
+                EntryDate.setDate(null);
+                EntryName.setText("");
+                EntryPhoneNumber.setText("");
+                EntryNumberPlate.setText("");
+                EntryUnitNumber.setText("");
+                //show success message
+                JOptionPane.showMessageDialog(null, "New entry added successfully");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }            
+        }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+        String visitorEntryID = UpdateVisitorEntryID.getText();
+        Date date = UpdateEntryDate.getDate();
+        String name = UpdateEntryName.getText();
+        String phoneNumber = UpdateEntryPhoneNumber.getText();
+        String plateNumber = UpdateEntryPlateNumber.getText();
+        String unitNumber = UpdateEntryUnitNumber.getText();
+        if(date == null || name.equals("") || phoneNumber.equals("") || plateNumber.equals("") || unitNumber.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill all the fields");
+        }
+        else{
+            String dateStr = new SimpleDateFormat("dd-MM-yyyy").format(date);
+            try {
+                HashMap<String, String> entry = new HashMap<>();
+                entry.put("VISITOR ENTRY ID", visitorEntryID);  
+                entry.put("DATE", dateStr);
+                entry.put("NAME", name);
+                entry.put("PHONE NUMBER", phoneNumber);
+                entry.put("PLATE NUMBER", plateNumber);
+                entry.put("UNIT NUMBER", unitNumber);
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+                boolean isDataUpdated = new securityGuardFileHandler().updateEntryV2(visitorEntryID, entry);
+
+                if (isDataUpdated)
+                    readVistorEntryTable("");
+                    //clear the fields
+                    UpdateEntryDate.setDate(null);
+                    UpdateEntryName.setText("");
+                    UpdateEntryPhoneNumber.setText("");
+                    UpdateEntryPlateNumber.setText("");
+                    UpdateEntryUnitNumber.setText("");
+                    //show success message
+                    JOptionPane.showMessageDialog(null, "Entry updated successfully");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } 
+                //GEN-LAST:event_updateActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_deleteActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
@@ -351,6 +442,43 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         vp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_backActionPerformed
+
+    private void EntryPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntryPhoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EntryPhoneNumberActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+        EntryDate.setDate(null);
+        EntryName.setText("");
+        EntryPhoneNumber.setText("");
+        EntryNumberPlate.setText("");
+        EntryUnitNumber.setText("");
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void visitorEntryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visitorEntryMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = visitorEntry.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)visitorEntry.getModel();
+        UpdateVisitorEntryID.setText(model.getValueAt (selectedRow, 0).toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String entryDateStr = model.getValueAt (selectedRow, 1).toString();
+
+        Date entryDate = null;
+
+        try {
+            entryDate = formatter.parse(entryDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        UpdateEntryDate.setDate(entryDate);
+        UpdateEntryName.setText(model.getValueAt (selectedRow, 2).toString());
+        UpdateEntryPhoneNumber.setText(model.getValueAt (selectedRow, 3).toString());
+        UpdateEntryUnitNumber.setText(model.getValueAt (selectedRow, 4).toString());
+        UpdateEntryPlateNumber.setText(model.getValueAt (selectedRow, 5).toString());
+
+    }//GEN-LAST:event_visitorEntryMouseClicked
 
     /**
      * @param args the command line arguments
@@ -388,16 +516,24 @@ public class manageVisitorEntry extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser EntryDate;
+    private javax.swing.JTextField EntryName;
+    private javax.swing.JTextField EntryNumberPlate;
+    private javax.swing.JTextField EntryPhoneNumber;
+    private javax.swing.JTextField EntryUnitNumber;
+    private com.toedter.calendar.JDateChooser UpdateEntryDate;
+    private javax.swing.JTextField UpdateEntryName;
+    private javax.swing.JTextField UpdateEntryPhoneNumber;
+    private javax.swing.JTextField UpdateEntryPlateNumber;
+    private javax.swing.JTextField UpdateEntryUnitNumber;
+    private javax.swing.JTextField UpdateVisitorEntryID;
+    private javax.swing.JButton add;
     private javax.swing.JButton back;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JButton delete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -411,14 +547,8 @@ public class manageVisitorEntry extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton reset;
+    private javax.swing.JButton update;
     private javax.swing.JTable visitorEntry;
     // End of variables declaration//GEN-END:variables
 }
