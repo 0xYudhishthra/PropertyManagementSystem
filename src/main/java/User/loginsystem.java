@@ -39,6 +39,7 @@ public class loginsystem extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
+        visitor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -121,14 +122,23 @@ public class loginsystem extends javax.swing.JFrame {
             }
         });
 
+        visitor.setText("Visitor");
+        visitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visitorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(visitor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addComponent(cancel)
                         .addGap(18, 18, 18)
                         .addComponent(loginButton))
@@ -156,7 +166,8 @@ public class loginsystem extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(visitor))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
@@ -224,6 +235,13 @@ public class loginsystem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelActionPerformed
 
+    private void visitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitorActionPerformed
+        // TODO add your handling code here:
+        Visitor.VisitorPassCode visitor = new Visitor.VisitorPassCode();
+        visitor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_visitorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,5 +288,6 @@ public class loginsystem extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField password;
+    private javax.swing.JButton visitor;
     // End of variables declaration//GEN-END:variables
 }
