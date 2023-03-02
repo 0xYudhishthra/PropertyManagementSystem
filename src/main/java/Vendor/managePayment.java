@@ -4,7 +4,12 @@
  */
 package Vendor;
 
+import com.itextpdf.text.DocumentException;
+
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -556,8 +561,105 @@ public class managePayment extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_printActionPerformed
+        //prompt the user on which table to print, there are 4 tables to choose from
+        String[] options = {"Statement", "Invoice", "Receipt", "Payment"};
+        int choice = JOptionPane.showOptionDialog(null, "Which table do you want to print?", "Print", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        //create another HashMap<Integer, HashMap<String, String>> to copy over the data from the table that the user wants to print
+        HashMap<Integer, HashMap<String, String>> printData = new HashMap<>();
+
+        //if the user clicks cancel, return
+        if (choice == -1) {
+            return;
+        }
+        //if the user clicks ok, proceed
+        if (choice == 0) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> statementData = new HashMap<>();
+            for (int i = 0; i < viewStatementTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewStatementTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewStatementTable.getColumnCount(); j++) {
+                        lineData.put(viewStatementTable.getColumnName(j), viewStatementTable.getValueAt(i, j).toString());
+                    }
+                    statementData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = statementData;
+        }
+
+        if (choice == 1) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> invoiceData = new HashMap<>();
+            for (int i = 0; i < viewInvoiceTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewInvoiceTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewInvoiceTable.getColumnCount(); j++) {
+                        lineData.put(viewInvoiceTable.getColumnName(j), viewInvoiceTable.getValueAt(i, j).toString());
+                    }
+                    invoiceData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = invoiceData;
+        }
+
+        if (choice == 2) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> receiptData = new HashMap<>();
+            for (int i = 0; i < viewReceiptTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewReceiptTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewReceiptTable.getColumnCount(); j++) {
+                        lineData.put(viewReceiptTable.getColumnName(j), viewReceiptTable.getValueAt(i, j).toString());
+                    }
+                    receiptData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = receiptData;
+        }
+
+        if (choice == 3) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> paymentData = new HashMap<>();
+            for (int i = 0; i < viewPaymentHistoryTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewPaymentHistoryTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewPaymentHistoryTable.getColumnCount(); j++) {
+                        lineData.put(viewPaymentHistoryTable.getColumnName(j), viewPaymentHistoryTable.getValueAt(i, j).toString());
+                    }
+                    paymentData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = paymentData;
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String fileName = fileToSave.getName();
+            String filePath = fileToSave.getAbsolutePath();
+
+            //create the pdf file
+            try {
+                Helpers.pdfGenerator pdf = new Helpers.pdfGenerator();
+                boolean isFileCreated = pdf.generatePDF(printData, filePath + ".pdf");
+                if (isFileCreated) {
+                    JOptionPane.showMessageDialog(null, "File saved successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "File not saved");
+                }
+            } catch (DocumentException | IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
