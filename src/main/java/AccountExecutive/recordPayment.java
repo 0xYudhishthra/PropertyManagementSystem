@@ -4,7 +4,11 @@
  */
 package AccountExecutive;
 
+import com.itextpdf.text.DocumentException;
+
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -339,12 +343,6 @@ public class recordPayment extends javax.swing.JFrame {
                 print.setEnabled(true);
                 //show a success message
                 JOptionPane.showMessageDialog(null, "Payment recorded successfully, your receipt number is " + newReceiptID, "Success", JOptionPane.INFORMATION_MESSAGE);
-                //clear the amount paid input
-                amountPaidInput.setText("");
-                //clear the amount input
-                amountInput.setText("");
-                //clear the description input
-                amountPaidInput1.setText("");
                 //reset loading bar
                 paymentRecordProgress.setValue(0);
 
@@ -403,7 +401,46 @@ public class recordPayment extends javax.swing.JFrame {
     }//GEN-LAST:event_searchActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        // TODO add your handling code here:
+        //ensure that the table is not empty
+        //get the data from the table by iterating through the rows that are not empty
+        //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+        HashMap<Integer, HashMap<String, String>> invoiceData = new HashMap<>();
+        HashMap<String, String> lineData = new HashMap<>();
+        lineData.put("userNumber", userNumberInput.getText().strip());
+        lineData.put("amount", amountInput.getText().strip());
+        lineData.put("amountPaid", amountPaidInput.getText().strip());
+        lineData.put("Description", amountPaidInput1.getText().strip());
+        lineData.put("totalAmountDue", totalAmountDueLabel.getText().strip());
+        lineData.put("receiptNumber", receiptNumberInput.getText().strip());
+        System.out.println(lineData);
+        invoiceData.put(0, lineData);
+        System.out.println(invoiceData);
+
+
+
+        //prompt the user on where to save the file, get the full path of the file and the file name
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String fileName = fileToSave.getName();
+            String filePath = fileToSave.getAbsolutePath();
+
+            //create the pdf file
+            try {
+                Helpers.pdfGenerator pdf = new Helpers.pdfGenerator();
+                boolean isFileCreated = pdf.generatePDF(invoiceData, filePath + ".pdf");
+                if (isFileCreated) {
+                    JOptionPane.showMessageDialog(null, "File saved successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "File not saved");
+                }
+            } catch (DocumentException | IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }//GEN-LAST:event_printActionPerformed
 
     /**
