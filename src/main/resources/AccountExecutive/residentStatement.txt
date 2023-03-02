@@ -14,3 +14,5 @@ _____________________
 02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | Monthly payment | MYR 20 | MYR 8.0 | ST5
 02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | Dues | MYR 1 | MYR 7.0 | ST6
 02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | pls work | MYR 1 | MYR 6.0 | ST7
+02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | pavan's wife is bhavneet | MYR 5 | MYR 1.0 | ST8
+02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | Resident payment | MYR 1 | MYR 0.0 | ST9
