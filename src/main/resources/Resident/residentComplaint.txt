@@ -4,8 +4,6 @@ RESIDENT COMPLAINT DETAILS
 THIS FILE STORES RESIDENT COMPLAINT DETAILS
 STORE FORMAT: <RESIDENT ID> | <DATE OF COMPLAINT> | <DESCRIPTION> | <COMPLAINT NUMBER> | <STATUS>
 _____________________
-RN001 | 01022023 | Leakage in kitchen | C001 | Pending
-RN004 | 01022023 | Leakage in kitchen | C003 | Resolved
-RN003 | 01022023 | Leakage in kitchen | C002 | Resolved
-RN001 | 01022023 | Leakage in kitchen | C002 | Resolved
+RN004 | 01022023 | Leakage in kitchen | C1 | RESOLVED
+RN003 | 01022023 | Leakage in kitchen | C1 | RESOLVED
 
