@@ -5,13 +5,32 @@
 package Resident;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author yudhx
  */
 public class manageProfile extends javax.swing.JFrame {
+    String residentID;
+
+    //keep track of an array to track changes in the text fields
+    ArrayList<String> textFields = new ArrayList<>();
 
     //instantiate file handler
     Resident.residentFileHandler residentFileHandler = new residentFileHandler();
@@ -19,8 +38,8 @@ public class manageProfile extends javax.swing.JFrame {
     /**
      * Creates new form Profile
      */
-    public manageProfile() {
-        initComponents();
+    public manageProfile(String residentID) {
+        initComponents(residentID);
     }
 
     /**
@@ -30,44 +49,46 @@ public class manageProfile extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String residentID) {
 
-        manageProfileScrollPane = new javax.swing.JScrollPane();
-        manageProfilePanel = new javax.swing.JPanel();
-        profilePicture = new javax.swing.JLabel();
-        update = new javax.swing.JButton();
-        personalDetailsPanel = new javax.swing.JPanel();
-        personalDetailsTitle = new javax.swing.JLabel();
-        nameTitle = new javax.swing.JLabel();
-        nameInput = new javax.swing.JTextField();
-        contactNumberInput = new javax.swing.JTextField();
-        contactNumberTitle = new javax.swing.JLabel();
-        emailTitle = new javax.swing.JLabel();
-        emailInput = new javax.swing.JTextField();
-        nationalityInput = new javax.swing.JTextField();
-        nationalityTitle = new javax.swing.JLabel();
-        buildingDetailsPanel = new javax.swing.JPanel();
-        buildingDetailsTitle = new javax.swing.JLabel();
-        buildingTitle = new javax.swing.JLabel();
-        buildingInput = new javax.swing.JTextField();
-        unitNameInput = new javax.swing.JTextField();
-        unitNameTitle = new javax.swing.JLabel();
-        occupancyDetailsPanel = new javax.swing.JPanel();
-        occupancyDetailsTitle = new javax.swing.JLabel();
-        moveInDateTitle = new javax.swing.JLabel();
-        moveInDateInput = new javax.swing.JTextField();
-        accountDetailsPanel = new javax.swing.JPanel();
-        accountDetailsTitle = new javax.swing.JLabel();
-        usernameTitle = new javax.swing.JLabel();
-        usernameInput = new javax.swing.JTextField();
-        passwordTitle = new javax.swing.JLabel();
-        passwordInput = new javax.swing.JTextField();
-        manageProfileTitle = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
+        this.residentID = residentID;
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        manageProfileScrollPane = new JScrollPane();
+        manageProfilePanel = new JPanel();
+        profilePicture = new JLabel();
+        update = new JButton();
+        personalDetailsPanel = new JPanel();
+        personalDetailsTitle = new JLabel();
+        nameTitle = new JLabel();
+        nameInput = new JTextField();
+        contactNumberInput = new JTextField();
+        contactNumberTitle = new JLabel();
+        emailTitle = new JLabel();
+        emailInput = new JTextField();
+        nationalityInput = new JTextField();
+        nationalityTitle = new JLabel();
+        buildingDetailsPanel = new JPanel();
+        buildingDetailsTitle = new JLabel();
+        buildingTitle = new JLabel();
+        buildingInput = new JTextField();
+        unitNameInput = new JTextField();
+        unitNameTitle = new JLabel();
+        occupancyDetailsPanel = new JPanel();
+        occupancyDetailsTitle = new JLabel();
+        moveInDateTitle = new JLabel();
+        moveInDateInput = new JTextField();
+        accountDetailsPanel = new JPanel();
+        accountDetailsTitle = new JLabel();
+        usernameTitle = new JLabel();
+        usernameInput = new JTextField();
+        passwordTitle = new JLabel();
+        passwordInput = new JTextField();
+        manageProfileTitle = new JLabel();
+        back = new JButton();
 
-        manageProfilePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 51, 0), null));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        manageProfilePanel.setBorder(BorderFactory.createEtchedBorder(new Color(204, 51, 0), null));
 
 
         //a sample return data from the statement above is {NATIONALITY=Malaysian, RESIDENT ID=N001, PROFILE PICTURE=johnDoe_01012023.jpg, CONTACT NUMBER=013-6699334, BUILDING=Parkhill Residence, PASSWORD=12345678, MOVE-IN DATE=01012023, RESIDENT NAME=John Doe, USERNAME=johnDoe, EMAIL=john.doe@email.com, UNIT NAME=Unit A-103}
@@ -119,43 +140,43 @@ public class manageProfile extends javax.swing.JFrame {
             System.out.println(e);
         }
 
-        profilePicture.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        profilePicture.setFont(new Font("Helvetica Neue", 0, 18)); // NOI18N
         profilePicture.setText("profilePicture");
 
-        update.setBackground(new java.awt.Color(102, 255, 102));
+        update.setBackground(new Color(102, 255, 102));
         update.setText("UPDATE");
-        update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        update.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 updateActionPerformed(evt);
             }
         });
 
-        personalDetailsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 0), null));
+        personalDetailsPanel.setBorder(BorderFactory.createEtchedBorder(new Color(204, 204, 0), null));
 
-        personalDetailsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        personalDetailsTitle.setFont(new Font("Helvetica Neue", 0, 18)); // NOI18N
         personalDetailsTitle.setText("Personal Details");
 
-        nameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        nameTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         nameTitle.setText("Name");
 
-        contactNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        contactNumberTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         contactNumberTitle.setText("Contact Number");
 
-        emailTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        emailTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         emailTitle.setText("Email");
 
-        nationalityTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        nationalityTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         nationalityTitle.setText("Nationality");
 
-        javax.swing.GroupLayout personalDetailsPanelLayout = new javax.swing.GroupLayout(personalDetailsPanel);
+        GroupLayout personalDetailsPanelLayout = new GroupLayout(personalDetailsPanel);
         personalDetailsPanel.setLayout(personalDetailsPanelLayout);
         personalDetailsPanelLayout.setHorizontalGroup(
-                personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                personalDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(personalDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(personalDetailsTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(personalDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addGroup(personalDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(personalDetailsTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(nameTitle)
                                                 .addComponent(contactNumberTitle)
                                                 .addComponent(emailTitle)
@@ -163,52 +184,52 @@ public class manageProfile extends javax.swing.JFrame {
                                                 .addComponent(contactNumberInput)
                                                 .addComponent(emailInput))
                                         .addComponent(nationalityTitle)
-                                        .addComponent(nationalityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(nationalityInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(22, Short.MAX_VALUE))
         );
         personalDetailsPanelLayout.setVerticalGroup(
-                personalDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                personalDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(personalDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(personalDetailsTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(nameTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nameInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(contactNumberTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(contactNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(contactNumberInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(emailTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(emailInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(nationalityTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nationalityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nationalityInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        buildingDetailsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 0), null));
+        buildingDetailsPanel.setBorder(BorderFactory.createEtchedBorder(new Color(204, 204, 0), null));
 
-        buildingDetailsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        buildingDetailsTitle.setFont(new Font("Helvetica Neue", 0, 18)); // NOI18N
         buildingDetailsTitle.setText("Building Details");
 
-        buildingTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        buildingTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         buildingTitle.setText("Building");
 
-        unitNameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        unitNameTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         unitNameTitle.setText("Unit Name");
 
-        javax.swing.GroupLayout buildingDetailsPanelLayout = new javax.swing.GroupLayout(buildingDetailsPanel);
+        GroupLayout buildingDetailsPanelLayout = new GroupLayout(buildingDetailsPanel);
         buildingDetailsPanel.setLayout(buildingDetailsPanelLayout);
         buildingDetailsPanelLayout.setHorizontalGroup(
-                buildingDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                buildingDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(buildingDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(buildingDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(buildingDetailsTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(buildingDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(buildingDetailsTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(buildingTitle)
                                         .addComponent(unitNameTitle)
                                         .addComponent(buildingInput)
@@ -216,78 +237,78 @@ public class manageProfile extends javax.swing.JFrame {
                                 .addContainerGap(22, Short.MAX_VALUE))
         );
         buildingDetailsPanelLayout.setVerticalGroup(
-                buildingDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                buildingDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(buildingDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(buildingDetailsTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(buildingTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buildingInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buildingInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(unitNameTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(unitNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(unitNameInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        occupancyDetailsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 0), null));
+        occupancyDetailsPanel.setBorder(BorderFactory.createEtchedBorder(new Color(204, 204, 0), null));
 
-        occupancyDetailsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        occupancyDetailsTitle.setFont(new Font("Helvetica Neue", 0, 18)); // NOI18N
         occupancyDetailsTitle.setText("Occupancy Details");
 
-        moveInDateTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        moveInDateTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         moveInDateTitle.setText("Move-In Date");
 
         moveInDateInput.setEnabled(false);
 
-        javax.swing.GroupLayout occupancyDetailsPanelLayout = new javax.swing.GroupLayout(occupancyDetailsPanel);
+        GroupLayout occupancyDetailsPanelLayout = new GroupLayout(occupancyDetailsPanel);
         occupancyDetailsPanel.setLayout(occupancyDetailsPanelLayout);
         occupancyDetailsPanelLayout.setHorizontalGroup(
-                occupancyDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                occupancyDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(occupancyDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(occupancyDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(occupancyDetailsTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(occupancyDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(occupancyDetailsTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(moveInDateTitle)
                                         .addComponent(moveInDateInput))
                                 .addContainerGap(22, Short.MAX_VALUE))
         );
         occupancyDetailsPanelLayout.setVerticalGroup(
-                occupancyDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                occupancyDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(occupancyDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(occupancyDetailsTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(moveInDateTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(moveInDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(moveInDateInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        accountDetailsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 0), null));
+        accountDetailsPanel.setBorder(BorderFactory.createEtchedBorder(new Color(204, 204, 0), null));
 
-        accountDetailsTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        accountDetailsTitle.setFont(new Font("Helvetica Neue", 0, 18)); // NOI18N
         accountDetailsTitle.setText("Account Details");
 
-        usernameTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        usernameTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         usernameTitle.setText("Username");
 
 
-        passwordTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        passwordTitle.setFont(new Font("Helvetica Neue", 0, 14)); // NOI18N
         passwordTitle.setText("Password");
 
 
-        javax.swing.GroupLayout accountDetailsPanelLayout = new javax.swing.GroupLayout(accountDetailsPanel);
+        GroupLayout accountDetailsPanelLayout = new GroupLayout(accountDetailsPanel);
         accountDetailsPanel.setLayout(accountDetailsPanelLayout);
         accountDetailsPanelLayout.setHorizontalGroup(
-                accountDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                accountDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(accountDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(accountDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(accountDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(accountDetailsPanelLayout.createSequentialGroup()
-                                                .addGroup(accountDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(accountDetailsTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(accountDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(accountDetailsTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(usernameTitle)
                                                         .addComponent(passwordTitle)
                                                         .addComponent(usernameInput))
@@ -296,99 +317,237 @@ public class manageProfile extends javax.swing.JFrame {
                                 .addContainerGap())
         );
         accountDetailsPanelLayout.setVerticalGroup(
-                accountDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                accountDetailsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(accountDetailsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(accountDetailsTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(usernameTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(usernameInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
                                 .addComponent(passwordTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(passwordInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout manageProfilePanelLayout = new javax.swing.GroupLayout(manageProfilePanel);
+        GroupLayout manageProfilePanelLayout = new GroupLayout(manageProfilePanel);
         manageProfilePanel.setLayout(manageProfilePanelLayout);
         manageProfilePanelLayout.setHorizontalGroup(
-                manageProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                manageProfilePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(manageProfilePanelLayout.createSequentialGroup()
-                                .addGroup(manageProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(manageProfilePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(manageProfilePanelLayout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(personalDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(personalDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addGroup(manageProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(manageProfilePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                         .addGroup(manageProfilePanelLayout.createSequentialGroup()
-                                                                .addComponent(buildingDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(buildingDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(occupancyDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(occupancyDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(accountDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                                .addComponent(accountDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(update, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGroup(manageProfilePanelLayout.createSequentialGroup()
                                                 .addGap(297, 297, 297)
-                                                .addComponent(profilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(profilePicture, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         manageProfilePanelLayout.setVerticalGroup(
-                manageProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                manageProfilePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(manageProfilePanelLayout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(profilePicture)
                                 .addGap(44, 44, 44)
-                                .addGroup(manageProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(personalDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(manageProfilePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(personalDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(manageProfilePanelLayout.createSequentialGroup()
-                                                .addGroup(manageProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(accountDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(buildingDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(occupancyDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGroup(manageProfilePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(accountDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(buildingDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(occupancyDetailsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(update, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         manageProfileScrollPane.setViewportView(manageProfilePanel);
 
-        manageProfileTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        manageProfileTitle.setFont(new Font("Helvetica Neue", 0, 18)); // NOI18N
         manageProfileTitle.setText("Manage Profile");
 
-        back.setBackground(new java.awt.Color(255, 51, 51));
+        back.setBackground(new Color(255, 51, 51));
         back.setText("BACK");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        back.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        //add action listener for profile picture button that opens a file chooser, and sets the profile picture to the selected image
+        profilePicture.addMouseListener(new MouseAdapter() {
+
+            private Icon ResizeImage(String path) {
+                ImageIcon MyImage = new ImageIcon(path);
+                Image img = MyImage.getImage();
+                Image newImg = img.getScaledInstance(125, 200, Image.SCALE_SMOOTH);
+                ImageIcon image = new ImageIcon(newImg);
+                profilePicture.setIcon(image);
+                return image;
+            }
+            public void mouseClicked(MouseEvent evt) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "gif", "png");
+                fileChooser.addChoosableFileFilter(filter);
+                int result = fileChooser.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    String path = selectedFile.getAbsolutePath();
+                    profilePicture.setIcon(ResizeImage(path));
+                    textFields.add("Profile Picture");
+                    //copy the image to the images folder
+                    try {
+                        //the directory with pictures is located at the resources folder that is located at the same level as the java folder
+                        //get the base path of the project, then add the path to the images folder
+                        Path source = selectedFile.toPath();
+                        //get the full absolute path leading up to the java folder
+                        String basePath = new File("").getAbsolutePath();
+                        Path target = new File(basePath + "/src/main/resources/Resident/ProfilePictures/" + usernameInput.getText() + "_" + new SimpleDateFormat("ddMMyyyy").format(new Date()) + ".jpg").toPath();
+                        Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (result == JFileChooser.CANCEL_OPTION) {
+                    System.out.println("No Data");
+                    textFields.remove("Profile Picture");
+                }
+            }
+        });
+
+        //use a different action listener, one that checks if there is a value change in the text field
+        nameInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Name");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Name");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Name");
+            }
+        });
+
+        contactNumberInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Contact Number");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Contact Number");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Contact Number");
+            }
+        });
+
+        emailInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Email");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Email");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Email");
+            }
+        });
+
+        nationalityInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Nationality");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Nationality");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Nationality");
+            }
+        });
+
+        buildingInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Building");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Building");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Building");
+            }
+        });
+
+        unitNameInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Unit Name");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Unit Name");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Unit Name");
+            }
+        });
+
+        usernameInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Username");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Username");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Username");
+            }
+        });
+
+        passwordInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Password");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Password");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Password");
+            }
+        });
+
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(manageProfileScrollPane)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(manageProfileTitle)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(back, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(manageProfileTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                                        .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(manageProfileScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(manageProfileTitle, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                                        .addComponent(back, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(manageProfileScrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -397,11 +556,65 @@ public class manageProfile extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // close this window and bring back the previous window
         this.dispose();
-        new Dashboard().setVisible(true);
+        new Dashboard(residentID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        // TODO add your handling code here:
+        //there are duplicate values in the arraylist, so we need to remove them, and list the changed fields for the user to see and confirm
+        ArrayList<String> changedFields = new ArrayList<String>();
+        //if changedfields is empty, return a message saying that no fields have been changed
+        if (textFields.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No fields have been changed", "No Changes", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        for (String field : textFields) {
+            if (!changedFields.contains(field)) {
+                changedFields.add(field);
+            }
+        }
+        ///generate a string of all the changed fields
+        String changedFieldsString = "";
+        for (String field : changedFields) {
+            changedFieldsString += field + ", ";
+        }
+        //remove the last comma and space
+        changedFieldsString = changedFieldsString.substring(0, changedFieldsString.length() - 2);
+        //ask the user to confirm the changes
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update the following fields: " + changedFieldsString + "?", "Confirm Changes", JOptionPane.YES_NO_OPTION);
+
+        //if the user confirms the changes, update the database
+        if (confirm == 0) {
+            //if profile picture is changed, upload the new image to the database
+            //pass a HashMap<String, String> of all the details in the dashboard to the update method
+            HashMap<String, String> details = new HashMap<String, String>();
+            details.put("RESIDENT ID", residentID);
+            details.put("RESIDENT NAME", nameInput.getText());
+            details.put("CONTACT NUMBER", contactNumberInput.getText());
+            details.put("EMAIL", emailInput.getText());
+            details.put("BUILDING", buildingInput.getText());
+            details.put("UNIT NAME", unitNameInput.getText());
+            details.put("MOVE-IN DATE", moveInDateInput.getText());
+            if (textFields.contains("Profile Picture")) {
+                details.put("PROFILE PICTURE", usernameInput.getText() + "_" + new SimpleDateFormat("ddMMyyyy").format(new Date()) + ".jpg");
+            }
+            details.put("USERNAME", usernameInput.getText());
+            details.put("PASSWORD", passwordInput.getText());
+            details.put("NATIONALITY", nationalityInput.getText());
+
+            //update the database
+            boolean isProfileUpdated = residentFileHandler.updateProfile(residentID, details);
+
+            //if true, return a message saying that the profile has been updated
+            if (isProfileUpdated) {
+                JOptionPane.showMessageDialog(null, "Profile has been updated", "Profile Updated", JOptionPane.INFORMATION_MESSAGE);
+                //close this window and bring back the previous window
+                this.dispose();
+                new manageProfile(residentID).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Profile has not been updated", "Profile Not Updated", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_updateActionPerformed
 
     /**
@@ -435,7 +648,7 @@ public class manageProfile extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manageProfile().setVisible(true);
+                new manageProfile(null).setVisible(true);
             }
         });
     }

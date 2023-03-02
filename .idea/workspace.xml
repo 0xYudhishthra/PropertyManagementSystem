@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d9740a3-6b06-4dad-9e01-897d96db5605" name="Changes" comment="chore: include boilerplate data">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+    <list default="true" id="1427a5e0-a903-45c5-a520-03c4b905907c" name="Changes" comment="feat: refactor to dynamically get residentIDs">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Resident/manageProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Resident/manageProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/Dashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/manageComplaints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/manageComplaints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/managePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/managePayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/manageProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/manageProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vendor/vendorFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vendor/vendorFileHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/clearLocal.sh" root0="FORCE_HIGHLIGHTING" />
@@ -18,11 +27,41 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="RunManager" selected="Application.Dashboard">
+    <configuration name="AccountExecutive.Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AccountExecutive.Dashboard" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AccountExecutive.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Dashboard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Vendor.Dashboard" />
+      <module name="PropertyManagementSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Vendor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Dashboard" />
+        <item itemvalue="Application.AccountExecutive.Dashboard" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: include boilerplate data" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: include boilerplate data" />
   </component>
 </project>

@@ -4,6 +4,12 @@
  */
 package Vendor;
 
+import com.itextpdf.text.DocumentException;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,12 +18,13 @@ import java.util.Map;
 public class managePayment extends javax.swing.JFrame {
 
     Vendor.vendorFileHandler vendorFileHandler = new Vendor.vendorFileHandler();
+    String vendorID;
 
     /**
      * Creates new form makePayment
      */
-    public managePayment() {
-        initComponents();
+    public managePayment(String vendorID) {
+        initComponents(vendorID);
     }
 
     /**
@@ -27,7 +34,9 @@ public class managePayment extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String vendorID) {
+
+        this.vendorID = vendorID;
 
         managePaymentsTitle = new javax.swing.JLabel();
         back = new javax.swing.JButton();
@@ -76,12 +85,9 @@ public class managePayment extends javax.swing.JFrame {
         amountToPayTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         amountToPayTitle.setText("Amount to Pay");
 
-        makePaymentInput.setText("jTextField1");
-
         receiptNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         receiptNumberTitle.setText("Receipt Number");
 
-        receiptNumberOutput.setText("jTextField1");
         receiptNumberOutput.setEnabled(false);
 
         pay.setBackground(new java.awt.Color(51, 255, 102));
@@ -103,6 +109,14 @@ public class managePayment extends javax.swing.JFrame {
 
         viewPaymentHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
                         {null, null, null, null, null},
                         {null, null, null, null, null},
                         {null, null, null, null, null},
@@ -152,6 +166,13 @@ public class managePayment extends javax.swing.JFrame {
 
         viewInvoiceTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null},
@@ -205,6 +226,14 @@ public class managePayment extends javax.swing.JFrame {
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
                         {null, null, null, null, null, null}
                 },
                 new String[]{
@@ -246,6 +275,14 @@ public class managePayment extends javax.swing.JFrame {
 
         viewStatementTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
@@ -429,18 +466,200 @@ public class managePayment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payActionPerformed
-        // TODO add your handling code here:
+        if (makePaymentInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount and amount paid is numeric
+        try {
+            Double.parseDouble(makePaymentInput.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount and amount paid is non-negative
+        if (Double.parseDouble(makePaymentInput.getText()) < 0) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure total amount due is not 0
+        if (Double.parseDouble(outstandingFeeOutput.getText().replace("MYR", "")) == 0) {
+            JOptionPane.showMessageDialog(null, "Outstanding fee is 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //amount should be equal or more than the amount paid
+        if (Double.parseDouble(makePaymentInput.getText()) > Double.parseDouble(outstandingFeeOutput.getText().replace("MYR", ""))) {
+            JOptionPane.showMessageDialog(null, "Amount paid should be equal or less than the outstanding amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //after user clicks this button, a series of steps will occur
+        //we will first create a new statement record, then create a new invoice record, then create a new receipt record, get the receipt id, and then add a new payment record with the receipt id
+        //get the new total amount due by subtracting the amount paid from the total amount due
+        double newTotalAmountDue = Double.parseDouble(outstandingFeeOutput.getText().replace("MYR", "")) - Double.parseDouble(makePaymentInput.getText());
+        //cast the above double to a string with "MYR" in front
+        String newTotalAmountDueString = "MYR " + String.valueOf(newTotalAmountDue);
+
+        String newStatementID = vendorFileHandler.addStatement(
+                vendorID,
+                "Resident payment",
+                makePaymentInput.getText().strip(),
+                newTotalAmountDueString);
+
+        String newInvoiceID = vendorFileHandler.addInvoice(
+                vendorID,
+                makePaymentInput.getText().strip()
+        );
+
+        System.out.println("newInvoiceID: " + newInvoiceID);
+
+        String newReceiptID = vendorFileHandler.addReceipt(
+                vendorID,
+                newInvoiceID,
+                newStatementID,
+                outstandingFeeOutput.getText().strip(),
+                makePaymentInput.getText().strip()
+        );
+
+        vendorFileHandler.addPayment(
+                vendorID,
+                outstandingFeeOutput.getText().strip(),
+                makePaymentInput.getText().strip(),
+                "MYR " + String.valueOf(Double.parseDouble(outstandingFeeOutput.getText().strip().replace("MYR", "")) - Double.parseDouble(makePaymentInput.getText().strip())),
+                newReceiptID
+        );
+
+        //sleep for 2 seconds
+        try {
+            pay.setEnabled(false);
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            System.out.println(ex);
+        }
+        //fill up the receipt number label
+        receiptNumberOutput.setText(newReceiptID);
+        //enable the print button
+        print.setEnabled(true);
+        pay.setEnabled(true);
+        //show a success message
+        JOptionPane.showMessageDialog(null, "Payment recorded successfully, your receipt number is " + newReceiptID, "Success", JOptionPane.INFORMATION_MESSAGE);
+        makePaymentInput.setText("");
+        //reload the frame
+        new managePayment(vendorID).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_payActionPerformed
+
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         //close this window and bring back the previous one
         this.dispose();
-        new Dashboard().setVisible(true);
+        new Dashboard(vendorID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_printActionPerformed
+        //prompt the user on which table to print, there are 4 tables to choose from
+        String[] options = {"Statement", "Invoice", "Receipt", "Payment"};
+        int choice = JOptionPane.showOptionDialog(null, "Which table do you want to print?", "Print", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        //create another HashMap<Integer, HashMap<String, String>> to copy over the data from the table that the user wants to print
+        HashMap<Integer, HashMap<String, String>> printData = new HashMap<>();
+
+        //if the user clicks cancel, return
+        if (choice == -1) {
+            return;
+        }
+        //if the user clicks ok, proceed
+        if (choice == 0) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> statementData = new HashMap<>();
+            for (int i = 0; i < viewStatementTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewStatementTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewStatementTable.getColumnCount(); j++) {
+                        lineData.put(viewStatementTable.getColumnName(j), viewStatementTable.getValueAt(i, j).toString());
+                    }
+                    statementData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = statementData;
+        }
+
+        if (choice == 1) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> invoiceData = new HashMap<>();
+            for (int i = 0; i < viewInvoiceTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewInvoiceTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewInvoiceTable.getColumnCount(); j++) {
+                        lineData.put(viewInvoiceTable.getColumnName(j), viewInvoiceTable.getValueAt(i, j).toString());
+                    }
+                    invoiceData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = invoiceData;
+        }
+
+        if (choice == 2) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> receiptData = new HashMap<>();
+            for (int i = 0; i < viewReceiptTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewReceiptTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewReceiptTable.getColumnCount(); j++) {
+                        lineData.put(viewReceiptTable.getColumnName(j), viewReceiptTable.getValueAt(i, j).toString());
+                    }
+                    receiptData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = receiptData;
+        }
+
+        if (choice == 3) {
+            //get the data from the table by iterating through the rows that are not empty
+            //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+            HashMap<Integer, HashMap<String, String>> paymentData = new HashMap<>();
+            for (int i = 0; i < viewPaymentHistoryTable.getRowCount(); i++) {
+                Map<String, String> lineData = new HashMap<>();
+                if (viewPaymentHistoryTable.getValueAt(i, 0) != null) {
+                    for (int j = 0; j < viewPaymentHistoryTable.getColumnCount(); j++) {
+                        lineData.put(viewPaymentHistoryTable.getColumnName(j), viewPaymentHistoryTable.getValueAt(i, j).toString());
+                    }
+                    paymentData.put(i, (HashMap<String, String>) lineData);
+                }
+            }
+            printData = paymentData;
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String fileName = fileToSave.getName();
+            String filePath = fileToSave.getAbsolutePath();
+
+            //create the pdf file
+            try {
+                Helpers.pdfGenerator pdf = new Helpers.pdfGenerator();
+                boolean isFileCreated = pdf.generatePDF(printData, filePath + ".pdf");
+                if (isFileCreated) {
+                    JOptionPane.showMessageDialog(null, "File saved successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "File not saved");
+                }
+            } catch (DocumentException | IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -475,7 +694,7 @@ public class managePayment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new managePayment().setVisible(true);
+                new managePayment(null).setVisible(true);
             }
         });
     }

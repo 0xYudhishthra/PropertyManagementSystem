@@ -4,7 +4,13 @@
  */
 package AccountExecutive;
 
+import com.itextpdf.text.DocumentException;
+
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -182,7 +188,50 @@ public class issueInvoice extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
-        // TODO add your handling code here:
+        //ensure that the table is not empty
+        if (invoiceOutputTable.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No data to print");
+            return;
+        }
+
+        //get the data from the table by iterating through the rows that are not empty
+        //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+        HashMap<Integer, HashMap<String, String>> invoiceData = new HashMap<>();
+        for (int i = 0; i < invoiceOutputTable.getRowCount(); i++) {
+            Map<String, String> lineData = new HashMap<>();
+            if (invoiceOutputTable.getValueAt(i, 0) != null) {
+                for (int j = 0; j < invoiceOutputTable.getColumnCount(); j++) {
+                    lineData.put(invoiceOutputTable.getColumnName(j), invoiceOutputTable.getValueAt(i, j).toString());
+                }
+                invoiceData.put(i, (HashMap<String, String>) lineData);
+            }
+        }
+
+        //prompt the user on where to save the file, get the full path of the file and the file name
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String fileName = fileToSave.getName();
+            String filePath = fileToSave.getAbsolutePath();
+
+            //create the pdf file
+            try {
+                Helpers.pdfGenerator pdf = new Helpers.pdfGenerator();
+                boolean isFileCreated = pdf.generatePDF(invoiceData, filePath + ".pdf");
+                if (isFileCreated) {
+                    JOptionPane.showMessageDialog(null, "File saved successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "File not saved");
+                }
+            } catch (DocumentException | IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+
     }//GEN-LAST:event_printActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
