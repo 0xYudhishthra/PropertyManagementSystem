@@ -22,7 +22,6 @@ public class securityGuardFileHandler extends FileHandler {
                 Map<Integer, Map<String, String>> passMap = new HashMap<>();
 
                 ArrayList<String> datas = readData(fileName, userRole);
-                System.out.println("test : " + datas);
                 //also get file header
                 ArrayList<String> fileHeader = getFileHeader(fileName, userRole);
                 int dataCount = 0;
