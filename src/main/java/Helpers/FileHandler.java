@@ -49,7 +49,6 @@ public class FileHandler implements IFileHandler {
             ArrayList<String> data = new ArrayList<>();
             //create a new java.io.BufferedReader to read the contents of the file
             java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
-            System.out.println("read: " + reader);
             //read the contents of the file and store it in the data variable
             String line;
             int count = 0;
@@ -176,6 +175,7 @@ public class FileHandler implements IFileHandler {
      */
     public boolean createData(String filename, HashMap<String, String> data, String userRole) throws Exception {
         try {
+            System.out.print("data " + data);
             java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
             //read the contents of the file and store it in the data variable
             String line;
@@ -240,8 +240,8 @@ public class FileHandler implements IFileHandler {
      */
     public boolean updateData(String filename, HashMap<Integer, HashMap<String, String>> data, String userRole) throws Exception {
         try {
-            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + "/" + filename + fileExtension));
-            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath + userRole + "/" + filename + ".temp", false)));
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath + userRole + File.separator + filename + fileExtension));
+            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath + userRole + File.separator + filename + ".temp", false)));
             String line;
             int lineNum = 0; // track line number
             while ((line = reader.readLine()) != null) {
@@ -285,11 +285,10 @@ public class FileHandler implements IFileHandler {
             reader.close();
             //close the writer
             writer.close();
-            File realName = new File(filePath + userRole + "/" + filename + fileExtension);
-            File oldName = new File(filePath + userRole + "/" + filename + fileExtension + ".tmp");
+            File realName = new File(filePath + userRole + File.separator + filename + fileExtension);
+            File oldName = new File(filePath + userRole + File.separator + filename + fileExtension + ".tmp");
             //add ".tmp" to the end of the filename
-            new File(filePath + userRole + "/" + filename + ".temp").renameTo(realName); // rename the new file to the filename the original file had.
-            System.out.println(oldName);
+            new File(filePath + userRole + File.separator + filename + ".temp").renameTo(realName); // rename the new file to the filename the original file had.
             oldName.delete();
             //if data has been written to the file, return true
             return true;
@@ -299,6 +298,7 @@ public class FileHandler implements IFileHandler {
         }
         return false;
     }
+
 }
 
 

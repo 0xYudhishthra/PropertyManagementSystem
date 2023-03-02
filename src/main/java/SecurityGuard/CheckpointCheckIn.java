@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package SecurityGuard;
-
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author User
@@ -15,6 +16,7 @@ public class CheckpointCheckIn extends javax.swing.JFrame {
      */
     public CheckpointCheckIn() {
         initComponents();
+        readcheckpointCheckInTable("");
     }
 
     /**
@@ -28,7 +30,7 @@ public class CheckpointCheckIn extends javax.swing.JFrame {
 
         jPasswordField1 = new javax.swing.JPasswordField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        checkpointCheckIn = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -39,18 +41,15 @@ public class CheckpointCheckIn extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        checkpointCheckIn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(checkpointCheckIn);
 
         jLabel1.setText("Code");
 
@@ -117,6 +116,38 @@ public class CheckpointCheckIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void readcheckpointCheckInTable(String query){
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> checkpointCheckIns = new securityGuardFileHandler().getData("checkpointCheckIn", "SecurityGuard");
+            //create a table model
+            DefaultTableModel model = (DefaultTableModel)checkpointCheckIn.getModel();
+            //clear the table
+            model.setRowCount(0);
+            //set header
+            String[] header = {"GUARD ID" , "CODE" , "LOCATION" , "DATE" };
+            model.setColumnIdentifiers(header);
+            if(query.equals("")){
+                for (Map.Entry<Integer, Map<String, String>> entry : checkpointCheckIns.entrySet()) {
+                    Map<String, String> checkpointCheckIn = entry.getValue();
+                    String[] row = {checkpointCheckIn.get("GUARD ID"), checkpointCheckIn.get("CODE"), checkpointCheckIn.get("LOCATION"), checkpointCheckIn.get("DATE")};
+                    model.addRow(row);
+                }
+            }
+            else{
+                for (Map.Entry<Integer, Map<String, String>> entry : checkpointCheckIns.entrySet()) {
+                    Map<String, String> checkpointCheckIn = entry.getValue();
+                    if(checkpointCheckIn.get("CODE").equals(query)){
+                        String[] row = {checkpointCheckIn.get("GUARD ID"), checkpointCheckIn.get("CODE"), checkpointCheckIn.get("LOCATION"), checkpointCheckIn.get("DATE")};
+                        model.addRow(row);
+                    }
+                }
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -165,12 +196,12 @@ public class CheckpointCheckIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JTable checkpointCheckIn;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

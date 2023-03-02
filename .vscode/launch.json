@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "manageVisitorEntry",
+            "request": "launch",
+            "mainClass": "SecurityGuard.manageVisitorEntry",
+            "projectName": "PropertyManagementSystem"
+        },
+        {
             "name": "Java",
             "type": "java",
             "request": "launch",
