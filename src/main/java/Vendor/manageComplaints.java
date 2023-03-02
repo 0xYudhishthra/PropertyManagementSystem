@@ -12,12 +12,13 @@ import java.util.Map;
 public class manageComplaints extends javax.swing.JFrame {
 
     Vendor.vendorFileHandler vendorFileHandler = new Vendor.vendorFileHandler();
+    String vendorID;
 
     /**
      * Creates new form manageComplaints
      */
-    public manageComplaints() {
-        initComponents();
+    public manageComplaints(String vendorID) {
+        initComponents(vendorID);
     }
 
     /**
@@ -27,7 +28,7 @@ public class manageComplaints extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String vendorID) {
 
         manageComplaintsScrollPane = new javax.swing.JScrollPane();
         manageComplaintsPanel = new javax.swing.JPanel();
@@ -322,7 +323,7 @@ public class manageComplaints extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         //close this window and bring back the previous one
         this.dispose();
-        new Dashboard().setVisible(true);
+        new Dashboard(vendorID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     /**
@@ -356,7 +357,7 @@ public class manageComplaints extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manageComplaints().setVisible(true);
+                new manageComplaints(null).setVisible(true);
             }
         });
     }

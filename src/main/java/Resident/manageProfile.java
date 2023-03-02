@@ -556,7 +556,7 @@ public class manageProfile extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // close this window and bring back the previous window
         this.dispose();
-        new Dashboard("RN001").setVisible(true);
+        new Dashboard(residentID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
@@ -614,7 +614,6 @@ public class manageProfile extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Profile has not been updated", "Profile Not Updated", JOptionPane.ERROR_MESSAGE);
             }
         }
-
 
     }//GEN-LAST:event_updateActionPerformed
 
