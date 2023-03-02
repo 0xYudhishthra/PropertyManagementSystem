@@ -398,7 +398,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                 entry.put("PLATE NUMBER", plateNumber);
                 entry.put("UNIT NUMBER", unitNumber);
 
-                boolean isDataUpdated = new securityGuardFileHandler().updateEntryV2(visitorEntryID, entry);
+                boolean isDataUpdated = new securityGuardFileHandler().updateEntry(visitorEntryID, entry);
 
                 if (isDataUpdated)
                     readVistorEntryTable("");
