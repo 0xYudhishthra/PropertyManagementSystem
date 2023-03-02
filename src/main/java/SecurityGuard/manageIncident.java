@@ -6,10 +6,13 @@ package SecurityGuard;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -77,8 +80,9 @@ public class manageIncident extends javax.swing.JFrame {
         UpdateIncidentLocation = new javax.swing.JTextField();
         UpdateIncidentDetails = new javax.swing.JTextField();
         UpdateIncidentCaused = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        update = new javax.swing.JButton();
+        IncidentID = new javax.swing.JLabel();
+        UpdateIncidentID = new javax.swing.JTextField();
         back = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -121,8 +125,20 @@ public class manageIncident extends javax.swing.JFrame {
             new String [] {
 
             }
-        ));
+
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        });
+        incidentRecord.setRowSelectionAllowed(false);
         incidentRecord.setShowGrid(true);
+        incidentRecord.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                incidentRecordMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(incidentRecord);
 
         jLabel2.setText("Date : ");
@@ -273,66 +289,71 @@ public class manageIncident extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Update");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Delete");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        IncidentID.setText("Incident ID: ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(UpdateIncidentDate, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                            .addComponent(UpdateIncidentName)
-                            .addComponent(UpdateIncidentPlateNumber)
-                            .addComponent(UpdateIncidentUnitNumber)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(52, 52, 52)
-                        .addComponent(UpdateIncidentLocation))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(18, 18, 18)
-                        .addComponent(UpdateIncidentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton4)
+                                .addComponent(jLabel16)
+                                .addGap(52, 52, 52)
+                                .addComponent(UpdateIncidentLocation))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(18, 18, 18)
+                                .addComponent(UpdateIncidentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(UpdateIncidentCaused))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(UpdateIncidentCaused))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(UpdateIncidentID, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                    .addComponent(UpdateIncidentDate, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                    .addComponent(UpdateIncidentName)
+                                    .addComponent(UpdateIncidentPlateNumber)
+                                    .addComponent(UpdateIncidentUnitNumber)))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(update))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(IncidentID)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IncidentID)
+                    .addComponent(UpdateIncidentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addComponent(UpdateIncidentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -362,11 +383,9 @@ public class manageIncident extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(UpdateIncidentCaused, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(update)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Update", jPanel3);
@@ -387,7 +406,7 @@ public class manageIncident extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(back)
-                        .addGap(129, 129, 129)
+                        .addGap(254, 254, 254)
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -422,12 +441,12 @@ public class manageIncident extends javax.swing.JFrame {
             //clear the table
             model.setRowCount(0);
             //set header
-            String[] header = {"DATE" , "NAME" , "PLATE NUMBER" , "UNIT NUMBER" , "LOCATION" , "INCIDENT DETAILS" , "INCIDENT CAUSED" };
+            String[] header = {"INCIDENT ID", "DATE" , "NAME" , "PLATE NUMBER" , "UNIT NUMBER" , "LOCATION" , "INCIDENT DETAILS" , "INCIDENT CAUSED" };
             model.setColumnIdentifiers(header);
             if(query.equals("")){
                 for (Map.Entry<Integer, Map<String, String>> entry : incidentRecords.entrySet()) {
                     Map<String, String> incidentRecord = entry.getValue();
-                    String[] row = {incidentRecord.get("DATE"), incidentRecord.get("NAME"), incidentRecord.get("PLATE NUMBER"), incidentRecord.get("UNIT NUMBER"), incidentRecord.get("LOCATION"), incidentRecord.get("INCIDENT DETAILS"), incidentRecord.get("INCIDENT CAUSED")};
+                    String[] row = {incidentRecord.get("INCIDENT ID"), incidentRecord.get("DATE"), incidentRecord.get("NAME"), incidentRecord.get("PLATE NUMBER"), incidentRecord.get("UNIT NUMBER"), incidentRecord.get("LOCATION"), incidentRecord.get("INCIDENT DETAILS"), incidentRecord.get("INCIDENT CAUSED")};
                     model.addRow(row);
                 }
             }
@@ -435,7 +454,7 @@ public class manageIncident extends javax.swing.JFrame {
                 for (Map.Entry<Integer, Map<String, String>> entry : incidentRecords.entrySet()) {
                     Map<String, String> incidentRecord = entry.getValue();
                     if(incidentRecord.get("NAME").equals(query)){
-                        String[] row = {incidentRecord.get("DATE"), incidentRecord.get("NAME"), incidentRecord.get("PLATE NUMBER"), incidentRecord.get("UNIT NUMBER"), incidentRecord.get("LOCATION"), incidentRecord.get("INCIDENT DETAILS"), incidentRecord.get("INCIDENT CAUSED")};
+                        String[] row = {incidentRecord.get("INCIDENT ID"), incidentRecord.get("DATE"), incidentRecord.get("NAME"), incidentRecord.get("PLATE NUMBER"), incidentRecord.get("UNIT NUMBER"), incidentRecord.get("LOCATION"), incidentRecord.get("INCIDENT DETAILS"), incidentRecord.get("INCIDENT CAUSED")};
                         model.addRow(row);
                     }
                 }
@@ -460,13 +479,54 @@ public class manageIncident extends javax.swing.JFrame {
         IncidentCaused.setText("");
     }//GEN-LAST:event_resetActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        String incidentID = IncidentID.getText();
+        Date date = IncidentDate.getDate();
+        String name = IncidentName.getText();
+        String plateNumber = IncidentPlateNumber.getText();
+        String unitNumber = IncidentUnitNumber.getText();
+        String location = IncidentLocation.getText();
+        String incidentDetails = IncidentDetails.getText();
+        String incidentCaused = IncidentCaused.getText();
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        if(date == null || name.equals("") || plateNumber.equals("") || unitNumber.equals("") || location.equals("") || incidentDetails.equals("") || incidentCaused.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill in all the fields");
+        }
+        else{
+            String dateStr = new SimpleDateFormat("dd-MM-yyyy").format(date);
+            try {
+                HashMap<String, String> entry = new HashMap<>();
+                entry.put("INCIDENT ID", incidentID);
+                entry.put("DATE", dateStr);
+                entry.put("NAME", name);
+                entry.put("PLATE NUMBER", plateNumber);
+                entry.put("UNIT NUMBER", unitNumber);
+                entry.put("LOCATION", location);
+                entry.put("INCIDENT DETAILS", incidentDetails);
+                entry.put("INCIDENT CAUSED", incidentCaused);
+
+                boolean isDataUpdated = new securityGuardFileHandler().updateIncident(incidentID, entry);
+
+                if (isDataUpdated)
+                    readIncidentRecordTable("");
+                    //clear the fields
+                    IncidentID.setText("");
+                    IncidentDate.setDate(null);
+                    IncidentName.setText("");
+                    IncidentPlateNumber.setText("");
+                    IncidentUnitNumber.setText("");
+                    IncidentLocation.setText("");
+                    IncidentDetails.setText("");
+                    IncidentCaused.setText("");
+                    //show success message
+                    JOptionPane.showMessageDialog(null, "Entry updated successfully");
+                    
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_updateActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
@@ -515,6 +575,31 @@ public class manageIncident extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UpdateIncidentUnitNumberActionPerformed
 
+    private void incidentRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_incidentRecordMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = incidentRecord.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)incidentRecord.getModel();
+        UpdateIncidentID.setText(model.getValueAt (selectedRow, 0).toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String incidentDateStr = model.getValueAt (selectedRow, 1).toString();
+
+        Date incidentDate = null;
+
+        try {
+            incidentDate = formatter.parse(incidentDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+        }
+
+        UpdateIncidentDate.setDate(incidentDate);
+        UpdateIncidentName.setText(model.getValueAt (selectedRow, 2).toString());
+        UpdateIncidentPlateNumber.setText(model.getValueAt (selectedRow, 3).toString());
+        UpdateIncidentUnitNumber.setText(model.getValueAt (selectedRow, 4).toString());
+        UpdateIncidentLocation.setText(model.getValueAt (selectedRow, 5).toString());
+        UpdateIncidentDetails.setText(model.getValueAt (selectedRow, 6).toString());
+        UpdateIncidentCaused.setText(model.getValueAt (selectedRow, 7).toString());
+    }//GEN-LAST:event_incidentRecordMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -554,6 +639,7 @@ public class manageIncident extends javax.swing.JFrame {
     private javax.swing.JTextField IncidentCaused;
     private com.toedter.calendar.JDateChooser IncidentDate;
     private javax.swing.JTextField IncidentDetails;
+    private javax.swing.JLabel IncidentID;
     private javax.swing.JTextField IncidentLocation;
     private javax.swing.JTextField IncidentName;
     private javax.swing.JTextField IncidentPlateNumber;
@@ -561,6 +647,7 @@ public class manageIncident extends javax.swing.JFrame {
     private javax.swing.JTextField UpdateIncidentCaused;
     private com.toedter.calendar.JDateChooser UpdateIncidentDate;
     private javax.swing.JTextField UpdateIncidentDetails;
+    private javax.swing.JTextField UpdateIncidentID;
     private javax.swing.JTextField UpdateIncidentLocation;
     private javax.swing.JTextField UpdateIncidentName;
     private javax.swing.JTextField UpdateIncidentPlateNumber;
@@ -568,8 +655,6 @@ public class manageIncident extends javax.swing.JFrame {
     private javax.swing.JButton add;
     private javax.swing.JButton back;
     private javax.swing.JTable incidentRecord;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -597,5 +682,6 @@ public class manageIncident extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton reset;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

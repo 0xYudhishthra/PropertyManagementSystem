@@ -22,7 +22,6 @@ public class securityGuardFileHandler extends FileHandler {
                 Map<Integer, Map<String, String>> passMap = new HashMap<>();
 
                 ArrayList<String> datas = readData(fileName, userRole);
-                System.out.println("test : " + datas);
                 //also get file header
                 ArrayList<String> fileHeader = getFileHeader(fileName, userRole);
                 int dataCount = 0;
@@ -182,26 +181,23 @@ public class securityGuardFileHandler extends FileHandler {
         }
     }
 
-    public void updateEntry(String date, String name, String phoneNumber, String plateNumber, String unitNumber) {
+    public void addNewCheckIn(String UID, String Code, String Date) {
         try {
             //create a new map to store the data
-            HashMap<Integer, HashMap<String, String>> data = new HashMap<>();
+            HashMap<String, String> data = new HashMap<>();
             //add the data to the map
-            HashMap<String, String> entry = new HashMap<>();
-            entry.put("DATE", date);
-            entry.put("NAME", name);
-            entry.put("PHONE NUMBER", phoneNumber);
-            entry.put("PLATE NUMBER", plateNumber);
-            entry.put("UNIT NUMBER", unitNumber);
-
+            data.put("GUARD ID", UID);
+            data.put("CODE", Code);
+            data.put("DATE", Date);
+            //call the createData function to create the data
+            createData("checkpointCheckIn", data, "SecurityGuard");
             
-
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    public boolean updateEntryV2(String visitorEntryID, HashMap<String, String> visitorEntryDetails) {
+    public boolean updateEntry(String visitorEntryID, HashMap<String, String> visitorEntryDetails) {
         {
 
             try {
@@ -314,5 +310,114 @@ public class securityGuardFileHandler extends FileHandler {
         }
     }
 
+    public boolean updateIncident(String incidentID, HashMap<String, String> incidentEntryDetails) {
+        {
+
+            try {
+                HashMap<Integer, HashMap<String, String>> incidentEntryMap = new HashMap<>();
+
+                ArrayList<String> passes = readData("incidentRecord", "SecurityGuard");
+                ArrayList<String> passesFileHeader = getFileHeader("visitorEntry", "SecurityGuard");
+
+                int incidentCount = 0;
+                for (String pass : passes) {
+                    HashMap<String, String> incidentDetailsLocal = new HashMap<>();
+                    //get the last index of the complaint, which is the status of the complaint
+                    String[] incidentDetailsArray = pass.split(dataSeparator);
+                    String incidentIDFromText = incidentDetailsArray[0];
+                    int count = 0;
+                    int columnCount = 0;
+
+                    for (int i = 0; i < pass.length(); i++) {
+                        if (pass.charAt(i) == dataSeparator.charAt(1)) {
+                            //this means that there is data before the data separator
+                            //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
+                            //get the value to start iterating from backwards, which is the index of the data separator - 1
+                            int start = i - 2;
+                            //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
+                            int end = start - count + 2;
+
+                            //create temp string to store the data
+                            StringBuilder temp = new StringBuilder();
+                            //iterate through the string backwards
+                            for (int j = start; j >= end; j--) {
+                                //add the char to the temp string
+                                temp.append(pass.charAt(j));
+                            }
+                            //reverse the string
+                            StringBuilder sb = new StringBuilder(temp.toString());
+                            sb.reverse();
+                            //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
+                            for (int k = 0; k < sb.length(); k++) {
+                                if (sb.charAt(k) == dataSeparator.charAt(1)) {
+                                    sb.deleteCharAt(k);
+                                }
+                            }
+                            //remove any space from the first index of the string
+                            if (sb.charAt(0) == ' ') {
+                                sb.deleteCharAt(0);
+                            }
+
+                            incidentDetailsLocal.put(passesFileHeader.get(columnCount), sb.toString());
+                            //reset the count
+                            count = 0;
+                            columnCount++;
+
+                        }
+
+                        //if we are reaching the last element in the line, then we need to add the last element to the map
+                        if (i == pass.length() - 1) {
+                            //get the value to start iterating from backwards, which is the index of the data separator - 1
+                            int start = i - count + 2;
+                            //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
+
+                            //create temp string to store the data
+                            StringBuilder temp = new StringBuilder();
+                            //iterate through the string backwards
+                            for (int j = i; j >= start; j--) {
+                                //add the char to the temp string
+                                temp.append(pass.charAt(j));
+                            }
+                            //reverse the string
+                            StringBuilder sb = new StringBuilder(temp.toString());
+                            sb.reverse();
+                            columnCount++;
+                            incidentDetailsLocal.put(passesFileHeader.get(columnCount - 1), sb.toString());
+                            columnCount++;
+                        }
+
+                        count++;
+                    }
+                    incidentCount++;
+                    incidentEntryMap.put(incidentCount, incidentDetailsLocal);
+                }
+
+                //now that we have the profile map, we just need to find the profile that matches the residentID, and update the profile
+                for (int i = 1; i <= incidentEntryMap.size(); i++) {
+                    HashMap<String, String> visitorEntryDetailsMap = incidentEntryMap.get(i);
+                    String visitorEntryIDFromMap = visitorEntryDetailsMap.get("VISITOR ENTRY ID");
+                    System.out.println("visitorEntryIDFromMap: " + visitorEntryIDFromMap + " incidentID: " + incidentID);
+                    if (visitorEntryIDFromMap.equals(incidentID)) {
+                        //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
+                        //then we would update the profileMap with the profileDetailsMap
+                        for (String key : incidentEntryDetails.keySet()) {
+                            visitorEntryDetailsMap.put(key, incidentEntryDetails.get(key));
+                        }
+                        incidentEntryMap.put(i, visitorEntryDetailsMap);
+                    }
+                }
+
+                //now that we have the updated profileMap, we need to write the data to the file
+                boolean isVisitorEntryUpdated = updateData("incidentEntry", incidentEntryMap, "SecurityGuard");
+                if (isVisitorEntryUpdated) {
+                    return true;
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+
+            return false;
+        }
+    }
 
 }
