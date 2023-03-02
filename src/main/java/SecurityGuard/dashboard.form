@@ -48,15 +48,15 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton2" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                  <Component id="jButton6" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                  <Component id="managevisitorpass" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                  <Component id="managecheckpoint" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton3" pref="175" max="32767" attributes="0"/>
-                  <Component id="jButton4" max="32767" attributes="0"/>
+                  <Component id="managevisitorentry" pref="175" max="32767" attributes="0"/>
+                  <Component id="manageincident" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
@@ -73,16 +73,16 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton4" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="jButton6" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="manageincident" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="managecheckpoint" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton2" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="jButton3" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="managevisitorpass" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="managevisitorentry" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
                   </Group>
@@ -105,28 +105,37 @@
         <Property name="text" type="java.lang.String" value="what do you want to access today?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="managevisitorpass">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Visitor Pass"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managevisitorpassActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton6">
+    <Component class="javax.swing.JButton" name="managecheckpoint">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Checkpoint"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managecheckpointActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="managevisitorentry">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Visitor Entry"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managevisitorentryActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="manageincident">
       <Properties>
-        <Property name="text" type="java.lang.String" value=" Record Incident"/>
+        <Property name="text" type="java.lang.String" value=" Manage Incident"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageincidentActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

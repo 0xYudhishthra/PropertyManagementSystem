@@ -4,6 +4,9 @@
  */
 package SecurityGuard;
 
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
@@ -15,7 +18,10 @@ public class manageVisitorPass extends javax.swing.JFrame {
      */
     public manageVisitorPass() {
         initComponents();
+        readVisitorPassTable("");
     }
+
+    SecurityGuard.securityGuardFileHandler sgfh = new securityGuardFileHandler();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,66 +34,145 @@ public class manageVisitorPass extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        visitorPassTable = new javax.swing.JTable();
+        back = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Manage Visitor Pass");
 
-        jButton1.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        jButton1.setText("Search");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        visitorPassTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(visitorPassTable);
+
+        back.setText("back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(back)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1)))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel1)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(searchButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearButton)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(back))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchButton)
+                        .addComponent(clearButton)))
+                .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    //Put data into table
+    private void readVisitorPassTable(String query) {
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> visitorPasses = new securityGuardFileHandler().getData("residentVisitorPass","resident");
+            //create a table model
+            DefaultTableModel model = (DefaultTableModel)visitorPassTable.getModel();
+            //clear the table
+            model.setRowCount(0);
+            //set header
+            String[] header = {"RESIDENT ID" , "VISITOR NAME" , "VEHICLE NUMBER" ,  "PURPOSE" , "DATE OF VISIT" , "VISITOR PASS NUMBER"};
+            model.setColumnIdentifiers(header);
+            if(query.equals("")){
+                for (Map.Entry<Integer, Map<String, String>> entry : visitorPasses.entrySet()) {
+                    Map<String, String> visitorPass = entry.getValue();
+                    System.out.println(visitorPass);
+                    String[] row = {visitorPass.get("RESIDENT ID"), visitorPass.get("VISITOR NAME"), visitorPass.get("VEHICLE NUMBER"), visitorPass.get("PURPOSE"), visitorPass.get("DATE OF VISIT"), visitorPass.get("VISITOR PASS NUMBER")};
+                    model.addRow(row);
+                }
+            }
+            else{
+                for (Map.Entry<Integer, Map<String, String>> entry : visitorPasses.entrySet()) {
+                    Map<String, String> visitorPass = entry.getValue();
+                    if(visitorPass.get("RESIDENT ID").toLowerCase().contains(query.toLowerCase()) || visitorPass.get("VISITOR NAME").toLowerCase().contains(query.toLowerCase()) || visitorPass.get("VEHICLE NUMBER").toLowerCase().contains(query.toLowerCase()) || visitorPass.get("PURPOSE").toLowerCase().contains(query.toLowerCase()) || visitorPass.get("DATE OF VISIT").toLowerCase().contains(query.toLowerCase()) || visitorPass.get("VISITOR PASS NUMBER").toLowerCase().contains(query.toLowerCase())){
+                        String[] row = {visitorPass.get("RESIDENT ID"), visitorPass.get("VISITOR NAME"), visitorPass.get("VEHICLE NUMBER"), visitorPass.get("PURPOSE"), visitorPass.get("DATE OF VISIT"), visitorPass.get("VISITOR PASS NUMBER")};
+                        model.addRow(row);
+                    }
+                }
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        dashboard vp = new dashboard();
+        vp.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_backActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        readVisitorPassTable(jTextField1.getText());
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        // TODO add your handling code here:
+        jTextField1.setText("");
+        readVisitorPassTable("");
+    }//GEN-LAST:event_clearButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,10 +210,12 @@ public class manageVisitorPass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton back;
+    private javax.swing.JButton clearButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTable visitorPassTable;
     // End of variables declaration//GEN-END:variables
 }
