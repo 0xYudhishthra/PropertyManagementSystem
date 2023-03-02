@@ -4,6 +4,12 @@
  */
 package Vendor;
 
+import Helpers.ComplaintStatus;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -29,6 +35,8 @@ public class manageComplaints extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents(String vendorID) {
+
+        this.vendorID = vendorID;
 
         manageComplaintsScrollPane = new javax.swing.JScrollPane();
         manageComplaintsPanel = new javax.swing.JPanel();
@@ -64,7 +72,6 @@ public class manageComplaints extends javax.swing.JFrame {
         complaintNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         complaintNumberTitle.setText("Complaint Number");
 
-        complaintNumberInput.setText("jTextField1");
         complaintNumberInput.setEnabled(false);
 
         delete.setBackground(new java.awt.Color(255, 51, 51));
@@ -134,7 +141,10 @@ public class manageComplaints extends javax.swing.JFrame {
         complaintDateTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         complaintDateTitle.setText("Complaint Date");
 
-        complaintDetailsInput.setText("jTextField4");
+        //set todays date in ddmmyyyy format
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+        complaintDateInput.setText(formatter.format(date));
 
         log.setBackground(new java.awt.Color(51, 255, 102));
         log.setText("LOG");
@@ -143,8 +153,6 @@ public class manageComplaints extends javax.swing.JFrame {
                 logActionPerformed(evt);
             }
         });
-
-        complaintDateInput.setText("jTextField4");
 
         viewPastComplaintsTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -309,15 +317,109 @@ public class manageComplaints extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        // TODO add your handling code here:
+        //check if a row is selected
+        if (pendingComplaintsTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a row to cancel");
+            return;
+        }
+
+        //check if the row is empty
+        if (pendingComplaintsTable.getValueAt(pendingComplaintsTable.getSelectedRow(), 0) == null) {
+            JOptionPane.showMessageDialog(null, "Please select a row to cancel");
+            return;
+        }
+
+        //get confirmation from the user
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this complaint?", "Warning", JOptionPane.YES_NO_OPTION);
+
+        //if the user clicks yes
+        if(dialogResult == JOptionPane.YES_OPTION){
+            //get the visitor pass number
+            String complaintNumber = pendingComplaintsTable.getValueAt(pendingComplaintsTable.getSelectedRow(), 2).toString();
+            //cancel the visitor pass
+            vendorFileHandler.deleteComplaint(vendorID, complaintNumber);
+            //show a success message
+            JOptionPane.showMessageDialog(null, "Complaint deleted successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            //reload the frame
+            new manageComplaints(vendorID).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_deleteActionPerformed
 
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        // TODO add your handling code here:
+    private void updateActionPerformed(ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        if (pendingComplaintsTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a booking to update");
+            return;
+        }
+
+        //if selected row is null, tell the user to select a row with a booking
+        if (pendingComplaintsTable.getValueAt(pendingComplaintsTable.getSelectedRow(), 0) == null) {
+            JOptionPane.showMessageDialog(null, "Please select a booking to update");
+            return;
+        }
+
+        //get the booking number of the selected row
+        String dateOfComplaint = pendingComplaintsTable.getValueAt(pendingComplaintsTable.getSelectedRow(), 0).toString();
+        String description = pendingComplaintsTable.getValueAt(pendingComplaintsTable.getSelectedRow(), 1).toString();
+        String complaintNumber = pendingComplaintsTable.getValueAt(pendingComplaintsTable.getSelectedRow(), 2).toString();
+        String status = pendingComplaintsTable.getValueAt(pendingComplaintsTable.getSelectedRow(), 3).toString();
+
+        new updateComplaints(vendorID, complaintDateInput.getText(), complaintDetailsInput.getText(), status, complaintNumber).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_updateActionPerformed
 
+
     private void logActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logActionPerformed
-        // TODO add your handling code here:
+        //make sure all fields are filled
+        //first check if all the fields are filled, and only one facility is selected
+        if (complaintDetailsInput.getText().equals("") || complaintDateInput.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please fill in all the fields");
+            return;
+        }
+
+        //check the format of the date, it must be in ddmmyyyy
+        if (complaintDateInput.getText().length() != 8) {
+            JOptionPane.showMessageDialog(null, "Please enter the date in the format ddmmyyyy");
+            return;
+        }
+
+        //the dd, mm and yyyy must be valid
+        int day = Integer.parseInt(complaintDateInput.getText().substring(0, 2));
+        int month = Integer.parseInt(complaintDateInput.getText().substring(2, 4));
+        int year = Integer.parseInt(complaintDateInput.getText().substring(4, 8));
+        if (day < 1 || day > 31 || month < 1 || month > 12 || year < 2023 || year > 2023) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid date");
+            return;
+        }
+
+        //get the new visitor pass number
+        String newComplaintNumber = vendorFileHandler.getNewComplaintNumber(vendorID);
+
+        vendorFileHandler.addComplaint(
+                vendorID,
+                //get the selected facility
+                complaintDateInput.getText().toUpperCase(),
+                complaintDetailsInput.getText().toString(),
+                ComplaintStatus.PENDING.toString().toUpperCase(),
+                newComplaintNumber
+        );
+
+        //sleep for 2 seconds
+        try {
+            log.setEnabled(false);
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            System.out.println(ex);
+        }
+        //fill up the receipt number label
+        complaintNumberInput.setText(newComplaintNumber);
+        //enable the print button
+        log.setEnabled(true);
+        //show a success message
+        JOptionPane.showMessageDialog(null, "Complaint logged successfully, your complaint number is " + newComplaintNumber, "Success", JOptionPane.INFORMATION_MESSAGE);
+        //reload the frame
+        new manageComplaints(vendorID).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_logActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
