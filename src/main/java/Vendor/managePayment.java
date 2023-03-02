@@ -12,12 +12,13 @@ import java.util.Map;
 public class managePayment extends javax.swing.JFrame {
 
     Vendor.vendorFileHandler vendorFileHandler = new Vendor.vendorFileHandler();
+    String vendorID;
 
     /**
      * Creates new form makePayment
      */
-    public managePayment() {
-        initComponents();
+    public managePayment(String vendorID) {
+        initComponents(vendorID);
     }
 
     /**
@@ -27,7 +28,9 @@ public class managePayment extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String vendorID) {
+
+        this.vendorID = vendorID;
 
         managePaymentsTitle = new javax.swing.JLabel();
         back = new javax.swing.JButton();
@@ -435,7 +438,7 @@ public class managePayment extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         //close this window and bring back the previous one
         this.dispose();
-        new Dashboard().setVisible(true);
+        new Dashboard(vendorID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
@@ -475,7 +478,7 @@ public class managePayment extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new managePayment().setVisible(true);
+                new managePayment(null).setVisible(true);
             }
         });
     }

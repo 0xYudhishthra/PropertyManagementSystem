@@ -5,7 +5,21 @@
 package Vendor;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,12 +28,15 @@ import java.util.Map;
 public class manageProfile extends javax.swing.JFrame {
 
     Vendor.vendorFileHandler vendorFileHandler = new vendorFileHandler();
+    String vendorID;
+
+    ArrayList<String> textFields = new ArrayList<>();
 
     /**
      * Creates new form Profile
      */
-    public manageProfile() {
-        initComponents();
+    public manageProfile(String vendorID) {
+        initComponents(vendorID);
     }
 
     /**
@@ -29,7 +46,9 @@ public class manageProfile extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String vendorID) {
+
+        this.vendorID = "VN001";
 
         manageProfileScrollPane = new javax.swing.JScrollPane();
         manageProfilePanel = new javax.swing.JPanel();
@@ -361,6 +380,144 @@ public class manageProfile extends javax.swing.JFrame {
             }
         });
 
+        profilePicture.addMouseListener(new MouseAdapter() {
+
+            private Icon ResizeImage(String path) {
+                ImageIcon MyImage = new ImageIcon(path);
+                Image img = MyImage.getImage();
+                Image newImg = img.getScaledInstance(125, 200, Image.SCALE_SMOOTH);
+                ImageIcon image = new ImageIcon(newImg);
+                profilePicture.setIcon(image);
+                return image;
+            }
+            public void mouseClicked(MouseEvent evt) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "gif", "png");
+                fileChooser.addChoosableFileFilter(filter);
+                int result = fileChooser.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    String path = selectedFile.getAbsolutePath();
+                    profilePicture.setIcon(ResizeImage(path));
+                    textFields.add("Profile Picture");
+                    //copy the image to the images folder
+                    try {
+                        //the directory with pictures is located at the resources folder that is located at the same level as the java folder
+                        //get the base path of the project, then add the path to the images folder
+                        Path source = selectedFile.toPath();
+                        //get the full absolute path leading up to the java folder
+                        String basePath = new File("").getAbsolutePath();
+                        Path target = new File(basePath + "/src/main/resources/Resident/ProfilePictures/" + usernameInput.getText() + "_" + new SimpleDateFormat("ddMMyyyy").format(new Date()) + ".jpg").toPath();
+                        Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if (result == JFileChooser.CANCEL_OPTION) {
+                    System.out.println("No Data");
+                    textFields.remove("Profile Picture");
+                }
+            }
+        });
+
+        //use a different action listener, one that checks if there is a value change in the text field
+        nameInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Name");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Name");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Name");
+            }
+        });
+
+        contactNumberInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Contact Number");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Contact Number");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Contact Number");
+            }
+        });
+
+        emailInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Email");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Email");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Email");
+            }
+        });
+
+        nationalityInput1.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Business Reg Number");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Business Reg Number");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Businesss Reg Number");
+            }
+        });
+
+        buildingInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Building");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Building");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Building");
+            }
+        });
+
+        unitNameInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Unit Name");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Unit Name");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Unit Name");
+            }
+        });
+
+        usernameInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Username");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Username");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Username");
+            }
+        });
+
+        passwordInput.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                textFields.add("Password");
+            }
+            public void removeUpdate(DocumentEvent e) {
+                textFields.add("Password");
+            }
+            public void insertUpdate(DocumentEvent e) {
+                textFields.add("Password");
+            }
+        });
+
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -393,11 +550,63 @@ public class manageProfile extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         //close this window and bring back the previous one
         this.dispose();
-        new Dashboard().setVisible(true);
+        new Dashboard(vendorID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        // TODO add your handling code here:
+        ArrayList<String> changedFields = new ArrayList<String>();
+        //if changedfields is empty, return a message saying that no fields have been changed
+        if (textFields.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No fields have been changed", "No Changes", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        for (String field : textFields) {
+            if (!changedFields.contains(field)) {
+                changedFields.add(field);
+            }
+        }
+        ///generate a string of all the changed fields
+        String changedFieldsString = "";
+        for (String field : changedFields) {
+            changedFieldsString += field + ", ";
+        }
+        //remove the last comma and space
+        changedFieldsString = changedFieldsString.substring(0, changedFieldsString.length() - 2);
+        //ask the user to confirm the changes
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update the following fields: " + changedFieldsString + "?", "Confirm Changes", JOptionPane.YES_NO_OPTION);
+
+        //if the user confirms the changes, update the database
+        if (confirm == 0) {
+            //if profile picture is changed, upload the new image to the database
+            //pass a HashMap<String, String> of all the details in the dashboard to the update method
+            HashMap<String, String> details = new HashMap<String, String>();
+            details.put("VENDOR ID", vendorID);
+            details.put("RESIDENT NAME", nameInput.getText());
+            details.put("CONTACT NUMBER", contactNumberInput.getText());
+            details.put("EMAIL", emailInput.getText());
+            details.put("BUILDING", buildingInput.getText());
+            details.put("UNIT NAME", unitNameInput.getText());
+            details.put("MOVE-IN DATE", moveInDateInput.getText());
+            if (textFields.contains("Profile Picture")) {
+                details.put("PROFILE PICTURE", usernameInput.getText() + "_" + new SimpleDateFormat("ddMMyyyy").format(new Date()) + ".jpg");
+            }
+            details.put("USERNAME", usernameInput.getText());
+            details.put("PASSWORD", passwordInput.getText());
+            details.put("BUSINESS REG NUMBER", nationalityInput1.getText());
+
+            //update the database
+            boolean isProfileUpdated = vendorFileHandler.updateProfile(vendorID, details);
+
+            //if true, return a message saying that the profile has been updated
+            if (isProfileUpdated) {
+                JOptionPane.showMessageDialog(null, "Profile has been updated", "Profile Updated", JOptionPane.INFORMATION_MESSAGE);
+                //close this window and bring back the previous window
+                this.dispose();
+                new Resident.manageProfile(vendorID).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Profile has not been updated", "Profile Not Updated", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_updateActionPerformed
 
     /**
@@ -433,7 +642,7 @@ public class manageProfile extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manageProfile().setVisible(true);
+                new manageProfile(null).setVisible(true);
             }
         });
     }

@@ -14,12 +14,13 @@ import java.util.Map;
 public class Dashboard extends javax.swing.JFrame {
 
     Vendor.vendorFileHandler vendorFileHandler = new Vendor.vendorFileHandler();
+    String vendorID;
 
     /**
      * Creates new form Dasboard
      */
-    public Dashboard() {
-        initComponents();
+    public Dashboard(String vendorID) {
+        initComponents(vendorID);
     }
 
     /**
@@ -29,7 +30,9 @@ public class Dashboard extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String vendorID) {
+
+        this.vendorID = "VN001";
 
         profilePicture = new javax.swing.JLabel();
         greetingPrompt = new javax.swing.JLabel();
@@ -41,7 +44,7 @@ public class Dashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         try {
-            Map<String, String> profileData = vendorFileHandler.getProfileDetails("VN001");
+            Map<String, String> profileData = vendorFileHandler.getProfileDetails(vendorID);
             for (Map.Entry<String, String> entry : profileData.entrySet()) {
                 switch (entry.getKey()) {
                     case "PROFILE PICTURE":
@@ -66,7 +69,7 @@ public class Dashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 //close this frame and bring up the profile page
                 dispose();
-                new manageProfile().setVisible(true);
+                new manageProfile(vendorID).setVisible(true);
             }
         });
 
@@ -157,14 +160,14 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void managePaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePaymentsActionPerformed
         // close this window and bring up the manage payments window
-        managePayment managePayment = new managePayment();
+        managePayment managePayment = new managePayment(vendorID);
         managePayment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_managePaymentsActionPerformed
 
     private void manageComplaintsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageComplaintsActionPerformed
         // close this window and bring up the manage complaints window
-        manageComplaints manageComplaints = new manageComplaints();
+        manageComplaints manageComplaints = new manageComplaints(vendorID);
         manageComplaints.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_manageComplaintsActionPerformed
@@ -206,7 +209,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                new Dashboard(null).setVisible(true);
             }
         });
     }
