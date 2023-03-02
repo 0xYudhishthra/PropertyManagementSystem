@@ -22,6 +22,12 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents(residentID);
     }
 
+    public Dashboard(String UID) {
+        // Get Customer Information from Login, then initialize
+        initComponents();
+        this.setLocationRelativeTo(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
