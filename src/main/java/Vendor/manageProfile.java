@@ -408,7 +408,7 @@ public class manageProfile extends javax.swing.JFrame {
                         Path source = selectedFile.toPath();
                         //get the full absolute path leading up to the java folder
                         String basePath = new File("").getAbsolutePath();
-                        Path target = new File(basePath + "/src/main/resources/Resident/ProfilePictures/" + usernameInput.getText() + "_" + new SimpleDateFormat("ddMMyyyy").format(new Date()) + ".jpg").toPath();
+                        Path target = new File(basePath + "/src/main/resources/Vendor/ProfilePictures/" + usernameInput.getText() + "_" + new SimpleDateFormat("ddMMyyyy").format(new Date()) + ".jpg").toPath();
                         Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -565,6 +565,16 @@ public class manageProfile extends javax.swing.JFrame {
                 changedFields.add(field);
             }
         }
+
+        //remove duplicate fields
+        for (int i = 0; i < changedFields.size(); i++) {
+            for (int j = i + 1; j < changedFields.size(); j++) {
+                if (changedFields.get(i).equals(changedFields.get(j))) {
+                    changedFields.remove(j);
+                }
+            }
+        }
+
         ///generate a string of all the changed fields
         String changedFieldsString = "";
         for (String field : changedFields) {
@@ -594,6 +604,7 @@ public class manageProfile extends javax.swing.JFrame {
             details.put("PASSWORD", passwordInput.getText());
             details.put("BUSINESS REG NUMBER", nationalityInput1.getText());
 
+            System.out.println(details);
             //update the database
             boolean isProfileUpdated = vendorFileHandler.updateProfile(vendorID, details);
 
@@ -602,7 +613,7 @@ public class manageProfile extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Profile has been updated", "Profile Updated", JOptionPane.INFORMATION_MESSAGE);
                 //close this window and bring back the previous window
                 this.dispose();
-                new Resident.manageProfile(vendorID).setVisible(true);
+                new manageProfile(vendorID).setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Profile has not been updated", "Profile Not Updated", JOptionPane.ERROR_MESSAGE);
             }

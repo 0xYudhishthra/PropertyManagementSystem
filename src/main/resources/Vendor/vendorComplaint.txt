@@ -4,7 +4,5 @@ VENDOR COMPLAINT DETAILS
 THIS FILE STORES VENDOR COMPLAINT DETAILS
 STORE FORMAT: <VENDOR ID> | <DATE OF COMPLAINT> | <DESCRIPTION> | <COMPLAINT NUMBER> | <STATUS>
 _____________________
-VN001 | 01022023 | Leakage in office | C001 | Pending
-VN001 | 01022023 | Leakage in office | C001 | Resolved
-VN002 | 01022023 | Leakage in office | C001 | Resolved
+VN001 | 02032023 | my office is broken | C1 | PENDING
 

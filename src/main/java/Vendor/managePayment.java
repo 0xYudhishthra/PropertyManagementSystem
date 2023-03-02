@@ -4,6 +4,7 @@
  */
 package Vendor;
 
+import javax.swing.*;
 import java.util.Map;
 
 /**
@@ -79,12 +80,9 @@ public class managePayment extends javax.swing.JFrame {
         amountToPayTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         amountToPayTitle.setText("Amount to Pay");
 
-        makePaymentInput.setText("jTextField1");
-
         receiptNumberTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         receiptNumberTitle.setText("Receipt Number");
 
-        receiptNumberOutput.setText("jTextField1");
         receiptNumberOutput.setEnabled(false);
 
         pay.setBackground(new java.awt.Color(51, 255, 102));
@@ -106,6 +104,14 @@ public class managePayment extends javax.swing.JFrame {
 
         viewPaymentHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
                         {null, null, null, null, null},
                         {null, null, null, null, null},
                         {null, null, null, null, null},
@@ -155,6 +161,13 @@ public class managePayment extends javax.swing.JFrame {
 
         viewInvoiceTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null},
@@ -208,6 +221,14 @@ public class managePayment extends javax.swing.JFrame {
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
                         {null, null, null, null, null, null}
                 },
                 new String[]{
@@ -249,6 +270,14 @@ public class managePayment extends javax.swing.JFrame {
 
         viewStatementTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
@@ -432,8 +461,93 @@ public class managePayment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payActionPerformed
-        // TODO add your handling code here:
+        if (makePaymentInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount and amount paid is numeric
+        try {
+            Double.parseDouble(makePaymentInput.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure amount and amount paid is non-negative
+        if (Double.parseDouble(makePaymentInput.getText()) < 0) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //make sure total amount due is not 0
+        if (Double.parseDouble(outstandingFeeOutput.getText().replace("MYR", "")) == 0) {
+            JOptionPane.showMessageDialog(null, "Outstanding fee is 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //amount should be equal or more than the amount paid
+        if (Double.parseDouble(makePaymentInput.getText()) > Double.parseDouble(outstandingFeeOutput.getText().replace("MYR", ""))) {
+            JOptionPane.showMessageDialog(null, "Amount paid should be equal or less than the outstanding amount", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //after user clicks this button, a series of steps will occur
+        //we will first create a new statement record, then create a new invoice record, then create a new receipt record, get the receipt id, and then add a new payment record with the receipt id
+        //get the new total amount due by subtracting the amount paid from the total amount due
+        double newTotalAmountDue = Double.parseDouble(outstandingFeeOutput.getText().replace("MYR", "")) - Double.parseDouble(makePaymentInput.getText());
+        //cast the above double to a string with "MYR" in front
+        String newTotalAmountDueString = "MYR " + String.valueOf(newTotalAmountDue);
+
+        String newStatementID = vendorFileHandler.addStatement(
+                vendorID,
+                "Resident payment",
+                makePaymentInput.getText().strip(),
+                newTotalAmountDueString);
+
+        String newInvoiceID = vendorFileHandler.addInvoice(
+                vendorID,
+                makePaymentInput.getText().strip()
+        );
+
+        System.out.println("newInvoiceID: " + newInvoiceID);
+
+        String newReceiptID = vendorFileHandler.addReceipt(
+                vendorID,
+                newInvoiceID,
+                newStatementID,
+                outstandingFeeOutput.getText().strip(),
+                makePaymentInput.getText().strip()
+        );
+
+        vendorFileHandler.addPayment(
+                vendorID,
+                outstandingFeeOutput.getText().strip(),
+                makePaymentInput.getText().strip(),
+                "MYR " + String.valueOf(Double.parseDouble(outstandingFeeOutput.getText().strip().replace("MYR", "")) - Double.parseDouble(makePaymentInput.getText().strip())),
+                newReceiptID
+        );
+
+        //sleep for 2 seconds
+        try {
+            pay.setEnabled(false);
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            System.out.println(ex);
+        }
+        //fill up the receipt number label
+        receiptNumberOutput.setText(newReceiptID);
+        //enable the print button
+        print.setEnabled(true);
+        pay.setEnabled(true);
+        //show a success message
+        JOptionPane.showMessageDialog(null, "Payment recorded successfully, your receipt number is " + newReceiptID, "Success", JOptionPane.INFORMATION_MESSAGE);
+        makePaymentInput.setText("");
+        //reload the frame
+        new managePayment(vendorID).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_payActionPerformed
+
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         //close this window and bring back the previous one
