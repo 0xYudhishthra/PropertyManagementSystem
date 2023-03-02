@@ -11,3 +11,6 @@ _____________________
 01032023 | John Doe | RN001 | Parkhill Residence | Unit A-103 | Resident payment | MYR 250 | MYR 250.0 | ST2
 02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | Resident payment | MYR 200 | MYR 50.0 | ST3
 02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | Resident payment | MYR 22 | MYR 28.0 | ST4
+02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | Monthly payment | MYR 20 | MYR 8.0 | ST5
+02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | Dues | MYR 1 | MYR 7.0 | ST6
+02032023 | Adam Soon | RN001 | Parkhill Residence | Unit A-103 | pls work | MYR 1 | MYR 6.0 | ST7
