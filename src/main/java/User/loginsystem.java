@@ -122,6 +122,8 @@ public class loginsystem extends javax.swing.JFrame {
             }
         });
 
+        visitor.setBackground(new java.awt.Color(204, 255, 204));
+        visitor.setForeground(new java.awt.Color(0, 102, 102));
         visitor.setText("Visitor");
         visitor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,6 +226,24 @@ public class loginsystem extends javax.swing.JFrame {
              System.out.println(loginStat[1]);
             Vendor.Dashboard Vendor  = new Vendor.Dashboard(loginStat[1]);
             Vendor.setVisible(true);
+            this.dispose();
+        }
+        else if(loginStat[0] == "AdminExecutive"){
+            System.out.println(loginStat[1]);
+            AdminExecutive.Dashboard AdminExecutive  = new AdminExecutive.Dashboard(loginStat[1]);
+            AdminExecutive.setVisible(true);
+           this.dispose();
+        }
+        else if(loginStat[0] == "BuildingManager"){
+            System.out.println(loginStat[1]);
+            BuildingManager.Dashboard BuildingManager  = new BuildingManager.Dashboard(loginStat[1]);
+            BuildingManager.setVisible(true);
+            this.dispose();
+        }
+        else if(loginStat[0] == "BuildingExecutive"){
+            System.out.println(loginStat[1]);
+            BuildingExecutive.Dashboard BuildingExecutive = new BuildingExecutive.Dashboard(loginStat[1]);
+            BuildingExecutive.setVisible(true);
             this.dispose();
         }
 
