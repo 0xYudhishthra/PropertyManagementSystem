@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package AccountExecutive;
+package User;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,10 +35,11 @@ public class loginsystem extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        LoginUsername = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
+        loginButton = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        visitor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -86,36 +89,43 @@ public class loginsystem extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(236, 240, 241));
         jLabel4.setText("Password:");
 
-        jTextField1.setBackground(new java.awt.Color(152, 159, 167));
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(250, 248, 246));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        LoginUsername.setBackground(new java.awt.Color(152, 159, 167));
+        LoginUsername.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        LoginUsername.setForeground(new java.awt.Color(250, 248, 246));
+        LoginUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                LoginUsernameActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setBackground(new java.awt.Color(152, 159, 167));
-        jPasswordField1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(250, 248, 246));
+        password.setBackground(new java.awt.Color(152, 159, 167));
+        password.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        password.setForeground(new java.awt.Color(250, 248, 246));
 
-        jButton1.setBackground(new java.awt.Color(32, 123, 110));
-        jButton1.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setBackground(new java.awt.Color(32, 123, 110));
+        loginButton.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        loginButton.setForeground(new java.awt.Color(255, 255, 255));
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(185, 96, 92));
-        jButton2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancel.setBackground(new java.awt.Color(185, 96, 92));
+        cancel.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        cancel.setForeground(new java.awt.Color(255, 255, 255));
+        cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelActionPerformed(evt);
+            }
+        });
+
+        visitor.setText("Visitor");
+        visitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visitorActionPerformed(evt);
             }
         });
 
@@ -125,19 +135,21 @@ public class loginsystem extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(visitor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                        .addComponent(cancel)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(loginButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))))
+                            .addComponent(LoginUsername)
+                            .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -146,15 +158,16 @@ public class loginsystem extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LoginUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(visitor))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
@@ -178,21 +191,58 @@ public class loginsystem extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void LoginUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_LoginUsernameActionPerformed
 
     private void jLabel1closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1closeMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel1closeMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String usernameInput = LoginUsername.getText();
+        String passwordInput = String.valueOf(password.getPassword());
+        String[] loginStat = new UserFileHandler().login(usernameInput, passwordInput);
+        if(loginStat[0] == "Resident"){
+            System.out.println(loginStat[1]);
+            Resident.Dashboard resident = new Resident.Dashboard(loginStat[1]);
+            resident.setVisible(true);
+            this.dispose();
+        }
+        else if(loginStat[0] == "Security"){
+            SecurityGuard.dashboard security = new SecurityGuard.dashboard(loginStat[1]);
+            security.setVisible(true);
+            this.dispose();
+        }
+         else if(loginStat[0] == "AccountExecutive"){
+            AccountExecutive.Dashboard AccountExecutive  = new AccountExecutive.Dashboard(loginStat[1]);
+            AccountExecutive.setVisible(true);
+            this.dispose();
+        }
+         else if(loginStat[0] == "Vendor"){
+             System.out.println(loginStat[1]);
+            Vendor.Dashboard Vendor  = new Vendor.Dashboard(loginStat[1]);
+            Vendor.setVisible(true);
+            this.dispose();
+        }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+        }
+
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancelActionPerformed
+
+    private void visitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitorActionPerformed
+        // TODO add your handling code here:
+        Visitor.VisitorPassCode visitor = new Visitor.VisitorPassCode();
+        visitor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_visitorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,15 +280,16 @@ public class loginsystem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField LoginUsername;
+    private javax.swing.JButton cancel;
     private javax.swing.JLabel jLabel1close;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JButton visitor;
     // End of variables declaration//GEN-END:variables
 }

@@ -48,7 +48,7 @@ public class manageProfile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents(String vendorID) {
 
-        this.vendorID = "VN001";
+        this.vendorID = vendorID;
 
         manageProfileScrollPane = new javax.swing.JScrollPane();
         manageProfilePanel = new javax.swing.JPanel();

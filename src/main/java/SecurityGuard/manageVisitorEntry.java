@@ -65,7 +65,6 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         UpdateEntryUnitNumber = new javax.swing.JTextField();
         UpdateEntryPlateNumber = new javax.swing.JTextField();
         update = new javax.swing.JButton();
-        delete = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         UpdateVisitorEntryID = new javax.swing.JTextField();
         back = new javax.swing.JButton();
@@ -204,13 +203,6 @@ public class manageVisitorEntry extends javax.swing.JFrame {
             }
         });
 
-        delete.setText("Delete");
-        delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionPerformed(evt);
-            }
-        });
-
         jLabel12.setText("Visitor Entry ID :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -218,38 +210,33 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel10))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(delete)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(UpdateEntryPhoneNumber)
-                                    .addComponent(UpdateEntryUnitNumber)
-                                    .addComponent(UpdateEntryPlateNumber)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel12))
-                                .addGap(25, 25, 25)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(UpdateEntryName)
-                                    .addComponent(UpdateEntryDate, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                                    .addComponent(UpdateVisitorEntryID)))))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UpdateEntryPhoneNumber)
+                            .addComponent(UpdateEntryUnitNumber)
+                            .addComponent(UpdateEntryPlateNumber)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(update)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel12))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UpdateEntryName)
+                            .addComponent(UpdateEntryDate, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                            .addComponent(UpdateVisitorEntryID))))
                 .addGap(15, 15, 15))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(update)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,9 +266,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(UpdateEntryPlateNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(update)
-                    .addComponent(delete))
+                .addComponent(update)
                 .addContainerGap(180, Short.MAX_VALUE))
         );
 
@@ -413,7 +398,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                 entry.put("PLATE NUMBER", plateNumber);
                 entry.put("UNIT NUMBER", unitNumber);
 
-                boolean isDataUpdated = new securityGuardFileHandler().updateEntryV2(visitorEntryID, entry);
+                boolean isDataUpdated = new securityGuardFileHandler().updateEntry(visitorEntryID, entry);
 
                 if (isDataUpdated)
                     readVistorEntryTable("");
@@ -430,11 +415,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
                 }
             }
         } 
-                //GEN-LAST:event_updateActionPerformed
-
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteActionPerformed
+//GEN-LAST:event_updateActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
@@ -468,8 +449,8 @@ public class manageVisitorEntry extends javax.swing.JFrame {
 
         try {
             entryDate = formatter.parse(entryDateStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
         }
 
         UpdateEntryDate.setDate(entryDate);
@@ -529,7 +510,6 @@ public class manageVisitorEntry extends javax.swing.JFrame {
     private javax.swing.JTextField UpdateVisitorEntryID;
     private javax.swing.JButton add;
     private javax.swing.JButton back;
-    private javax.swing.JButton delete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

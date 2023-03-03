@@ -17,6 +17,16 @@ public class dashboard extends javax.swing.JFrame {
         initComponents();
     }
 
+
+    private String ID;
+
+    public dashboard(String UID) {
+        // Get Customer Information from Login, then initialize
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.ID = UID;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,7 +151,7 @@ public class dashboard extends javax.swing.JFrame {
 
     private void managecheckpointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managecheckpointActionPerformed
         // TODO add your handling code here:
-        CheckpointCheckIn vp = new CheckpointCheckIn () ;
+        CheckpointCheckIn vp = new CheckpointCheckIn (ID) ;
         vp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_managecheckpointActionPerformed

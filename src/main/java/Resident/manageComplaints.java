@@ -324,7 +324,7 @@ public class manageComplaints extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // close this window and bring up the previous one
         this.dispose();
-        new Dashboard("RN001").setVisible(true);
+        new Dashboard(residentID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
