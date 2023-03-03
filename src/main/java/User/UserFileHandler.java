@@ -35,6 +35,15 @@ public class UserFileHandler extends FileHandler {
                 else if(UID.startsWith("VN")){
                     valid = new String[]{"Vendor", UID};
                 }
+                else if(UID.startsWith("AM")){
+                    valid = new String[]{"AdminExecutive", UID};
+                }
+                else if(UID.startsWith("BM")){
+                    valid = new String[]{"BuildingManager", UID};
+                }
+                else if(UID.startsWith("BE")){
+                    valid = new String[]{"BuildingExecutive", UID};
+                }
             }
         }
         } catch (Exception e) {

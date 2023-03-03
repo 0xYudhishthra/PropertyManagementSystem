@@ -57,6 +57,14 @@ public class VisitorDetails extends javax.swing.JFrame {
 
         jLabel7.setText("Purpose : ");
 
+        VisitorCode.setEnabled(false);
+
+        VisitorName.setEnabled(false);
+
+        VisitorDate.setEnabled(false);
+
+        VisitorPurpose.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
