@@ -15,4 +15,5 @@ public enum Roles {
     Admin,
     BuildingExecutive,
     AccountExecutive,
+    SecurityGuard
 }

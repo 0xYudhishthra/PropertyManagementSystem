@@ -194,8 +194,10 @@ public class issueInvoice extends javax.swing.JFrame {
             return;
         }
 
-        //get the data from the table by iterating through the rows that are not empty
-        //output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+        /*
+         *get the data from the table by iterating through the rows that are not empty
+         *output should be like {line1: {column1: value, column2: value}, line2: {column1: value, column2: value}}
+         */
         HashMap<Integer, HashMap<String, String>> invoiceData = new HashMap<>();
         for (int i = 0; i < invoiceOutputTable.getRowCount(); i++) {
             Map<String, String> lineData = new HashMap<>();

@@ -41,6 +41,16 @@ public class Dashboard extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButton1.setText("User Management");
 
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
         jButton2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButton2.setText("Funds Allocation");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -52,8 +62,20 @@ public class Dashboard extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButton3.setText("Team Structure");
 
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         jButton5.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButton5.setText("Reports");
+
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,8 +114,28 @@ public class Dashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jButton2ActionPerformed
+        UserManagement um = new UserManagement();
+        um.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Fund fund = new Fund();
+        fund.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        TeamStructureManagement teamStructure = new TeamStructureManagement();
+        teamStructure.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        UserManagement um = new UserManagement();
+//        um.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
