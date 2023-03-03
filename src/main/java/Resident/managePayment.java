@@ -39,6 +39,7 @@ public class managePayment extends javax.swing.JFrame {
     private void initComponents(String residentID) {
 
         this.residentID = residentID;
+        System.out.println("residentID: " + residentID);
 
         managePaymentsTitle = new javax.swing.JLabel();
         back = new javax.swing.JButton();
@@ -183,6 +184,7 @@ public class managePayment extends javax.swing.JFrame {
         try {
             //read the data from the database
             Map<Integer, Map<String, String>> data = residentFileHandler.getInvoice(residentID);
+            System.out.println(data);
             if (data.size() != 0) {
                 viewInvoiceTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {

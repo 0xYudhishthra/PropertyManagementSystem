@@ -118,7 +118,7 @@ public class manageVisitorPass extends javax.swing.JFrame {
         });
         try {
             //read the data from the database
-            Map<Integer, Map<String, String>> data = residentFileHandler.getVisitorPasses("RN001");
+            Map<Integer, Map<String, String>> data = residentFileHandler.getVisitorPasses(residentID);
             if (data.size() != 0) {
                 cancel.setEnabled(true);
                 update.setEnabled(true);

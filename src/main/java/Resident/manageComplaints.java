@@ -119,7 +119,7 @@ public class manageComplaints extends javax.swing.JFrame {
         });
         //call the readData function from another
         try{
-            Map<Integer, Map<String, String>> data = residentFileHandler.getPendingComplaints("RN001");
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPendingComplaints(residentID);
             if (data.size() != 0) {
                 update.setEnabled(true);
                 delete.setEnabled(true);
@@ -194,7 +194,7 @@ public class manageComplaints extends javax.swing.JFrame {
         });
         //call the readData function from another
         try {
-            Map<Integer, Map<String, String>> data = residentFileHandler.getPastComplaints("RN001");
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPastComplaints(residentID);
             if (data.size() != 0) {
                 viewPastComplaintsTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {
