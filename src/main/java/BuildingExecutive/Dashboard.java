@@ -104,21 +104,21 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         SecurityManagement securityManagement = new SecurityManagement();
         securityManagement.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         UpdateComplaint updateComplaint = new UpdateComplaint();
         updateComplaint.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         TaskManagement taskManagement = new TaskManagement();
         taskManagement.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**

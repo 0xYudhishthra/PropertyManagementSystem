@@ -32,6 +32,10 @@ public class UpdateComplaint extends javax.swing.JFrame {
         updateTableList();
     }
 
+    String selectedComplaintIDString;
+
+    BuildingExecutive.buildingExecutiveFileHandler buildingExecutiveFileHandler = new BuildingExecutive.buildingExecutiveFileHandler();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,38 +271,36 @@ public class UpdateComplaint extends javax.swing.JFrame {
         jComboBox1.setSelectedItem(model.getValueAt(i, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    public void updateResidentComplaint(String filename, String userRole, HashMap<String, String> newData) {
-        HashMap<Integer, HashMap<String, String>> data = new HashMap<>();
-        int lineNumber = 1;
-        HashMap<String, String> lineData = new HashMap<>();
-        for (String key : newData.keySet()) {
-            lineData.put(key, newData.get(key));
-            if (key.equals("status")) {
-                data.put(lineNumber, lineData);
-                lineNumber++;
-                lineData = new HashMap<>();
-            }
-        }
-        try {
-            FileHandler fileHandler = new FileHandler();
-            boolean result = fileHandler.updateData(filename, data, userRole);
-            if (result) {
-                System.out.println("Data updated successfully.");
-            } else {
-                System.out.println("Error: Data not updated.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
+    // public void updateResidentComplaint(String filename, String userRole, HashMap<String, String> newData) {
+    //     HashMap<Integer, HashMap<String, String>> data = new HashMap<>();
+    //     int lineNumber = 1;
+    //     HashMap<String, String> lineData = new HashMap<>();
+    //     for (String key : newData.keySet()) {
+    //         lineData.put(key, newData.get(key));
+    //         if (key.equals("status")) {
+    //             data.put(lineNumber, lineData);
+    //             lineNumber++;
+    //             lineData = new HashMap<>();
+    //         }
+    //     }
+    //     try {
+    //         FileHandler fileHandler = new FileHandler();
+    //         boolean result = buildingExecutiveFileHandler.updateComplaint();
+    //         if (result) {
+    //             System.out.println("Data updated successfully.");
+    //         } else {
+    //             System.out.println("Error: Data not updated.");
+    //         }
+    //     } catch (Exception e) {
+    //         System.out.println("Error: " + e.getMessage());
+    //     }
+    // }
 
     //when combocox is changed, update the status of the complaint
     private void jComboBox1ItemStateChanged(ItemEvent evt) {
         String residentID = jTextField2.getText();
         String date = jTextField3.getText();
         String complaint = jTextArea1.getText();
-        // String complaintID = jTable1.getValueAt(selectedRow, 3).toString();
-        String complaintID = "C3";
         String status = jComboBox1.getSelectedItem().toString();
     
         try {
@@ -309,7 +311,13 @@ public class UpdateComplaint extends javax.swing.JFrame {
             newData.put("DESCRIPTION", complaint);
             newData.put("COMPLAINT NUMBER", complaintID);
             newData.put("STATUS", status);
-            updateResidentComplaint("residentComplaint", "Resident", newData);
+            System.out.println(newData);
+            boolean isDataUpdated = buildingExecutiveFileHandler.updateComplaint(residentID, newData);
+            if (isDataUpdated) {
+                System.out.println("Data updated successfully.");
+            } else {
+                System.out.println("Error: Data not updated.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
