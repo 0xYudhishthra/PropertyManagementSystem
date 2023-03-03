@@ -4,6 +4,13 @@
  */
 package BuildingManager;
 
+import Helpers.FileHandler;
+import Helpers.Roles;
+
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  *
  * @author Bryan
@@ -13,9 +20,12 @@ public class UserManagement extends javax.swing.JFrame {
     /**
      * Creates new form userManagement
      */
-    public UserManagement() {
+    public UserManagement() throws Exception {
         initComponents();
+        updateTableList();
     }
+
+    BuildingManager.buildingManagerFileHandler buildingManagerFileHandler = new buildingManagerFileHandler();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +79,28 @@ public class UserManagement extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+
+        try {
+            //read the data from the database
+            Map<Integer, Map<String, String>> data = buildingManagerFileHandler.getUsers();
+            if (data.size() != 0) {
+                for (int i = 1; i < data.size() + 1; i++) {
+                    //iterate through the data
+                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
+                        for (int j = 0; j < jTable1.getColumnCount(); j++) {
+                            if (entry.getKey().equals(jTable1.getColumnName(j).toUpperCase())) {
+                                jTable1.setValueAt(entry.getValue(), i - 1, j);
+                            }
+                        }
+                    }
+                }
+            } else {
+                jTable1.setEnabled(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -104,7 +136,9 @@ public class UserManagement extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        for (Roles role : Roles.values()) {
+            jComboBox1.addItem(role.toString());
+        }
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel6.setText("Users");
@@ -218,6 +252,61 @@ public class UserManagement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void updateTableList() throws Exception {
+        FileHandler fileHandler = new FileHandler();
+        ArrayList<String> data = fileHandler.readData("loginRecords", "User");
+
+        ArrayList<ArrayList<String>> userArray = new ArrayList<ArrayList<String>>();
+
+        for( int i = 0; i < data.size(); i++ ) {
+            String[] temp = data.get(i).split("\\|");
+            ArrayList<String> tempArray = new ArrayList<String>();
+            for( int j = 0; j < temp.length; j++ ) {
+                tempArray.add(temp[j].strip());
+            }
+            userArray.add(tempArray);
+        }
+
+        //in the array, add index 2 we need to mofidy the role of the user, use switch case for this
+        //first iterate through the array and then use switch case to modify the role, do this by detecting the first 2 characters of the string
+        //then add the array to the table
+        for (int i = 0; i < userArray.size(); i++) {
+            String role = userArray.get(i).get(0).substring(0, 2);
+            switch (role) {
+                case "RN":
+                    userArray.get(i).set(2, "Resident");
+                    break;
+                case "VN":
+                    userArray.get(i).set(2, "Vendor");
+                    break;
+                case "AE":
+                    userArray.get(i).set(2, "Account Executive");
+                    break;
+                case "SG":
+                    userArray.get(i).set(2, "Security Guard");
+                    break;
+                case "CN":
+                    userArray.get(i).set(2, "Cleaner");
+                    break;
+                case "AD":
+                    userArray.get(i).set(2, "Admin");
+                    break;
+                case "BE":
+                    userArray.get(i).set(2, "Building Executive");
+                    break;
+
+            }
+        }
+
+        //add complaintarray into jtable1
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for( int i = 0; i < userArray.size(); i++ ) {
+            model.addRow(new Object[] { userArray.get(i).get(0), userArray.get(i).get(1), userArray.get(i).get(2) });
+        }
+    }
+
+
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -231,7 +320,8 @@ public class UserManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new Dashboard().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -273,7 +363,11 @@ public class UserManagement extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserManagement().setVisible(true);
+                try {
+                    new UserManagement().setVisible(true);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }

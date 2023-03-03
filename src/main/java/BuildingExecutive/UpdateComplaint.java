@@ -271,31 +271,6 @@ public class UpdateComplaint extends javax.swing.JFrame {
         jComboBox1.setSelectedItem(model.getValueAt(i, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    // public void updateResidentComplaint(String filename, String userRole, HashMap<String, String> newData) {
-    //     HashMap<Integer, HashMap<String, String>> data = new HashMap<>();
-    //     int lineNumber = 1;
-    //     HashMap<String, String> lineData = new HashMap<>();
-    //     for (String key : newData.keySet()) {
-    //         lineData.put(key, newData.get(key));
-    //         if (key.equals("status")) {
-    //             data.put(lineNumber, lineData);
-    //             lineNumber++;
-    //             lineData = new HashMap<>();
-    //         }
-    //     }
-    //     try {
-    //         FileHandler fileHandler = new FileHandler();
-    //         boolean result = buildingExecutiveFileHandler.updateComplaint();
-    //         if (result) {
-    //             System.out.println("Data updated successfully.");
-    //         } else {
-    //             System.out.println("Error: Data not updated.");
-    //         }
-    //     } catch (Exception e) {
-    //         System.out.println("Error: " + e.getMessage());
-    //     }
-    // }
-
     //when combocox is changed, update the status of the complaint
     private void jComboBox1ItemStateChanged(ItemEvent evt) {
         String residentID = jTextField2.getText();
