@@ -1,0 +1,12 @@
+_____________________
+CHECKPOINT CHECK IN RECORD
+
+THIS FILE STORES DETAILS OF SECURITY'S GUARD CHECK IN PATROL IN PARKHILL RESIDENCE
+STORE FORMAT: <TASK ID> | <TASK DESCRIPTION> | <EMPLOYEE NAME>
+_____________________
+TSK01 | MOP FLOOR | John
+TSK02 | MOP WINDOW | John
+TSK03 | Floor Sweep | Marry
+Task ID | Task Description | Task Description
+Task ID | Task Description | Task Description
+Task ID | Task Description | Task Description
