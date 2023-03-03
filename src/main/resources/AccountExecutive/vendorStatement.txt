@@ -7,3 +7,4 @@ _____________________
 12012022 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | Supply of Cleaning Prod. | MYR 500 | MYR 500 | ST1
 01032023 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | test | MYR 400 | MYR 100.0 | ST2
 01032023 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | test | MYR 1 | MYR 1269.0 | ST3
+03032023 | ABC Supplies | VN001 | Parkhill Businesses | Unit A-1022 | Utilities | MYR 1200 | MYR 69.0 | ST4
