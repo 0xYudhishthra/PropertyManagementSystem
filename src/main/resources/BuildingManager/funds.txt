@@ -1,0 +1,12 @@
+_____________________
+FUNDS RECORDS
+
+THIS FILE STORES DETAILS OF FUNDS IN PARKHILL RESIDENCE
+STORE FORMAT: <FUND ID> | <FUND NAME> | <FUND AMOUNT>
+_____________________
+FUND001 | Kitchen | 1000
+FUND002 | Parking | 1200
+FUND003 | Yard | 1400
+FUND004 | Toilet | 1500
+
+FUND005 | Room | 500
