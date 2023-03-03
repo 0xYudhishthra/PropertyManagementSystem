@@ -5,6 +5,7 @@
 package AccountExecutive;
 
 import Helpers.FacilityList;
+import User.loginsystem;
 
 import javax.swing.*;
 
@@ -444,12 +445,10 @@ public class Dashboard extends javax.swing.JFrame {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", dialogButton);
         if (dialogResult == 0) {
-            // close this window and bring up the login window
-//            login login = new login();
-//            login.setVisible(true);
+            User.loginsystem loginsystem = new loginsystem();
+            loginsystem.setVisible(true);
             this.dispose();
             //exit the program
-            System.exit(0);
         }
 
     }//GEN-LAST:event_logoutActionPerformed

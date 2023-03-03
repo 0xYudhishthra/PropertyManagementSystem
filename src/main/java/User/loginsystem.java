@@ -205,6 +205,7 @@ public class loginsystem extends javax.swing.JFrame {
         String passwordInput = String.valueOf(password.getPassword());
         String[] loginStat = new UserFileHandler().login(usernameInput, passwordInput);
         if(loginStat[0] == "Resident"){
+            System.out.println(loginStat[1]);
             Resident.Dashboard resident = new Resident.Dashboard(loginStat[1]);
             resident.setVisible(true);
             this.dispose();
@@ -220,6 +221,7 @@ public class loginsystem extends javax.swing.JFrame {
             this.dispose();
         }
          else if(loginStat[0] == "Vendor"){
+             System.out.println(loginStat[1]);
             Vendor.Dashboard Vendor  = new Vendor.Dashboard(loginStat[1]);
             Vendor.setVisible(true);
             this.dispose();

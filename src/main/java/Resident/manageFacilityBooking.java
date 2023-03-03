@@ -538,7 +538,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // close this window and open the previous window
         this.dispose();
-        new Dashboard("RN001").setVisible(true);
+        new Dashboard(residentID).setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     /**
