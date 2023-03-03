@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "loginsystem",
+            "request": "launch",
+            "mainClass": "User.loginsystem",
+            "projectName": "PropertyManagementSystem"
+        },
+        {
+            "type": "java",
             "name": "manageVisitorEntry",
             "request": "launch",
             "mainClass": "SecurityGuard.manageVisitorEntry",
