@@ -7,9 +7,15 @@ package BuildingManager;
 import Helpers.FileHandler;
 import Helpers.Roles;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  *
@@ -44,14 +50,11 @@ public class UserManagement extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,39 +71,29 @@ public class UserManagement extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "User ID", "User Name", "Role"
+                "User ID", "User Name", "Password"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-
-        try {
-            //read the data from the database
-            Map<Integer, Map<String, String>> data = buildingManagerFileHandler.getUsers();
-            if (data.size() != 0) {
-                for (int i = 1; i < data.size() + 1; i++) {
-                    //iterate through the data
-                    for (Map.Entry<String, String> entry : data.get(i).entrySet()) {
-                        for (int j = 0; j < jTable1.getColumnCount(); j++) {
-                            if (entry.getKey().equals(jTable1.getColumnName(j).toUpperCase())) {
-                                jTable1.setValueAt(entry.getValue(), i - 1, j);
-                            }
-                        }
-                    }
-                }
-            } else {
-                jTable1.setEnabled(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -126,19 +119,12 @@ public class UserManagement extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel4.setText("Password");
 
-        jLabel5.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel5.setText("Role");
-
         jTextField4.setText("Password");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
-
-        for (Roles role : Roles.values()) {
-            jComboBox1.addItem(role.toString());
-        }
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel6.setText("Users");
@@ -159,8 +145,11 @@ public class UserManagement extends javax.swing.JFrame {
         });
 
         jButton3.setText("Save");
-
-        jButton4.setText("Cancel");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButton5.setText("Print");
@@ -192,7 +181,6 @@ public class UserManagement extends javax.swing.JFrame {
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField2)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,11 +190,7 @@ public class UserManagement extends javax.swing.JFrame {
                                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jTextField4)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(42, 42, 42)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -237,14 +221,8 @@ public class UserManagement extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(123, 123, 123)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -265,37 +243,6 @@ public class UserManagement extends javax.swing.JFrame {
                 tempArray.add(temp[j].strip());
             }
             userArray.add(tempArray);
-        }
-
-        //in the array, add index 2 we need to mofidy the role of the user, use switch case for this
-        //first iterate through the array and then use switch case to modify the role, do this by detecting the first 2 characters of the string
-        //then add the array to the table
-        for (int i = 0; i < userArray.size(); i++) {
-            String role = userArray.get(i).get(0).substring(0, 2);
-            switch (role) {
-                case "RN":
-                    userArray.get(i).set(2, "Resident");
-                    break;
-                case "VN":
-                    userArray.get(i).set(2, "Vendor");
-                    break;
-                case "AE":
-                    userArray.get(i).set(2, "Account Executive");
-                    break;
-                case "SG":
-                    userArray.get(i).set(2, "Security Guard");
-                    break;
-                case "CN":
-                    userArray.get(i).set(2, "Cleaner");
-                    break;
-                case "AD":
-                    userArray.get(i).set(2, "Admin");
-                    break;
-                case "BE":
-                    userArray.get(i).set(2, "Building Executive");
-                    break;
-
-            }
         }
 
         //add complaintarray into jtable1
@@ -326,11 +273,98 @@ public class UserManagement extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        isEditMode = false;
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField4.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        userClickedSave();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private Boolean isEditMode = false;
+    private int selectedIndex = 0;
+
+    private void jTable1MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:.
+        int index = jTable1.getSelectedRow();
+        
+        isEditMode = true;
+        selectedIndex = index;
+
+        TableModel model = jTable1.getModel();
+
+        String id = model.getValueAt(index, 0).toString();
+        String name = model.getValueAt(index, 1).toString();
+        String password = model.getValueAt(index, 2).toString();
+
+        jTextField1.setText(id);
+        jTextField2.setText(name);
+        jTextField4.setText(password);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void userClickedSave() {
+        String id = jTextField1.getText();
+        String name = jTextField2.getText();
+        String password = jTextField4.getText();
+
+        if( id.isEmpty() || name.isEmpty() || password.isEmpty() ) {
+            JOptionPane.showMessageDialog(null, "Please fill in all the fields");
+            return;
+        }
+
+        if( isEditMode ) {
+            updateData();
+        } else {
+            createData();
+        }
+    }
+
+    private void createData() {
+        FileHandler fileHandler = new FileHandler();
+        //new hashmap string, string
+        HashMap<String, String> data = new HashMap<String, String>();
+        data.put("USERID", jTextField1.getText());
+        data.put("USERNAME", jTextField2.getText());
+        data.put("PASSWORD", jTextField4.getText());
+
+        try {
+            fileHandler.createData("loginRecords", data, "User");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            updateTableList();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private void updateData() {
+        FileHandler fileHandler = new FileHandler();
+        HashMap<Integer, HashMap<String, String>> data = new HashMap<Integer, HashMap<String, String>>();
+        HashMap<String, String> temp = new HashMap<String, String>();
+        temp.put("USERID", jTextField1.getText());
+        temp.put("USERNAME", jTextField2.getText());
+        temp.put("PASSWORD", jTextField4.getText());
+        data.put(selectedIndex, temp);
+
+        try {
+            fileHandler.updateData("loginRecords", data, "User");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -376,14 +410,11 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
