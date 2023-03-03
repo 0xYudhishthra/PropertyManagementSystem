@@ -4,6 +4,8 @@
  */
 package Resident;
 
+import User.loginsystem;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class Dashboard extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents(String residentID) {
+        System.out.println("resident id in dashboard: " + residentID);
 
         this.residentID = residentID;
 
@@ -46,6 +49,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         try{
             Map<String, String> profileData = residentFileHandler.getProfileDetails(residentID);
+            System.out.println("profile data: " + profileData);
             for (Map.Entry<String, String> entry : profileData.entrySet()) {
                 switch (entry.getKey()){
                     case "PROFILE PICTURE":
@@ -202,11 +206,10 @@ public class Dashboard extends javax.swing.JFrame {
         int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", dialogButton);
         if (dialogResult == 0) {
             // close this window and bring up the login window
-//            login login = new login();
-//            login.setVisible(true);
+            User.loginsystem login = new loginsystem();
+            login.setVisible(true);
             this.dispose();
             //exit the program
-            System.exit(0);
         }
     }//GEN-LAST:event_logoutActionPerformed
 
