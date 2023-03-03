@@ -1,0 +1,8 @@
+_____________________
+EMPLOYEE DETAILS
+
+THIS FILE STORES PAYMENT DETAILS FOR EMPLOYEES
+STORE FORMAT: <EMPLOYEE ID> | <NAME> | <DATE OF BIRTH> | <ROLE>
+_____________________
+EMP001 | John Wick | 05011999 | Security Guard
+EMP002 | Im Sick | 03031969 | Cleaner
