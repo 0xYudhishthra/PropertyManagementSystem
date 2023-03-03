@@ -267,31 +267,49 @@ public class UpdateComplaint extends javax.swing.JFrame {
         jComboBox1.setSelectedItem(model.getValueAt(i, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
+    public void updateResidentComplaint(String filename, String userRole, HashMap<String, String> newData) {
+        HashMap<Integer, HashMap<String, String>> data = new HashMap<>();
+        int lineNumber = 1;
+        HashMap<String, String> lineData = new HashMap<>();
+        for (String key : newData.keySet()) {
+            lineData.put(key, newData.get(key));
+            if (key.equals("status")) {
+                data.put(lineNumber, lineData);
+                lineNumber++;
+                lineData = new HashMap<>();
+            }
+        }
+        try {
+            FileHandler fileHandler = new FileHandler();
+            boolean result = fileHandler.updateData(filename, data, userRole);
+            if (result) {
+                System.out.println("Data updated successfully.");
+            } else {
+                System.out.println("Error: Data not updated.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
     //when combocox is changed, update the status of the complaint
     private void jComboBox1ItemStateChanged(ItemEvent evt) {
         String residentID = jTextField2.getText();
         String date = jTextField3.getText();
         String complaint = jTextArea1.getText();
+        // String complaintID = jTable1.getValueAt(selectedRow, 3).toString();
+        String complaintID = "C3";
         String status = jComboBox1.getSelectedItem().toString();
     
         try {
             //update the status of the complaint in the file
-            FileHandler fileHandler = new FileHandler();
-            HashMap<Integer, HashMap<String, String>> data = new HashMap<>();
-            HashMap<String, String> temp = new HashMap<>();
-            temp.put("RESIDENT ID", residentID);
-            temp.put("DATE OF COMPLAINT", date);
-            temp.put("DESCRIPTION", complaint);
-            temp.put("COMPLAINT NUMBER", complaintID);
-            temp.put("STATUS", status);
-            data.put(selectedRow, temp);
-            boolean success = fileHandler.updateData("residentComplaint", data, "Resident");
-    
-            if (success) {
-                updateTableList();
-            } else {
-                System.out.println("Failed to update data in file.");
-            }
+            HashMap<String, String> newData = new HashMap<>();
+            newData.put("RESIDENT ID", residentID);
+            newData.put("DATE OF COMPLAINT", date);
+            newData.put("DESCRIPTION", complaint);
+            newData.put("COMPLAINT NUMBER", complaintID);
+            newData.put("STATUS", status);
+            updateResidentComplaint("residentComplaint", "Resident", newData);
         } catch (Exception e) {
             e.printStackTrace();
         }
