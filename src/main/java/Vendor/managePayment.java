@@ -137,7 +137,7 @@ public class managePayment extends javax.swing.JFrame {
 
         try {
             //read the data from the database
-            Map<Integer, Map<String, String>> data = vendorFileHandler.getPaymentHistory("VN001");
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getPaymentHistory(vendorID);
             if (data.size() != 0) {
                 outstandingFeeOutput.setText(data.get(data.size()).get("TOTAL AMOUNT DUE"));
                 viewPaymentHistoryTable.setEnabled(true);
@@ -193,7 +193,7 @@ public class managePayment extends javax.swing.JFrame {
 
         try {
             //read the data from the database
-            Map<Integer, Map<String, String>> data = vendorFileHandler.getInvoice("VN001");
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getInvoice(vendorID);
             if (data.size() != 0) {
                 viewInvoiceTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {
@@ -251,7 +251,7 @@ public class managePayment extends javax.swing.JFrame {
 
         try {
             //read the data from the database
-            Map<Integer, Map<String, String>> data = vendorFileHandler.getReceipt("VN001");
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getReceipt(vendorID);
             if (data.size() != 0) {
                 viewReceiptTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {
@@ -303,7 +303,7 @@ public class managePayment extends javax.swing.JFrame {
 
         try {
             //read the data from the database
-            Map<Integer, Map<String, String>> data = vendorFileHandler.getStatement("VN001");
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getStatement(vendorID);
             if (data.size() != 0) {
                 viewStatementTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {

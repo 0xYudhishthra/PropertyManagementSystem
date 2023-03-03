@@ -45,7 +45,7 @@ public class Dashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         try {
-            Map<String, String> profileData = vendorFileHandler.getProfileDetails("VN001");
+            Map<String, String> profileData = vendorFileHandler.getProfileDetails(vendorID);
             for (Map.Entry<String, String> entry : profileData.entrySet()) {
                 switch (entry.getKey()) {
                     case "PROFILE PICTURE":
