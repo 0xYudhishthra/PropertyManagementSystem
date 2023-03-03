@@ -126,7 +126,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
         //call the readData function from another
         try {
             //read the data from the database
-            Map<Integer, Map<String, String>> data = residentFileHandler.getPastBookings("RN001");
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPastBookings(residentID);
             if (data.size() != 0) {
                 viewPastBookingsTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {
@@ -135,6 +135,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
                         for (int j = 0; j < viewPastBookingsTable.getColumnCount(); j++) {
                             if (entry.getKey().equals(viewPastBookingsTable.getColumnName(j).toUpperCase())) {
                                 viewPastBookingsTable.setValueAt(entry.getValue(), i - 1, j);
+                                break;
                             }
                         }
                     }
@@ -192,7 +193,7 @@ public class manageFacilityBooking extends javax.swing.JFrame {
         //call the readData function from another
         try {
             //read the data from the database
-            Map<Integer, Map<String, String>> data = residentFileHandler.getPendingBookings("RN001");
+            Map<Integer, Map<String, String>> data = residentFileHandler.getPendingBookings(residentID);
             if (data.size() != 0) {
                 update.setEnabled(true);
                 cancel.setEnabled(true);

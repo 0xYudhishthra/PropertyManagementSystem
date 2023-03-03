@@ -105,7 +105,7 @@ public class manageComplaints extends javax.swing.JFrame {
             }
         });
         try {
-            Map<Integer, Map<String, String>> data = vendorFileHandler.getPendingComplaints("VN001");
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getPendingComplaints(vendorID);
             if (data.size() != 0) {
                 pendingComplaintsTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {
@@ -175,7 +175,7 @@ public class manageComplaints extends javax.swing.JFrame {
         });
         //call the readData function from another
         try {
-            Map<Integer, Map<String, String>> data = vendorFileHandler.getPastComplaints("VN001");
+            Map<Integer, Map<String, String>> data = vendorFileHandler.getPastComplaints(vendorID);
             if (data.size() != 0) {
                 viewPastComplaintsTable.setEnabled(true);
                 for (int i = 1; i < data.size() + 1; i++) {

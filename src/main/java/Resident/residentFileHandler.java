@@ -45,14 +45,7 @@ public class residentFileHandler extends FileHandler {
                     //for each char in residentID, check if it is equal to the char in residentIDFromComplaint
                     //if it is, then print true
                     //if it is not, then print false
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(inProgressStatus.toString()))) {
+                    if (residentIDFromComplaint.strip().equals(residentID.strip()) && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(inProgressStatus.toString()))) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -147,14 +140,7 @@ public class residentFileHandler extends FileHandler {
                 String[] complaintDetailsArray = complaint.split(dataSeparator);
                 String residentIDFromComplaint = complaintDetailsArray[0];
                 String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                boolean isResidentID = true;
-                for (int i = 0; i < residentID.length(); i++) {
-                    if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                        isResidentID = false;
-                        break;
-                    }
-                }
-                if (isResidentID && (complaintStatus.toUpperCase().equals(resolvedStatus.toString()) || complaintStatus.toUpperCase().equals(closedStatus.toString()))) {
+                if (residentIDFromComplaint.strip().equals(residentID.strip()) && (complaintStatus.toUpperCase().equals(resolvedStatus.toString()) || complaintStatus.toUpperCase().equals(closedStatus.toString()))) {
                     int count = 0;
                     int columnCount = 0;
 
@@ -250,14 +236,7 @@ public class residentFileHandler extends FileHandler {
                     String[] complaintDetailsArray = booking.split(dataSeparator);
                     String residentIDFromComplaint = complaintDetailsArray[0];
                     String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(confirmedStatus.toString()))) {
+                    if (residentID.strip().equals(residentIDFromComplaint.strip()) && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(confirmedStatus.toString()))) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -352,14 +331,7 @@ public class residentFileHandler extends FileHandler {
                     String[] complaintDetailsArray = booking.split(dataSeparator);
                     String residentIDFromComplaint = complaintDetailsArray[0];
                     String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(confirmedStatus.toString()))) {
+                    if (residentIDFromComplaint.strip().equals(residentID.strip()) && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(confirmedStatus.toString()))) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -455,7 +427,7 @@ public class residentFileHandler extends FileHandler {
                     String[] bookingDetailsArray = booking.split(dataSeparator);
                     String residentIDFromBooking = bookingDetailsArray[0];
                     System.out.println(residentIDFromBooking);
-                    if (residentID.equals(residentIDFromBooking)) {
+                    if (residentID.strip().equals(residentIDFromBooking.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -549,14 +521,7 @@ public class residentFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] paymentDetailsArray = payment.split(dataSeparator);
                     String residentIDFromPayment = paymentDetailsArray[2];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromPayment.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromPayment.strip().equals(residentID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -650,14 +615,7 @@ public class residentFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] invoiceDetailsArray = invoice.split(dataSeparator);
                     String residentIDFromInvoice = invoiceDetailsArray[3];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromInvoice.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromInvoice.strip().equals(residentID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -751,14 +709,7 @@ public class residentFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] receiptDetailsArray = receipt.split(dataSeparator);
                     String residentIDFromReceipt = receiptDetailsArray[4];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromReceipt.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromReceipt.strip().equals(residentID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -850,14 +801,7 @@ public class residentFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] statementDetailsArray = statement.split(dataSeparator);
                     String residentIDFromStatement = statementDetailsArray[5];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromStatement.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromStatement.strip().equals(residentID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -1033,14 +977,7 @@ public class residentFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] passDetailsArray = pass.split(dataSeparator);
                     String residentIDFromPass = passDetailsArray[0];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromPass.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromPass.strip().equals(residentID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -1136,14 +1073,7 @@ public class residentFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] passDetailsArray = complaint.split(dataSeparator);
                     String residentIDFromPass = passDetailsArray[0];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < residentID.length(); i++) {
-                        if (residentID.charAt(i) != residentIDFromPass.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromPass.strip().equals(residentID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -1622,8 +1552,9 @@ public class residentFileHandler extends FileHandler {
                 //now that we have the profile map, we just need to find the profile that matches the residentID, and update the profile
                 for (int i = 1; i <= profileMap.size(); i++) {
                     HashMap<String, String> profileDetailsMap = profileMap.get(i);
+                    System.out.println(profileDetailsMap);
                     String residentID = profileDetailsMap.get("RESIDENT ID");
-                    if (residentID.equals(userID)) {
+                    if (residentID.strip().equals(userID.strip())) {
                         //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
                         //then we would update the profileMap with the profileDetailsMap
                         for (String key : profileDetails.keySet()) {
@@ -1734,7 +1665,7 @@ public class residentFileHandler extends FileHandler {
                 for (int i = 1; i <= profileMap.size(); i++) {
                     HashMap<String, String> profileDetailsMap = profileMap.get(i);
                     String residentID = profileDetailsMap.get("RESIDENT ID");
-                    if (residentID.equals(userID)) {
+                    if (residentID.strip().equals(userID.strip()) && profileDetailsMap.get("BOOKING NUMBER").equals(bookingDetails.get("BOOKING NUMBER"))) {
                         //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
                         //then we would update the profileMap with the profileDetailsMap
                         for (String key : bookingDetails.keySet()) {
@@ -1772,127 +1703,12 @@ public class residentFileHandler extends FileHandler {
                 //get the last index of the complaint, which is the status of the complaint
                 String[] statementDetailsArray = profile.split(dataSeparator);
                 String residentIDFromProfile = statementDetailsArray[0];
-                int count = 0;
-                int columnCount = 0;
-
-                for (int i = 0; i < profile.length(); i++) {
-                    if (profile.charAt(i) == dataSeparator.charAt(1)) {
-                        //this means that there is data before the data separator
-                        //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
-                        //get the value to start iterating from backwards, which is the index of the data separator - 1
-                        int start = i - 2;
-                        //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-                        int end = start - count + 2;
-
-                        //create temp string to store the data
-                        StringBuilder temp = new StringBuilder();
-                        //iterate through the string backwards
-                        for (int j = start; j >= end; j--) {
-                            //add the char to the temp string
-                            temp.append(profile.charAt(j));
-                        }
-                        //reverse the string
-                        StringBuilder sb = new StringBuilder(temp.toString());
-                        sb.reverse();
-                        //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
-                        for (int k = 0; k < sb.length(); k++) {
-                            if (sb.charAt(k) == dataSeparator.charAt(1)) {
-                                sb.deleteCharAt(k);
-                            }
-                        }
-                        //remove any space from the first index of the string
-                        if (sb.charAt(0) == ' ') {
-                            sb.deleteCharAt(0);
-                        }
-
-                        statementDetails.put(profilesFileHeader.get(columnCount), sb.toString());
-                        //reset the count
-                        count = 0;
-                        columnCount++;
-
-                    }
-
-                    //if we are reaching the last element in the line, then we need to add the last element to the map
-                    if (i == profile.length() - 1) {
-                        //get the value to start iterating from backwards, which is the index of the data separator - 1
-                        int start = i - count + 2;
-                        //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-
-                        //create temp string to store the data
-                        StringBuilder temp = new StringBuilder();
-                        //iterate through the string backwards
-                        for (int j = i; j >= start; j--) {
-                            //add the char to the temp string
-                            temp.append(profile.charAt(j));
-                        }
-                        //reverse the string
-                        StringBuilder sb = new StringBuilder(temp.toString());
-                        sb.reverse();
-                        columnCount++;
-                        statementDetails.put(profilesFileHeader.get(columnCount - 1), sb.toString());
-                        columnCount++;
-                    }
-
-                    count++;
-                }
-                profileDataCount++;
-                profileMap.put(profileDataCount, statementDetails);
-            }
-
-            //now that we have the profile map, find a row matching the residentid and visitorpassid, and delete the row
-            for (int i = 1; i <= profileMap.size(); i++) {
-                HashMap<String, String> profileDetailsMap = profileMap.get(i);
-                String residentID = profileDetailsMap.get("RESIDENT ID");
-                String visitorPassID = profileDetailsMap.get("VISITOR PASS NUMBER");
-                if (residentID.equals(userID) && visitorPassID.equals(visitorPassDetails)) {
-                    //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
-                    //then we would update the profileMap with the profileDetailsMap
-                    profileMap.remove(i);
-                }
-            }
-
-            //rearrange the profileMap paritcularly the keys, for example, after removing 1, there's 2 and 3 inside, but it should ebe reerranged to 1 and 2
-            HashMap<Integer, HashMap<String, String>> rearrangedProfileMap = new HashMap<>();
-            int count = 1;
-            for (int i = 1; i <= profileMap.size(); i++) {
-                HashMap<String, String> profileDetailsMap = profileMap.get(i);
-                if (profileDetailsMap != null) {
-                    rearrangedProfileMap.put(count, profileDetailsMap);
-                    count++;
-                }
-            }
-
-            //now that we have the updated profileMap, we need to write the data to the file
-            boolean isBookingUpdated = updateData("residentVisitorPass", rearrangedProfileMap, "Resident");
-            if (isBookingUpdated) {
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-        return false;
-    }
-    public boolean updateVisitorPass(String userID, HashMap<String, String> visitorPassDetails) {
-        {
-
-            try {
-                HashMap<Integer, HashMap<String, String>> profileMap = new HashMap<>();
-
-                ArrayList<String> passes = readData("residentVisitorPass", "Resident");
-                ArrayList<String> passesFileHeader = getFileHeader("residentVisitorPass", "Resident");
-
-                int profileDataCount = 0;
-                for (String pass : passes) {
-                    HashMap<String, String> statementDetails = new HashMap<>();
-                    //get the last index of the complaint, which is the status of the complaint
-                    String[] statementDetailsArray = pass.split(dataSeparator);
-                    String residentIDFromProfile = statementDetailsArray[0];
+                if (residentIDFromProfile.strip().equals(userID.strip())) {
                     int count = 0;
                     int columnCount = 0;
 
-                    for (int i = 0; i < pass.length(); i++) {
-                        if (pass.charAt(i) == dataSeparator.charAt(1)) {
+                    for (int i = 0; i < profile.length(); i++) {
+                        if (profile.charAt(i) == dataSeparator.charAt(1)) {
                             //this means that there is data before the data separator
                             //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
                             //get the value to start iterating from backwards, which is the index of the data separator - 1
@@ -1905,7 +1721,7 @@ public class residentFileHandler extends FileHandler {
                             //iterate through the string backwards
                             for (int j = start; j >= end; j--) {
                                 //add the char to the temp string
-                                temp.append(pass.charAt(j));
+                                temp.append(profile.charAt(j));
                             }
                             //reverse the string
                             StringBuilder sb = new StringBuilder(temp.toString());
@@ -1921,7 +1737,7 @@ public class residentFileHandler extends FileHandler {
                                 sb.deleteCharAt(0);
                             }
 
-                            statementDetails.put(passesFileHeader.get(columnCount), sb.toString());
+                            statementDetails.put(profilesFileHeader.get(columnCount), sb.toString());
                             //reset the count
                             count = 0;
                             columnCount++;
@@ -1929,7 +1745,7 @@ public class residentFileHandler extends FileHandler {
                         }
 
                         //if we are reaching the last element in the line, then we need to add the last element to the map
-                        if (i == pass.length() - 1) {
+                        if (i == profile.length() - 1) {
                             //get the value to start iterating from backwards, which is the index of the data separator - 1
                             int start = i - count + 2;
                             //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
@@ -1939,13 +1755,13 @@ public class residentFileHandler extends FileHandler {
                             //iterate through the string backwards
                             for (int j = i; j >= start; j--) {
                                 //add the char to the temp string
-                                temp.append(pass.charAt(j));
+                                temp.append(profile.charAt(j));
                             }
                             //reverse the string
                             StringBuilder sb = new StringBuilder(temp.toString());
                             sb.reverse();
                             columnCount++;
-                            statementDetails.put(passesFileHeader.get(columnCount - 1), sb.toString());
+                            statementDetails.put(profilesFileHeader.get(columnCount - 1), sb.toString());
                             columnCount++;
                         }
 
@@ -1954,154 +1770,155 @@ public class residentFileHandler extends FileHandler {
                     profileDataCount++;
                     profileMap.put(profileDataCount, statementDetails);
                 }
-                //now that we have the profile map, we just need to find the profile that matches the residentID, and update the profile
+
+                //now that we have the profile map, find a row matching the residentid and visitorpassid, and delete the row
                 for (int i = 1; i <= profileMap.size(); i++) {
                     HashMap<String, String> profileDetailsMap = profileMap.get(i);
                     String residentID = profileDetailsMap.get("RESIDENT ID");
-                    if (residentID.equals(userID)) {
+                    String visitorPassID = profileDetailsMap.get("VISITOR PASS NUMBER");
+                    if (residentID.equals(userID) && visitorPassID.equals(visitorPassDetails)) {
                         //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
                         //then we would update the profileMap with the profileDetailsMap
-                        for (String key : visitorPassDetails.keySet()) {
-                            profileDetailsMap.put(key, visitorPassDetails.get(key));
-                        }
-                        profileMap.put(i, profileDetailsMap);
+                        profileMap.remove(i);
                     }
                 }
 
-                System.out.println(profileMap);
+                //rearrange the profileMap paritcularly the keys, for example, after removing 1, there's 2 and 3 inside, but it should ebe reerranged to 1 and 2
+                HashMap<Integer, HashMap<String, String>> rearrangedProfileMap = new HashMap<>();
+                int count = 1;
+                for (int i = 1; i <= profileMap.size(); i++) {
+                    HashMap<String, String> profileDetailsMap = profileMap.get(i);
+                    if (profileDetailsMap != null) {
+                        rearrangedProfileMap.put(count, profileDetailsMap);
+                        count++;
+                    }
+                }
 
                 //now that we have the updated profileMap, we need to write the data to the file
-                boolean isPassUpdated = updateData("residentVisitorPass", profileMap, "Resident");
-                if (isPassUpdated) {
+                boolean isBookingUpdated = updateData("residentVisitorPass", rearrangedProfileMap, "Resident");
+                if (isBookingUpdated) {
                     return true;
                 }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
 
-            return false;
-        }
-    }
-    public boolean deleteComplaint(String userID, String complaintNumber) {
-        try {
-            HashMap<Integer, HashMap<String, String>> profileMap = new HashMap<>();
-
-            ArrayList<String> complaints = readData("residentComplaint", "Resident");
-            ArrayList<String> complaintsFileHeader = getFileHeader("residentComplaint", "Resident");
-
-            int profileDataCount = 0;
-            for (String complaint : complaints) {
-                HashMap<String, String> statementDetails = new HashMap<>();
-                //get the last index of the complaint, which is the status of the complaint
-                String[] statementDetailsArray = complaint.split(dataSeparator);
-                String residentIDFromProfile = statementDetailsArray[0];
-                int count = 0;
-                int columnCount = 0;
-
-                for (int i = 0; i < complaint.length(); i++) {
-                    if (complaint.charAt(i) == dataSeparator.charAt(1)) {
-                        //this means that there is data before the data separator
-                        //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
-                        //get the value to start iterating from backwards, which is the index of the data separator - 1
-                        int start = i - 2;
-                        //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-                        int end = start - count + 2;
-
-                        //create temp string to store the data
-                        StringBuilder temp = new StringBuilder();
-                        //iterate through the string backwards
-                        for (int j = start; j >= end; j--) {
-                            //add the char to the temp string
-                            temp.append(complaint.charAt(j));
-                        }
-                        //reverse the string
-                        StringBuilder sb = new StringBuilder(temp.toString());
-                        sb.reverse();
-                        //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
-                        for (int k = 0; k < sb.length(); k++) {
-                            if (sb.charAt(k) == dataSeparator.charAt(1)) {
-                                sb.deleteCharAt(k);
-                            }
-                        }
-                        //remove any space from the first index of the string
-                        if (sb.charAt(0) == ' ') {
-                            sb.deleteCharAt(0);
-                        }
-
-                        statementDetails.put(complaintsFileHeader.get(columnCount), sb.toString());
-                        //reset the count
-                        count = 0;
-                        columnCount++;
-
-                    }
-
-                    //if we are reaching the last element in the line, then we need to add the last element to the map
-                    if (i == complaint.length() - 1) {
-                        //get the value to start iterating from backwards, which is the index of the data separator - 1
-                        int start = i - count + 2;
-                        //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
-
-                        //create temp string to store the data
-                        StringBuilder temp = new StringBuilder();
-                        //iterate through the string backwards
-                        for (int j = i; j >= start; j--) {
-                            //add the char to the temp string
-                            temp.append(complaint.charAt(j));
-                        }
-                        //reverse the string
-                        StringBuilder sb = new StringBuilder(temp.toString());
-                        sb.reverse();
-                        columnCount++;
-                        statementDetails.put(complaintsFileHeader.get(columnCount - 1), sb.toString());
-                        columnCount++;
-                    }
-
-                    count++;
-                }
-                profileDataCount++;
-                profileMap.put(profileDataCount, statementDetails);
-            }
-
-            //now that we have the profile map, find a row matching the residentid and visitorpassid, and delete the row
-            for (int i = 1; i <= profileMap.size(); i++) {
-                HashMap<String, String> profileDetailsMap = profileMap.get(i);
-                System.out.println(profileDetailsMap);
-                String residentID = profileDetailsMap.get("RESIDENT ID");
-                String complaintID = profileDetailsMap.get("COMPLAINT NUMBER");
-                if (residentID.equals(userID) && complaintID.equals(complaintNumber)) {
-                    //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
-                    //then we would update the profileMap with the profileDetailsMap
-                    profileMap.remove(i);
-                }
-            }
-
-            //rearrange the profileMap paritcularly the keys, for example, after removing 1, there's 2 and 3 inside, but it should ebe reerranged to 1 and 2
-            HashMap<Integer, HashMap<String, String>> rearrangedProfileMap = new HashMap<>();
-            int count = 1;
-            for (int i = 1; i <= profileMap.size(); i++) {
-                HashMap<String, String> profileDetailsMap = profileMap.get(i);
-                if (profileDetailsMap != null) {
-                    rearrangedProfileMap.put(count, profileDetailsMap);
-                    count++;
-                }
-            }
-
-            //now that we have the updated profileMap, we need to write the data to the file
-            boolean isBookingUpdated = updateData("residentComplaint", rearrangedProfileMap, "Resident");
-            if (isBookingUpdated) {
-                return true;
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-
         return false;
     }
 
-    public boolean updateComplaint(String userID, HashMap<String, String> complaintDetails){
-        {
+        public boolean updateVisitorPass (String userID, HashMap < String, String > visitorPassDetails){
+            {
+
+                try {
+                    HashMap<Integer, HashMap<String, String>> profileMap = new HashMap<>();
+
+                    ArrayList<String> passes = readData("residentVisitorPass", "Resident");
+                    ArrayList<String> passesFileHeader = getFileHeader("residentVisitorPass", "Resident");
+
+                    int profileDataCount = 0;
+                    for (String pass : passes) {
+                        HashMap<String, String> statementDetails = new HashMap<>();
+                        //get the last index of the complaint, which is the status of the complaint
+                        String[] statementDetailsArray = pass.split(dataSeparator);
+                        String residentIDFromProfile = statementDetailsArray[0];
+                        int count = 0;
+                        int columnCount = 0;
+
+                        for (int i = 0; i < pass.length(); i++) {
+                            if (pass.charAt(i) == dataSeparator.charAt(1)) {
+                                //this means that there is data before the data separator
+                                //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
+                                //get the value to start iterating from backwards, which is the index of the data separator - 1
+                                int start = i - 2;
+                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
+                                int end = start - count + 2;
+
+                                //create temp string to store the data
+                                StringBuilder temp = new StringBuilder();
+                                //iterate through the string backwards
+                                for (int j = start; j >= end; j--) {
+                                    //add the char to the temp string
+                                    temp.append(pass.charAt(j));
+                                }
+                                //reverse the string
+                                StringBuilder sb = new StringBuilder(temp.toString());
+                                sb.reverse();
+                                //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
+                                for (int k = 0; k < sb.length(); k++) {
+                                    if (sb.charAt(k) == dataSeparator.charAt(1)) {
+                                        sb.deleteCharAt(k);
+                                    }
+                                }
+                                //remove any space from the first index of the string
+                                if (sb.charAt(0) == ' ') {
+                                    sb.deleteCharAt(0);
+                                }
+
+                                statementDetails.put(passesFileHeader.get(columnCount), sb.toString());
+                                //reset the count
+                                count = 0;
+                                columnCount++;
+
+                            }
+
+                            //if we are reaching the last element in the line, then we need to add the last element to the map
+                            if (i == pass.length() - 1) {
+                                //get the value to start iterating from backwards, which is the index of the data separator - 1
+                                int start = i - count + 2;
+                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
+
+                                //create temp string to store the data
+                                StringBuilder temp = new StringBuilder();
+                                //iterate through the string backwards
+                                for (int j = i; j >= start; j--) {
+                                    //add the char to the temp string
+                                    temp.append(pass.charAt(j));
+                                }
+                                //reverse the string
+                                StringBuilder sb = new StringBuilder(temp.toString());
+                                sb.reverse();
+                                columnCount++;
+                                statementDetails.put(passesFileHeader.get(columnCount - 1), sb.toString());
+                                columnCount++;
+                            }
+
+                            count++;
+                        }
+                        profileDataCount++;
+                        profileMap.put(profileDataCount, statementDetails);
+                    }
+                    //now that we have the profile map, we just need to find the profile that matches the residentID, and update the profile
+                    for (int i = 1; i <= profileMap.size(); i++) {
+                        HashMap<String, String> profileDetailsMap = profileMap.get(i);
+                        String residentID = profileDetailsMap.get("RESIDENT ID");
+                        if (residentID.strip().equals(userID.strip()) && profileDetailsMap.get("VISITOR PASS NUMBER").equals(visitorPassDetails.get("VISITOR PASS NUMBER"))) {
+                            //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
+                            //then we would update the profileMap with the profileDetailsMap
+                            for (String key : visitorPassDetails.keySet()) {
+                                profileDetailsMap.put(key, visitorPassDetails.get(key));
+                            }
+                            profileMap.put(i, profileDetailsMap);
+                        }
+                    }
+
+                    System.out.println(profileMap);
+
+                    //now that we have the updated profileMap, we need to write the data to the file
+                    boolean isPassUpdated = updateData("residentVisitorPass", profileMap, "Resident");
+                    if (isPassUpdated) {
+                        return true;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+
+                return false;
+            }
+        }
+        public boolean deleteComplaint (String userID, String complaintNumber){
             try {
-                HashMap<Integer, HashMap<String, String>> complaintMap = new HashMap<>();
+                HashMap<Integer, HashMap<String, String>> profileMap = new HashMap<>();
 
                 ArrayList<String> complaints = readData("residentComplaint", "Resident");
                 ArrayList<String> complaintsFileHeader = getFileHeader("residentComplaint", "Resident");
@@ -2176,27 +1993,36 @@ public class residentFileHandler extends FileHandler {
                         count++;
                     }
                     profileDataCount++;
-                    complaintMap.put(profileDataCount, statementDetails);
+                    profileMap.put(profileDataCount, statementDetails);
                 }
-                //now that we have the profile map, we just need to find the profile that matches the residentID, and update the profile
-                for (int i = 1; i <= complaintMap.size(); i++) {
-                    HashMap<String, String> profileDetailsMap = complaintMap.get(i);
+
+                //now that we have the profile map, find a row matching the residentid and visitorpassid, and delete the row
+                for (int i = 1; i <= profileMap.size(); i++) {
+                    HashMap<String, String> profileDetailsMap = profileMap.get(i);
+                    System.out.println(profileDetailsMap);
                     String residentID = profileDetailsMap.get("RESIDENT ID");
-                    if (residentID.equals(userID)) {
+                    String complaintID = profileDetailsMap.get("COMPLAINT NUMBER");
+                    if (residentID.equals(userID) && complaintID.equals(complaintNumber)) {
                         //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
                         //then we would update the profileMap with the profileDetailsMap
-                        for (String key : complaintDetails.keySet()) {
-                            profileDetailsMap.put(key, complaintDetails.get(key));
-                        }
-                        complaintMap.put(i, profileDetailsMap);
+                        profileMap.remove(i);
                     }
                 }
 
-                System.out.println(complaintMap);
+                //rearrange the profileMap paritcularly the keys, for example, after removing 1, there's 2 and 3 inside, but it should ebe reerranged to 1 and 2
+                HashMap<Integer, HashMap<String, String>> rearrangedProfileMap = new HashMap<>();
+                int count = 1;
+                for (int i = 1; i <= profileMap.size(); i++) {
+                    HashMap<String, String> profileDetailsMap = profileMap.get(i);
+                    if (profileDetailsMap != null) {
+                        rearrangedProfileMap.put(count, profileDetailsMap);
+                        count++;
+                    }
+                }
 
                 //now that we have the updated profileMap, we need to write the data to the file
-                boolean isPassUpdated = updateData("residentComplaint", complaintMap, "Resident");
-                if (isPassUpdated) {
+                boolean isBookingUpdated = updateData("residentComplaint", rearrangedProfileMap, "Resident");
+                if (isBookingUpdated) {
                     return true;
                 }
             } catch (Exception e) {
@@ -2205,6 +2031,115 @@ public class residentFileHandler extends FileHandler {
 
             return false;
         }
+
+        public boolean updateComplaint (String userID, HashMap < String, String > complaintDetails){
+            {
+                try {
+                    HashMap<Integer, HashMap<String, String>> complaintMap = new HashMap<>();
+
+                    ArrayList<String> complaints = readData("residentComplaint", "Resident");
+                    ArrayList<String> complaintsFileHeader = getFileHeader("residentComplaint", "Resident");
+
+                    int profileDataCount = 0;
+                    for (String complaint : complaints) {
+                        HashMap<String, String> statementDetails = new HashMap<>();
+                        //get the last index of the complaint, which is the status of the complaint
+                        String[] statementDetailsArray = complaint.split(dataSeparator);
+                        String residentIDFromProfile = statementDetailsArray[0];
+                        int count = 0;
+                        int columnCount = 0;
+
+                        for (int i = 0; i < complaint.length(); i++) {
+                            if (complaint.charAt(i) == dataSeparator.charAt(1)) {
+                                //this means that there is data before the data separator
+                                //get the data in reverse by iterating through the string backwards, and then join the string back together in the correct order
+                                //get the value to start iterating from backwards, which is the index of the data separator - 1
+                                int start = i - 2;
+                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
+                                int end = start - count + 2;
+
+                                //create temp string to store the data
+                                StringBuilder temp = new StringBuilder();
+                                //iterate through the string backwards
+                                for (int j = start; j >= end; j--) {
+                                    //add the char to the temp string
+                                    temp.append(complaint.charAt(j));
+                                }
+                                //reverse the string
+                                StringBuilder sb = new StringBuilder(temp.toString());
+                                sb.reverse();
+                                //manually iterate through te sb string, and remove all spaces and super.dataSeparator char at
+                                for (int k = 0; k < sb.length(); k++) {
+                                    if (sb.charAt(k) == dataSeparator.charAt(1)) {
+                                        sb.deleteCharAt(k);
+                                    }
+                                }
+                                //remove any space from the first index of the string
+                                if (sb.charAt(0) == ' ') {
+                                    sb.deleteCharAt(0);
+                                }
+
+                                statementDetails.put(complaintsFileHeader.get(columnCount), sb.toString());
+                                //reset the count
+                                count = 0;
+                                columnCount++;
+
+                            }
+
+                            //if we are reaching the last element in the line, then we need to add the last element to the map
+                            if (i == complaint.length() - 1) {
+                                //get the value to start iterating from backwards, which is the index of the data separator - 1
+                                int start = i - count + 2;
+                                //get the value to end iterating at, which is the index of the data separator - 1 - the length of the data separator
+
+                                //create temp string to store the data
+                                StringBuilder temp = new StringBuilder();
+                                //iterate through the string backwards
+                                for (int j = i; j >= start; j--) {
+                                    //add the char to the temp string
+                                    temp.append(complaint.charAt(j));
+                                }
+                                //reverse the string
+                                StringBuilder sb = new StringBuilder(temp.toString());
+                                sb.reverse();
+                                columnCount++;
+                                statementDetails.put(complaintsFileHeader.get(columnCount - 1), sb.toString());
+                                columnCount++;
+                            }
+
+                            count++;
+                        }
+                        profileDataCount++;
+                        complaintMap.put(profileDataCount, statementDetails);
+                    }
+                    //now that we have the profile map, we just need to find the profile that matches the residentID, and update the profile
+                    for (int i = 1; i <= complaintMap.size(); i++) {
+                        HashMap<String, String> profileDetailsMap = complaintMap.get(i);
+                        String residentID = profileDetailsMap.get("RESIDENT ID");
+                        if (residentID.equals(userID)) {
+                            //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
+                            //then we would update the profileMap with the profileDetailsMap
+                            for (String key : complaintDetails.keySet()) {
+                                profileDetailsMap.put(key, complaintDetails.get(key));
+                            }
+                            complaintMap.put(i, profileDetailsMap);
+                        }
+                    }
+
+                    System.out.println(complaintMap);
+
+                    //now that we have the updated profileMap, we need to write the data to the file
+                    boolean isPassUpdated = updateData("residentComplaint", complaintMap, "Resident");
+                    if (isPassUpdated) {
+                        return true;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+
+                return false;
+            }
+        }
+
     }
 
-}

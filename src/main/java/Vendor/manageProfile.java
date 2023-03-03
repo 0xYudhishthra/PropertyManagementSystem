@@ -101,7 +101,7 @@ public class manageProfile extends javax.swing.JFrame {
         //a sample return data from the statement above is {NATIONALITY=Malaysian, RESIDENT ID=N001, PROFILE PICTURE=johnDoe_01012023.jpg, CONTACT NUMBER=013-6699334, BUILDING=Parkhill Residence, PASSWORD=12345678, MOVE-IN DATE=01012023, RESIDENT NAME=John Doe, USERNAME=johnDoe, EMAIL=john.doe@email.com, UNIT NAME=Unit A-103}
         //automatically set the text of the text fields to the data from the database
         try {
-            Map<String, String> profileData = vendorFileHandler.getProfileDetails("VN001");
+            Map<String, String> profileData = vendorFileHandler.getProfileDetails(vendorID);
             for (Map.Entry<String, String> entry : profileData.entrySet()) {
                 switch (entry.getKey()) {
                     case "PROFILE PICTURE":
@@ -591,7 +591,7 @@ public class manageProfile extends javax.swing.JFrame {
             //pass a HashMap<String, String> of all the details in the dashboard to the update method
             HashMap<String, String> details = new HashMap<String, String>();
             details.put("VENDOR ID", vendorID);
-            details.put("RESIDENT NAME", nameInput.getText());
+            details.put("VENDOR NAME", nameInput.getText());
             details.put("CONTACT NUMBER", contactNumberInput.getText());
             details.put("EMAIL", emailInput.getText());
             details.put("BUILDING", buildingInput.getText());

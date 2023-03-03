@@ -47,14 +47,7 @@ public class vendorFileHandler extends FileHandler {
                     //for each char in residentID, check if it is equal to the char in residentIDFromComplaint
                     //if it is, then print true
                     //if it is not, then print false
-                    boolean isResidentID = true;
-                    for (int i = 0; i < vendorID.length(); i++) {
-                        if (vendorID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(inProgressStatus.toString()))) {
+                    if (residentIDFromComplaint.strip().equals(vendorID.strip()) && (complaintStatus.toUpperCase().equals(pendingStatus.toString()) || complaintStatus.toUpperCase().equals(inProgressStatus.toString()))) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -149,14 +142,7 @@ public class vendorFileHandler extends FileHandler {
                 String[] complaintDetailsArray = complaint.split(dataSeparator);
                 String residentIDFromComplaint = complaintDetailsArray[0];
                 String complaintStatus = complaintDetailsArray[complaintDetailsArray.length - 1];
-                boolean isResidentID = true;
-                for (int i = 0; i < vendorID.length(); i++) {
-                    if (vendorID.charAt(i) != residentIDFromComplaint.charAt(i)) {
-                        isResidentID = false;
-                        break;
-                    }
-                }
-                if (isResidentID && (complaintStatus.toUpperCase().equals(resolvedStatus.toString()) || complaintStatus.toUpperCase().equals(closedStatus.toString()))) {
+                if (residentIDFromComplaint.strip().equals(vendorID.strip()) && (complaintStatus.toUpperCase().equals(resolvedStatus.toString()) || complaintStatus.toUpperCase().equals(closedStatus.toString()))) {
                     int count = 0;
                     int columnCount = 0;
 
@@ -249,14 +235,7 @@ public class vendorFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] paymentDetailsArray = payment.split(dataSeparator);
                     String residentIDFromPayment = paymentDetailsArray[2];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < vendorID.length(); i++) {
-                        if (vendorID.charAt(i) != residentIDFromPayment.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromPayment.strip().equals(vendorID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -350,14 +329,7 @@ public class vendorFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] invoiceDetailsArray = invoice.split(dataSeparator);
                     String residentIDFromInvoice = invoiceDetailsArray[3];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < vendorID.length(); i++) {
-                        if (vendorID.charAt(i) != residentIDFromInvoice.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromInvoice.strip().equals(vendorID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -451,14 +423,7 @@ public class vendorFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] receiptDetailsArray = receipt.split(dataSeparator);
                     String residentIDFromReceipt = receiptDetailsArray[4];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < vendorID.length(); i++) {
-                        if (vendorID.charAt(i) != residentIDFromReceipt.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromReceipt.strip().equals(vendorID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -550,14 +515,7 @@ public class vendorFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] statementDetailsArray = statement.split(dataSeparator);
                     String residentIDFromStatement = statementDetailsArray[5];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < vendorID.length(); i++) {
-                        if (vendorID.charAt(i) != residentIDFromStatement.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromStatement.strip().equals(vendorID.strip())) {
                         int count = 0;
                         int columnCount = 0;
 
@@ -636,6 +594,7 @@ public class vendorFileHandler extends FileHandler {
     }
 
     public Map<String, String> getProfileDetails(String vendorID) {
+        System.out.println(vendorID);
         try {
             //create a list of complaints
             //from the call of the second readData function above, get the list of complaints
@@ -648,14 +607,9 @@ public class vendorFileHandler extends FileHandler {
                 //get the last index of the complaint, which is the status of the complaint
                 String[] profileDetailsArray = profile.split(dataSeparator);
                 String vendorIDFromProfile = profileDetailsArray[0];
-                boolean isVendorID = true;
-                for (int i = 0; i < vendorID.length(); i++) {
-                    if (vendorID.charAt(i) != vendorIDFromProfile.charAt(i)) {
-                        isVendorID = false;
-                        break;
-                    }
-                }
-                if (isVendorID) {
+                System.out.println(vendorIDFromProfile);
+                if (vendorIDFromProfile.strip().equals(vendorID.strip())) {
+                    System.out.println("Profile found");
                     int count = 0;
                     int columnCount = 0;
                     for (int i = 0; i < profile.length(); i++) {
@@ -715,6 +669,7 @@ public class vendorFileHandler extends FileHandler {
 
                         count++;
                     }
+                    System.out.println("Profile Details: " + profileDetails);
                     return profileDetails;
                 }
             }
@@ -808,7 +763,8 @@ public class vendorFileHandler extends FileHandler {
                 for (int i = 1; i <= profileMap.size(); i++) {
                     HashMap<String, String> profileDetailsMap = profileMap.get(i);
                     String vendorID = profileDetailsMap.get("VENDOR ID");
-                    if (vendorID.equals(userID)) {
+                    System.out.println(vendorID.strip().equals(userID.strip()));
+                    if (vendorID.strip().equals(userID.strip())) {
                         //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
                         //then we would update the profileMap with the profileDetailsMap
                         for (String key : profileDetails.keySet()) {
@@ -818,7 +774,7 @@ public class vendorFileHandler extends FileHandler {
                     }
                 }
 
-                System.out.println(profileMap);
+                System.out.println("profileMap:" + profileMap);
 
                 //now that we have the updated profileMap, we need to write the data to the file
                 boolean isProfileUpdated = updateData("vendorDetail", profileMap, "Vendor");
@@ -958,14 +914,8 @@ public class vendorFileHandler extends FileHandler {
                     //get the last index of the complaint, which is the status of the complaint
                     String[] passDetailsArray = complaint.split(dataSeparator);
                     String residentIDFromPass = passDetailsArray[0];
-                    boolean isResidentID = true;
-                    for (int i = 0; i < vendorID.length(); i++) {
-                        if (vendorID.charAt(i) != residentIDFromPass.charAt(i)) {
-                            isResidentID = false;
-                            break;
-                        }
-                    }
-                    if (isResidentID) {
+                    if (residentIDFromPass.strip().equals(vendorID.strip())) {
+                        System.out.println("complaint" + complaint);
                         int count = 0;
                         int columnCount = 0;
 
@@ -1090,8 +1040,6 @@ public class vendorFileHandler extends FileHandler {
         }
         return null;
     }
-
-
 
     public String addInvoice(String userID, String amount) {
         try {
@@ -1375,7 +1323,9 @@ public class vendorFileHandler extends FileHandler {
                 for (int i = 1; i <= complaintMap.size(); i++) {
                     HashMap<String, String> profileDetailsMap = complaintMap.get(i);
                     String residentID = profileDetailsMap.get("VENDOR ID");
-                    if (residentID.equals(userID)) {
+                    System.out.println(residentID.strip().equals(userID) + " " + profileDetailsMap.get("COMPLAINT NUMBER").equals(complaintDetails.get("COMPLAINT NUMBER")));
+                    if (residentID.strip().equals(userID.strip()) && profileDetailsMap.get("COMPLAINT NUMBER").equals(complaintDetails.get("COMPLAINT NUMBER"))) {
+                        System.out.println("imhere");
                         //we would then compare the profileDetailsMap with the profileDetails, and update the profileDetailsMap with the profileDetails
                         //then we would update the profileMap with the profileDetailsMap
                         for (String key : complaintDetails.keySet()) {
