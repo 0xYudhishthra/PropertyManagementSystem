@@ -948,14 +948,7 @@ public class residentFileHandler extends FileHandler {
                 //get the last index of the complaint, which is the status of the complaint
                 String[] profileDetailsArray = profile.split(dataSeparator);
                 String residentIDFromProfile = profileDetailsArray[0];
-                boolean isResidentID = true;
-                for (int i = 0; i < residentID.length(); i++) {
-                    if (residentID.charAt(i) != residentIDFromProfile.charAt(i)) {
-                        isResidentID = false;
-                        break;
-                    }
-                }
-                if (isResidentID) {
+                if (residentID.strip().equals(residentIDFromProfile.strip())) {
                     int count = 0;
                     int columnCount = 0;
                     for (int i = 0; i < profile.length(); i++) {
@@ -1012,7 +1005,6 @@ public class residentFileHandler extends FileHandler {
                             profileDetails.put(fileHeader.get(columnCount - 1), sb.toString());
                             columnCount++;
                         }
-
                         count++;
                     }
                     return profileDetails;
