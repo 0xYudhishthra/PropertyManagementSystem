@@ -25,7 +25,15 @@ public class manageIncident extends javax.swing.JFrame {
      */
     public manageIncident() {
         initComponents();
-        readIncidentRecordTable("");
+    }
+        private String ID;
+
+    public manageIncident(String UID) {
+        // Get Customer Information from Login, then initialize
+        initComponents();
+        this.setLocationRelativeTo(null);
+         readIncidentRecordTable("");
+        this.ID = UID;
     }
 
     /**
@@ -630,7 +638,7 @@ public class manageIncident extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manageIncident().setVisible(true);
+                new manageIncident(null).setVisible(true);
             }
         });
     }
