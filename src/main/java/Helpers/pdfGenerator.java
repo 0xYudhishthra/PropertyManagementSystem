@@ -47,6 +47,7 @@ public class pdfGenerator {
         //we first construct the table with the number of columns and rows
         //stop comment here
         PdfPTable table = new PdfPTable(data.get(0).size());
+        System.out.println(data.get(0));
         table.setWidthPercentage(100);
 
         //we then add the column names to the table, column names are in bold, adjust the header width to fit the column names

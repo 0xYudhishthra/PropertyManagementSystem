@@ -15,7 +15,7 @@ import java.util.HashMap;
  *
  * @author yudhx
  */
-public class updateComplaints extends javax.swing.JFrame {
+public class    updateComplaints extends javax.swing.JFrame {
 
     residentFileHandler residentFileHandler = new residentFileHandler();
 

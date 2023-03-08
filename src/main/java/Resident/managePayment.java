@@ -120,6 +120,9 @@ public class managePayment extends javax.swing.JFrame {
                         {null, null, null, null, null},
                         {null, null, null, null, null},
                         {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
                         {null, null, null, null, null}
                 },
                 new String[]{
@@ -164,6 +167,9 @@ public class managePayment extends javax.swing.JFrame {
 
         viewInvoiceTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null},
@@ -217,6 +223,9 @@ public class managePayment extends javax.swing.JFrame {
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
                         {null, null, null, null, null, null}
                 },
                 new String[]{
@@ -257,6 +266,9 @@ public class managePayment extends javax.swing.JFrame {
 
         viewStatementTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null},

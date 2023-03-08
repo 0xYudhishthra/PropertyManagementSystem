@@ -6,4 +6,3 @@ STORE FORMAT: <CODE> | <LOCATION>
 _____________________
  A | LOBBY BLOCK C
  C | LEVEL 7
- 

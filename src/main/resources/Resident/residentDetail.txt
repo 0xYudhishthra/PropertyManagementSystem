@@ -4,7 +4,7 @@ RESIDENT PROFILE DETAILS
 THIS FILE STORES THE PROFILE DETAILS OF RESIDENTS
 STORE FORMAT: <RESIDENT ID> | <RESIDENT NAME> | <CONTACT NUMBER> | <EMAIL> | <BUILDING> | <UNIT NAME> | <MOVE-IN DATE> | <PROFILE PICTURE> | <NATIONALITY> | <USERNAME> | <PASSWORD>
 _____________________
-RN001  | Adam Daee | 013-6699334 | john.doe@email.com | Parkhill Res | Unit A-104 | 01012023 | adamSoon_03032023.jpg | Singaporean | adamSoon | 12345678
+RN001  | Adam Bryan | 013-6699334 | john.doe@email.com | Parkhill Res | Unit A-104 | 01012023 | adamSoon_08032023.jpg | Malaysian | adamSoon | 12345678
 RN002 | John Doe | 013-6699334 | john.doe@email.com | Parkhill Residence | Unit A-103 | 01012023 | johnDoe_01012023.jpg | Malaysian | johnDoe | 12345678
 RN003 | John Doe | 013-6699334 | john.doe@email.com | Parkhill Residence | Unit A-103 | 01012023 | johnDoe_01012023.jpg | Malaysian | johnDoe | 12345678
 

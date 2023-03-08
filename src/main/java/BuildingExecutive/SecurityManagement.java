@@ -262,7 +262,13 @@ public class SecurityManagement extends javax.swing.JFrame {
         //add complaintarray into jtable1
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
+
+        System.out.println(complaintArray);
+
         for( int i = 0; i < complaintArray.size(); i++ ) {
+            if (complaintArray.get(i).size() == 0) {
+                continue;
+            }
             model.addRow(new Object[] { complaintArray.get(i).get(0), complaintArray.get(i).get(1)});
         }
     }

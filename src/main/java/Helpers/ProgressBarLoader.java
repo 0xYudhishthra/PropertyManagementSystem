@@ -20,7 +20,7 @@ public class ProgressBarLoader {
             protected Void doInBackground() throws Exception {
                 int progress = startPercentage;
                 while (progress < endPercentage) {
-                    // Sleep for 80 milliseconds to simulate loading time
+                    // Sleep for 10 milliseconds to simulate loading time
                     Thread.sleep(10);
                     progress++;
                     progressBar.setValue(progress);

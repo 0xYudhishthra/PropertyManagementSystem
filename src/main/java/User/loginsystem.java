@@ -230,7 +230,7 @@ public class loginsystem extends javax.swing.JFrame {
         }
         else if(loginStat[0] == "AdminExecutive"){
             System.out.println(loginStat[1]);
-            AdminExecutive.Dashboard AdminExecutive  = new AdminExecutive.Dashboard(loginStat[1]);
+            AdminExecutive.Dashboard AdminExecutive  = new AdminExecutive.Dashboard();
             AdminExecutive.setVisible(true);
            this.dispose();
         }

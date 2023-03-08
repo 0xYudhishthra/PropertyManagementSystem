@@ -7,8 +7,6 @@ _____________________
 12012022 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | Supply of Cleaning Prod. | MYR 500 | MYR 500 | ST1
 01032023 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | test | MYR 400 | MYR 100.0 | ST2
 01032023 | ABC Supplies | VN001 | Parkhill Business | Unit A-102 | test | MYR 1 | MYR 1269.0 | ST3
-03032023 | ABC Supplies | VN001 | Parkhill Businesses | Unit A-1022 | Utilities | MYR 1200 | MYR 69.0 | ST4
-03032023 | ABC Supplies | VN001  | Parkhill Businesses | Unit A-1022 | Resident payment | MYR 9 | MYR 60.0 | ST5
-03032023 | ABC Supplies | VN001  | Parkhill Businesses | Unit A-1022 | Resident payment | MYR 1 | MYR 59.0 | ST6
-03032023 | ABC Supplies | VN001  | Parkhill Businesses | Unit A-1022 | Resident payment | MYR 1 | MYR 58.0 | ST7
-03032023 | ABC Supply | VN001  | Parkhill Business | Unit A-1022 | Resident payment | MYR 5 | MYR 53.0 | ST8
+08032023 | ABC Supply | VN001  | Parkhill Business | Unit A-1022 | Resident payment | MYR 9 | MYR 60.0 | ST4
+08032023 | ABC Supply | VN001 | Parkhill Business | Unit A-1022 | Demo | MYR 30 | MYR 30.0 | ST5
+08032023 | ABC Supply | VN001  | Parkhill Business | Unit A-1022 | Resident payment | MYR 10 | MYR 20.0 | ST6

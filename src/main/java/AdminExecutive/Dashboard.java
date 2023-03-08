@@ -4,6 +4,8 @@
  */
 package AdminExecutive;
 
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author Bryan
@@ -13,7 +15,7 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public Dashboard(String ID) {
+    public Dashboard() {
         initComponents();
     }
 
@@ -34,6 +36,12 @@ public class Dashboard extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Complaints Management");
@@ -53,10 +61,25 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         jButton9.setText("Facility Management");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Unit Management");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setText("Resident Management");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,8 +131,35 @@ public class Dashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton9ActionPerformed(ActionEvent evt) {
+        FacilityManagement fm = new FacilityManagement();
+        fm.setVisible(true);
+        this.dispose();
+    }
+
+    private void jButton10ActionPerformed(ActionEvent evt) {
+        UnitManagement um = new UnitManagement();
+        um.setVisible(true);
+        this.dispose();
+    }
+
+    private void jButton11ActionPerformed(ActionEvent evt) {
+        Resident resident = new Resident();
+        resident.setVisible(true);
+        this.dispose();
+    }
+
+    private void jButton7ActionPerformed(ActionEvent evt) {
+        EmployeeManagement em = new EmployeeManagement();
+        em.setVisible(true);
+        this.dispose();
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ComplaintManagement cm = new ComplaintManagement();
+        cm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -147,7 +197,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard(null).setVisible(true);
+                new Dashboard().setVisible(true);
             }
         });
     }

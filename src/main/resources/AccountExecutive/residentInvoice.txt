@@ -7,10 +7,3 @@ _____________________
 John Doe | RN001 | 01012023 | MYR 500 | INV1
 John Doe | RN002 | 01032023 | MYR 100 | INV1
 John Doe | RN003 | 01032023 | MYR 350 | INV1
-John Doe | RN001 | 01032023 | MYR 250 | INV2
-Adam Soon | RN001 | 02032023 | MYR 200 | INV3
-Adam Soon | RN001 | 02032023 | MYR 20 | INV4
-Adam Soon | RN001 | 02032023 | MYR 1 | INV5
-Adam Soon | RN001 | 02032023 | MYR 1 | INV6
-Adam Soon | RN001 | 02032023 | MYR 5 | INV7
-John Doe | RN002 | 03032023 | MYR 1 | INV2

@@ -286,13 +286,9 @@ public class UpdateComplaint extends javax.swing.JFrame {
             newData.put("DESCRIPTION", complaint);
             newData.put("COMPLAINT NUMBER", complaintID);
             newData.put("STATUS", status);
-            System.out.println(newData);
             boolean isDataUpdated = buildingExecutiveFileHandler.updateComplaint(residentID, newData);
-            if (isDataUpdated) {
-                System.out.println("Data updated successfully.");
-            } else {
-                System.out.println("Error: Data not updated.");
-            }
+
+            updateTableList();
         } catch (Exception e) {
             e.printStackTrace();
         }

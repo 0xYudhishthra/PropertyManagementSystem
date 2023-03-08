@@ -4,6 +4,8 @@
  */
 package AdminExecutive;
 
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author Bryan
@@ -100,6 +102,11 @@ public class Resident extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel3.setText("Resident ID");
@@ -341,6 +348,12 @@ public class Resident extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(ActionEvent evt) {
+        Dashboard db = new Dashboard();
+        db.setVisible(true);
+        this.dispose();
+    }
 
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
         // TODO add your handling code here:
