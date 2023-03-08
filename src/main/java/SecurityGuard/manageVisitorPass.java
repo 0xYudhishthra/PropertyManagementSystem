@@ -18,7 +18,16 @@ public class manageVisitorPass extends javax.swing.JFrame {
      */
     public manageVisitorPass() {
         initComponents();
+    }
+    
+    private String ID;
+
+    public manageVisitorPass(String UID) {
+        // Get Customer Information from Login, then initialize
+        initComponents();
+        this.setLocationRelativeTo(null);
         readVisitorPassTable("");
+        this.ID = UID;
     }
 
     SecurityGuard.securityGuardFileHandler sgfh = new securityGuardFileHandler();
@@ -158,7 +167,8 @@ public class manageVisitorPass extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        dashboard vp = new dashboard();
+        System.out.println(ID);
+        dashboard vp = new dashboard(ID);
         vp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_backActionPerformed
@@ -204,7 +214,7 @@ public class manageVisitorPass extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manageVisitorPass().setVisible(true);
+                new manageVisitorPass(null).setVisible(true);
             }
         });
     }

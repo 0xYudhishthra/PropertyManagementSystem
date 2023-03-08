@@ -23,7 +23,15 @@ public class manageVisitorEntry extends javax.swing.JFrame {
      */
     public manageVisitorEntry() {
         initComponents();
+    }
+    
+    private String ID;
+
+    public manageVisitorEntry(String UID) {
+        initComponents();
+        this.setLocationRelativeTo(null);
         readVistorEntryTable("");
+        this.ID = UID;
     }
 
     /**
@@ -491,7 +499,7 @@ public class manageVisitorEntry extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manageVisitorEntry().setVisible(true);
+                new manageVisitorEntry(null).setVisible(true);
             }
         });
     }
