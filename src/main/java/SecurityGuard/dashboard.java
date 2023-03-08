@@ -4,6 +4,9 @@
  */
 package SecurityGuard;
 
+import User.loginsystem;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -44,6 +47,7 @@ public class dashboard extends javax.swing.JFrame {
         managecheckpoint = new javax.swing.JButton();
         managevisitorentry = new javax.swing.JButton();
         manageincident = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,6 +97,15 @@ public class dashboard extends javax.swing.JFrame {
             }
         });
 
+        Logout.setBackground(new java.awt.Color(102, 0, 0));
+        Logout.setForeground(new java.awt.Color(255, 255, 255));
+        Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,16 +118,20 @@ public class dashboard extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(managevisitorentry, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(manageincident, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(managevisitorentry, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                        .addComponent(manageincident, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Logout, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(Logout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,14 +154,14 @@ public class dashboard extends javax.swing.JFrame {
 
     private void managevisitorpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managevisitorpassActionPerformed
         // TODO add your handling code here:
-        manageVisitorPass vp = new manageVisitorPass();
+        manageVisitorPass vp = new manageVisitorPass(ID);
         vp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_managevisitorpassActionPerformed
 
     private void managevisitorentryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managevisitorentryActionPerformed
         // TODO add your handling code here:
-        manageVisitorEntry vp = new manageVisitorEntry () ;
+        manageVisitorEntry vp = new manageVisitorEntry (ID) ;
         vp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_managevisitorentryActionPerformed
@@ -158,10 +175,22 @@ public class dashboard extends javax.swing.JFrame {
 
     private void manageincidentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageincidentActionPerformed
         // TODO add your handling code here:
-        manageIncident vp = new manageIncident () ;
+        manageIncident vp = new manageIncident (ID) ;
         vp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_manageincidentActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", dialogButton);
+        if (dialogResult == 0) {
+            loginsystem ls = new loginsystem() ;
+            ls.setVisible(true);
+            setVisible(false);
+        }
+            //exit the program
+    }//GEN-LAST:event_LogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,6 +228,7 @@ public class dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Logout;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
